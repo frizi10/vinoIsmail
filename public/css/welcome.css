@@ -1,0 +1,31 @@
+.container {
+    border-radius: 10px;
+    margin: 0 1em;
+    padding: 0.5em;
+    /* width: calc(100% - 2em); */
+    box-sizing: border-box;
+    min-height: 36em;
+    border: 2px solid black; 
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    text-align: center;
+    font-family: 'Helvetica';
+    font-size: 16px;
+}
+
+.welcome {
+    padding: 0 3em;  
+}
+
+.welcome-title {
+    font-size: 35px;
+}
+
+.welcome-vino {
+    font-family: "dreamboat", sans-serif;
+}
+
+.welcome-text {
+    line-height: 1.5em;
+}

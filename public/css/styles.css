@@ -1,12 +1,16 @@
 @import url('nav.css');
+@import url('welcome.css');
 
 :root {
 --black: #000000;
 --light-red: #8F002A; 
+--light-red-opacity: rgba(143, 0, 42, 0.5);
 --dark-red: #580019; 
+--dark-red-opacity: rgba(88, 0, 25, 0.5);
 --white: #FEFEFF; 
 --space: 1em; 
 --space-wide: 2em; 
+--h1-size: 24px; 
 }
 
 * {
@@ -14,6 +18,12 @@
     padding:0; 
     box-sizing:border-box;
     background-color: var(--white);
+}
+
+h1 {
+    font-family: "dreamboat", sans-serif;
+    font-weight: 700;
+    color: var(--black);
 }
 
 /******  Polices ******/
@@ -28,4 +38,17 @@
     font-family: 'Helvetica';
     src: url('../resources/assets/fonts/helvetica.ttf');
     font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Dreamboat';
+    src: url('../resources/assets/fonts/dreamboat.ttf');
+}
+
+/****** Général ******/
+
+.title-container {
+    display: flex;
+    justify-content: center;
+    font-size: var(--h1-size);
 }

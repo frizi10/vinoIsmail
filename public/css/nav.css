@@ -1,10 +1,10 @@
 .main-nav-list {
-    display: flex;
-    justify-content: space-around;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(20%, auto));
     position: fixed;
     bottom: 0;
     padding-bottom: 0.5em;
-    width: 100%;
 }
 
 .main-nav-item {
