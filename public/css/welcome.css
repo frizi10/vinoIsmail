@@ -30,6 +30,10 @@
     line-height: 1.5em;
 }
 
+.welcome-img {
+    width: 20%;
+}
+
 .welcome-informations {
     display: flex;
     flex-flow: column;

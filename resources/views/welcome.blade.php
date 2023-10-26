@@ -4,10 +4,10 @@
 
 <div class="container">
     <div class="welcome">
-        <h2 class="welcome-title">Bienvenue <br> chez <span class="welcome-vino">vino</span>!</h2>
+        <h2 class="welcome-title">Bienvenue chez <span class="welcome-vino">vino</span>!</h2>
         <p class="welcome-text">L'outil le plus simple et efficace pour gérer vos celliers et vos achats SAQ.</p>
     </div>
-
+    <img src="{{ asset('assets/img/img_connexion.jpeg') }}" alt="Bouteille au marché" class="welcome-img">
     <div class="welcome-informations">
         <form action="" class="welcome-form">
             <div class="welcome-input-container">
