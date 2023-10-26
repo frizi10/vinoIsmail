@@ -13,11 +13,19 @@
     margin:0;
     padding:0; 
     box-sizing:border-box;
+    background-color: var(--white);
 }
 
 /******  Polices ******/
 
 @font-face {
     font-family: 'Helvetica';
-    src: url('../assets/fonts/helvetica_light.ttf');
+    src: url('../resources/assets/fonts/helvetica_light.ttf');
+    font-weight: lighter;
+}
+
+@font-face {
+    font-family: 'Helvetica';
+    src: url('../resources/assets/fonts/helvetica.ttf');
+    font-weight: normal;
 }

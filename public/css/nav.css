@@ -1,0 +1,33 @@
+.main-nav-list {
+    display: flex;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 0;
+    padding-bottom: 0.5em;
+    width: 100%;
+}
+
+.main-nav-item {
+    list-style: none;
+    font-family: 'Helvetica';
+    font-weight: lighter;
+}
+
+.main-nav-item a {
+    text-decoration: none;
+    color: var(--black); 
+}
+
+.container-icons-navbar {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    gap: 0.35em;
+}
+
+.active{
+    text-decoration: underline;
+    text-decoration-color: var(--dark-red);
+    text-decoration-thickness: 4px;
+    text-underline-offset: .5em;
+}
