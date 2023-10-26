@@ -1,0 +1,23 @@
+@import url('nav.css');
+
+:root {
+--black: #000000;
+--light-red: #8F002A; 
+--dark-red: #580019; 
+--white: #FEFEFF; 
+--space: 1em; 
+--space-wide: 2em; 
+}
+
+* {
+    margin:0;
+    padding:0; 
+    box-sizing:border-box;
+}
+
+/******  Polices ******/
+
+@font-face {
+    font-family: 'Helvetica';
+    src: url('../assets/fonts/helvetica_light.ttf');
+}
