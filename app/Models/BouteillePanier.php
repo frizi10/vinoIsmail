@@ -20,11 +20,6 @@ class BouteillePanier extends Model
         return $this->belongsTo(Bouteille::class);
     }
 
-    public function bouteillePersonnalisee() 
-    {
-        return $this->belongsTo(BouteillePersonnalisee::class);
-    }
-
     public function panier() 
     {
         return $this->belongsTo(Panier::class);

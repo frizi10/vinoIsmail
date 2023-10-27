@@ -30,11 +30,6 @@ class BouteillePersonnalisee extends Model
         return $this->hasMany(BouteillesCelliers::class);
     }
 
-    public function bouteillesPaniers() 
-    {
-        return $this->hasMany(BouteillesPaniers::class);
-    }
-
     public function commentaires() 
     {
         return $this->hasMany(Commentaire::class);
