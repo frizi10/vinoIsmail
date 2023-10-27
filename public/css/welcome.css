@@ -1,0 +1,80 @@
+.container {
+    border-radius: 10px;
+    margin: 0 1em;
+    padding: 1em 4em;
+    /* width: calc(100% - 2em); */
+    box-sizing: border-box;
+    min-height: 37em;
+    border: 2px solid black; 
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    text-align: center;
+    font-family: 'Helvetica';
+    font-size: 16px;
+}
+
+.welcome {
+    padding: 0 3em;  
+}
+
+.welcome-title {
+    font-size: 35px;
+}
+
+.welcome-vino {
+    font-family: "dreamboat", sans-serif;
+}
+
+.welcome-text {
+    line-height: 1.5em;
+}
+
+.welcome-img {
+    width: 20%;
+}
+
+.welcome-informations {
+    display: flex;
+    flex-flow: column;
+    gap: var(--space);
+    font-size: 12px;
+}
+
+.welcome-informations a {
+    color: var(--black);
+}
+
+.welcome-connection-btn, .welcome-form-input {
+    border-style: none; 
+}
+
+.welcome-input-container {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: var(--space);
+}
+
+.welcome-form-input {
+    border: 1px solid var(--black);
+    padding: 0.5em;
+}
+
+.welcome-informations, .welcome-form-input, .welcome-connection-btn {
+    width: 100%;
+}
+
+.welcome-forgot-psw {
+    display: flex;
+    justify-content: flex-end; 
+}
+
+.welcome-connection-btn {
+    background-color: var(--light-red);
+    padding: 0.5em;
+    color: var(--white);
+    font-size: 18px;
+    border-radius: 10px; 
+}
