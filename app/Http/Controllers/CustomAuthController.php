@@ -17,7 +17,7 @@ class CustomAuthController extends Controller
      */
     public function index()
     {
-        return view('auth.login');
+        return view('welcome');
     }
 
     /**
@@ -27,7 +27,7 @@ class CustomAuthController extends Controller
      */
     public function create()
     {
-        return view('auth.registration');
+        return view('auth.create');
     }
 
     /**
@@ -67,7 +67,7 @@ class CustomAuthController extends Controller
         $user->email = $request->input('email');
         $user->password = Hash::make($request->input('password'));
         $user->save();
-       return redirect(route('login'))->withSuccess('utilisateur enregistré');
+        return redirect(route('home'))->withSuccess('utilisateur enregistré');
     }
 
     public function authentication(Request $request)
@@ -99,7 +99,7 @@ class CustomAuthController extends Controller
         Auth::login($user, $request->get('remember'));
     
 
-            return redirect()->route('home')->with('success', 'Vous êtes connectés')->with('name', $user->nom);
+        return redirect()->route('celliers.index')->with('success', 'Vous êtes connectés')->with('name', $user->nom);
             
     }
     
