@@ -9,23 +9,22 @@
     </div>
     <img src="{{ asset('assets/img/img_connexion.jpeg') }}" alt="Bouteille au marché" class="welcome-img">
     <div class="welcome-informations">
-        <form action="" class="welcome-form">
+        <form action="{{ route('login.authentication') }}" method="post" class="welcome-form" id="login">
+            @csrf
             <div class="welcome-input-container">
                 <label for="email" class="welcome-form-label">EMAIL</label>
-                <input type="text" id="email" class="welcome-form-input">
+                <input type="text" id="email" name="email" class="welcome-form-input">
             </div>
             <div class="welcome-input-container">
                 <label for="password" class="welcome-form-label">PASSWORD</label>
-                <input type="text" id="password" class="welcome-form-input">
+                <input type="text" id="password" name="password" class="welcome-form-input">
             </div>
         </form>
         <div class="welcome-forgot-psw">
             <a href="#">MOT DE PASSE OUBLIÉ</a>
         </div>
-        <a href="#">
-            <button class="welcome-connection-btn">CONNECTER</button>
-        </a>
-        <a href="#">CRÉER UN COMPTE</a>
+        <button class="welcome-connection-btn" type="submit" form="login">CONNECTER</button>
+        <a href="{{ route('register') }}">CRÉER UN COMPTE</a>
     </div>
 </div>
 
