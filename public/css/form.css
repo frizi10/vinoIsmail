@@ -1,0 +1,43 @@
+/*
+	(composante) */
+
+/* form button -> voir btn.css */
+
+.form-forgot-psw {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* j'essaye de faire centrer le formulaire qui aura un max-width */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 100%;
+}
+
+form {
+    /* max-width: 75ch; */
+    display: flex;
+    flex-direction: column;
+}
+
+.form-input-container {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: var(--space);
+}
+
+form input {
+    min-width: 100%;
+    border: .5px solid var(--black);
+    padding: 0.5em;
+}
+
+form label {
+    text-transform: uppercase;
+    /* text-decoration: underline; */
+    font-size: 12px;
+}

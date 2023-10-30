@@ -1,4 +1,5 @@
-.main-nav-list {
+.main-nav-list,
+.nav-list {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(5, minmax(20%, auto));
@@ -7,27 +8,31 @@
     padding-bottom: 0.5em;
 }
 
-.main-nav-item {
+.main-nav-item,
+.nav-item {
     list-style: none;
     font-family: 'Helvetica';
     font-weight: lighter;
 }
 
-.main-nav-item a {
+.main-nav-item a,
+.nav-item a {
     text-decoration: none;
     color: var(--black); 
 }
 
-.container-icons-navbar {
+.container-icons-navbar,
+.nav-icon-container {
     display: flex;
     flex-flow: column;
     align-items: center;
     gap: 0.35em;
 }
 
-.active{
+.active,
+.nav-active {
     text-decoration: underline;
-    text-decoration-color: var(--dark-red);
+    /* text-decoration-color: var(--dark-red); */
     text-decoration-thickness: 4px;
     text-underline-offset: .5em;
 }

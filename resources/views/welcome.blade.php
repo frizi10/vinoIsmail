@@ -1,31 +1,42 @@
 @extends('layouts.app')
 @section('title', 'Bienvenue')
 @section('content')
-
-<div class="container">
+<!-- <header class="title-container"> -->
+<header>
+    vino
+</header>
+<main>
     <div class="welcome">
-        <h2 class="welcome-title">Bienvenue chez <span class="welcome-vino">vino</span>!</h2>
+        <h1 class="welcome-title">Bienvenue chez <span class="welcome-vino">vino</span>!</h1>
         <p class="welcome-text">L'outil le plus simple et efficace pour gérer vos celliers et vos achats SAQ.</p>
     </div>
-    <img src="{{ asset('assets/img/img_connexion.jpeg') }}" alt="Bouteille au marché" class="welcome-img">
-    <div class="welcome-informations">
-        <form action="{{ route('login.authentication') }}" method="post" class="welcome-form" id="login">
+    <picture class="welcome-image-container">
+        <img src="{{ asset('assets/img/img_connexion.jpeg') }}" alt="Bouteille au marché" class="welcome-img">
+    </picture>
+    <div class="form-container">
+        <form action="{{ route('login.authentication') }}" method="post" id="login">
             @csrf
-            <div class="welcome-input-container">
-                <label for="email" class="welcome-form-label">EMAIL</label>
-                <input type="text" id="email" name="email" class="welcome-form-input">
+            <div class="form-input-container">
+                <label for="email">EMAIL</label>
+                <input type="text" id="email" name="email">
             </div>
-            <div class="welcome-input-container">
-                <label for="password" class="welcome-form-label">PASSWORD</label>
-                <input type="text" id="password" name="password" class="welcome-form-input">
+            <div class="form-input-container">
+                <label for="password">PASSWORD</label>
+                <input type="text" id="password" name="password">
             </div>
+            <div class="form-forgot-psw link">
+                <a href="#">MOT DE PASSE OUBLIÉ</a>
+            </div>
+            <button type="submit" form="login" class="btn-submit">CONNECTER</button>
+            <div class="link">
+                <a href="{{ route('register') }}">CRÉER UN COMPTE</a>
+            </div>
+
         </form>
-        <div class="welcome-forgot-psw">
-            <a href="#">MOT DE PASSE OUBLIÉ</a>
-        </div>
-        <button class="welcome-connection-btn" type="submit" form="login">CONNECTER</button>
-        <a href="{{ route('register') }}">CRÉER UN COMPTE</a>
     </div>
-</div>
+</main>
+<footer>
+    © <span>vino</span> 2023. (version 1.1) - Tous droits réservés.
+</footer>
 
 @endsection
