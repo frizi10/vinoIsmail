@@ -9,9 +9,6 @@
     <title>Vino - @yield('title')</title>
 </head>
 <body>
-    <div class="title-container">
-        <h1>vino</h1>
-    </div>
     @yield('content')
     <nav class="main-nav">
         <ul class="main-nav-list">
@@ -26,8 +23,8 @@
             <li class="main-nav-item">        
                 <a href="#">
                     <figure class="container-icons-navbar">
-                        <img src="{{ asset('assets/icons/search_icon.svg') }}" alt="Recherche">
-                        <figcaption class="icons-label">recherche</figcaption>
+                        <img src="{{ asset('assets/icons/add_icon.svg') }}" alt="Recherche">
+                        <figcaption class="icons-label">ajouter</figcaption>
                     </figure>
                 </a>
             </li>

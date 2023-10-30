@@ -1,0 +1,8 @@
+/* liens qui ne sont pas visuellement des boutons */
+
+.link {
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-top: .5rem;
+    margin-bottom: 1rem;
+}
