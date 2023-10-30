@@ -27,15 +27,15 @@
         <div class="form-container">
             <form action="" method="" id="">
                 <div class="form-input-container">
-                    <label for="category">Catégories</label>
-                    <select name="category" id="category">
-                        <option value=""></option>
-                    </select>
-                </div>
-                <div class="form-input-container">
                     <label for="color">Couleur</label>
                     <select name="color" id="color">
                         <option value="white">Blanc</option>
+                    </select>
+                </div>
+                <div class="form-input-container">
+                    <label for="format">Format</label>
+                    <select name="format" id="format">
+                        <option value="750">750ml</option>
                     </select>
                 </div>
                 <div class="form-input-container">
@@ -59,9 +59,21 @@
                     </select>
                 </div>
                 <div class="form-input-container">
-                    <label for="year">'Millésime'</label>
+                    <label for="region">Région</label>
+                    <select name="region" id="region">
+                        <option value="quebec">Québec</option>
+                    </select>
+                </div>
+                <div class="form-input-container">
+                    <label for="year">Millésime</label>
                     <select name="year" id="year">
                         <option value="2001">2001</option>
+                    </select>
+                </div>
+                <div class="form-input-container">
+                    <label for="grape">Cépage</label>
+                    <select name="grape" id="grape">
+                        <option value="cabernet-sauv">Cabernet-Sauvignon</option>
                     </select>
                 </div>
             </form>
@@ -73,8 +85,10 @@
                 <div class="form-input-container">
                     <label for="sort">TRIER</label>
                     <select name="sort" id="sort">
-                        <option value="asc">Nom du produit (A-Z)</option>
-                        <option value="desc">Nom du produit (Z-A)</option>
+                        <option value="name-asc">Nom du produit (A-Z)</option>
+                        <option value="name-desc">Nom du produit (Z-A)</option>
+                        <option value="price-asc">Prix ($-$$$)</option>
+                        <option value="price-desc">Prix ($$$-$)</option>
                     </select>
                 </div>
             </form>
