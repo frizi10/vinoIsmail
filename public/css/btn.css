@@ -26,6 +26,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
     /* text-align: center; */
     /* justify-content: space-between; */
     border: 2px solid black;
@@ -36,6 +37,16 @@
     /* padding-right: 1rem; */
     /* Ajout de la transition pour padding-left */
     transition: gap 0.3s ease-in-out, padding-left 0.3s ease-in-out;
+}
+.btn-arrow-top>svg {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%); /* Pour le centrer verticalement */
+    transition: left 0.3s ease-in-out;
+}
+header>.btn-arrow-top:hover svg {
+    left: 5px;
 }
 
 .btn-arrow {
@@ -69,7 +80,6 @@
     color: black;
 }
 
-
 .btn-round {
     display: flex;
     align-items: center;
@@ -91,10 +101,25 @@
     margin: 0 var(--space-s) var(--space-s) var(--space-s);
 } */
 
+/* Boutons dans le carousel de l'accueil */
 .btn-prev {
     left: 0;
 }
-
 .btn-next {
     right: 0;
 }
+
+/* Pour modifier le nom du cellier ou de la liste */
+.btn-modify {
+    margin: .5rem 0;
+    position: relative;
+    min-width: 100%;
+}
+
+.btn-modify svg {
+    position: absolute;
+    right: 10px; /* Positionner le SVG à la limite droite de la balise h1 */
+    top: 50%;
+    transform: translateY(-50%); /* Pour le centrer verticalement par rapport au texte */
+}
+
