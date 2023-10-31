@@ -9,6 +9,8 @@ class BouteillePersonnalisee extends Model
 {
     use HasFactory;
 
+    protected $table = 'bouteilles_personnalisees';
+
     protected $fillable = [
         'nom',
         'pays',
@@ -27,7 +29,7 @@ class BouteillePersonnalisee extends Model
 
     public function bouteillesCelliers() 
     {
-        return $this->hasMany(BouteillesCelliers::class);
+        return $this->hasMany(BouteilleCellier::class);
     }
 
     public function commentaires() 
