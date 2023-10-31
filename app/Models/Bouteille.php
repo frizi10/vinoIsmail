@@ -27,7 +27,9 @@ class Bouteille extends Model
         'agentPromotion',
         'produitQuebec',
         'type',
-        'millesime'
+        'millesime',
+        'pastilleGoutTitre',
+        'pastilleImageSrc',
     
 
       
