@@ -13,7 +13,7 @@
     <nav class="main-nav">
         <ul class="main-nav-list">
             <li class="main-nav-item">        
-                <a href="#">
+                <a href="{{ route('welcome') }}">
                     <figure class="container-icons-navbar active">
                         <img src="{{ asset('assets/icons/home_icon.svg') }}" alt="Accueil">
                         <figcaption>accueil</figcaption>
@@ -21,7 +21,7 @@
                 </a>
             </li>
             <li class="main-nav-item">        
-                <a href="{{ route('bouteilles.search') }}">
+                <a href="{{ route('bouteille.index') }}">
                     <figure class="container-icons-navbar">
                         <img src="{{ asset('assets/icons/add_icon.svg') }}" alt="Recherche">
                         <figcaption class="icons-label">ajouter</figcaption>
@@ -29,7 +29,7 @@
                 </a>
             </li>
             <li class="main-nav-item">
-                <a href="#">
+                <a href="{{ route('liste.index') }}">
                     <figure class="container-icons-navbar">
                         <img src="{{ asset('assets/icons/list_icon.svg') }}" alt="Liste d'achats">
                         <figcaption>liste</figcaption>
@@ -37,7 +37,7 @@
                 </a>
             </li>
             <li class="main-nav-item">        
-                <a href="#">
+                <a href="{{ route('cellier.index') }}">
                     <figure class="container-icons-navbar">
                         <img src="{{ asset('assets/icons/cellars_icon.svg') }}" alt="Celliers">
                         <figcaption>celliers</figcaption>

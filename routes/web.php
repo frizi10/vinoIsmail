@@ -21,6 +21,17 @@ Route::middleware(['auth'])->group(function () {
     // *************** Déconnexion ****************
     Route::get('/logout', [CustomAuthController::class, 'logout'])->name('logout');
 
+    // *************** Gestion du profil ****************
+
+    // Affichage du profil de l'utilisateur
+    Route::get('/profil/{utilisateur_id}', [CustomAuthController::class, 'show'])->name('profil.show');
+    // Modification du profil de l'utilisateur
+    Route::get('/profil-modifier/{utilisateur_id}', [CustomAuthController::class, 'edit'])->name('profil.edit');
+    // Stockage de la modification du profil de l'utilisateur
+    Route::put('/profil-modifier/{utilisateur_id}', [CustomAuthController::class, 'update']);
+    // Suppression d'un profil
+    Route::delete('/profil-modifier/{utilisateur_id}', [CustomAuthController::class, 'destroy'])->name('profil.destroy');
+
     // *************** Gestion des bouteilles ****************
 
     // Affichage de toutes les bouteilles

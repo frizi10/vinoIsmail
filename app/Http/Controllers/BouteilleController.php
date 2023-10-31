@@ -14,7 +14,7 @@ class BouteilleController extends Controller
      */
     public function index()
     {
-        //
+        return view('bouteille.index');
     }
 
     /**

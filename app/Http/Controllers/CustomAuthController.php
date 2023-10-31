@@ -99,7 +99,7 @@ class CustomAuthController extends Controller
         Auth::login($user, $request->get('remember'));
     
 
-        return redirect()->route('celliers.index')->with('success', 'Vous êtes connectés')->with('name', $user->nom);
+        return redirect()->route('welcome')->with('success', 'Vous êtes connectés')->with('name', $user->nom);
             
     }
     
