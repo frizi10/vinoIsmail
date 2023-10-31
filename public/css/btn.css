@@ -2,8 +2,10 @@
 	(composante) */
 
 .btn-submit {
-    background-color: var(--light-red);
-    padding: 0.5em;
+    background-color: black;
+    /* padding: 0.5em; */
+    padding: calc(var(--space-xs) - 2px) calc(var(--space-s) - 2px) calc(var(--space-xs) - 2px) calc(var(--space-s) - 2px);
+    border: 2px solid transparent;
     color: var(--white);
     font-size: 1rem;
     border-radius: 5px;
@@ -13,8 +15,29 @@
     text-transform: uppercase;
     font-weight: bold;
 }
+.btn-submit:hover {
+    border-color: black; /* Changement de border à border-color */
+    background-color: white;
+    color: black;
+}
 
-/* button avec fleche */
+
+.btn-arrow-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* text-align: center; */
+    /* justify-content: space-between; */
+    border: 2px solid black;
+    border-radius: 25px;
+    gap: 0.5rem;
+    min-width: 100%;
+    padding: 0 var(--space-sx) 0 var(--space-sx);
+    /* padding-right: 1rem; */
+    /* Ajout de la transition pour padding-left */
+    transition: gap 0.3s ease-in-out, padding-left 0.3s ease-in-out;
+}
+
 .btn-arrow {
     display: flex;
     justify-content: space-between;
@@ -47,7 +70,6 @@
 }
 
 
-/* button defaut rectangle */
 .btn-round {
     display: flex;
     align-items: center;

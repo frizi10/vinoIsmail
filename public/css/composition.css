@@ -40,6 +40,7 @@ main>div {
 header {
     display: flex;
     justify-content: center;
+    margin: var(--space-xs) var(--space-s);
 }
 
 section {
