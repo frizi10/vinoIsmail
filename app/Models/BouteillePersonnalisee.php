@@ -9,6 +9,8 @@ class BouteillePersonnalisee extends Model
 {
     use HasFactory;
 
+    protected $table = 'bouteilles_personnalisees';
+
     protected $fillable = [
         'nom',
         'pays',
