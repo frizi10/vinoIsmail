@@ -1,0 +1,1 @@
+<!-- Affichage des informations de l'utilisateur -->
