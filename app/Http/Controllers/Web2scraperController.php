@@ -15,7 +15,7 @@ class Web2scraperController extends Controller
         set_time_limit(0);
         $client = new Client();
 
-        $pageMax = 100;
+        $pageMax = 2;
         for ($page = 1; $page <= $pageMax; $page++) {
             $url = "https://www.saq.com/fr/produits/vin?p={$page}&product_list_limit=24&product_list_order=name_asc";
             $response = $client->request('GET', $url);
@@ -29,6 +29,7 @@ class Web2scraperController extends Controller
                 $lienProduit =  $node->filter('a.product.photo.product-item-photo')->attr('href');
                 $srcImage =  $node->filter('img.product-image-photo')->attr('src');
                 $srcsetImage =  $node->filter('img.product-image-photo')->attr('srcset');
+                
 
                 // le prix du bouteille ;
                 $prixText = $node->filter('.price')->text();
@@ -83,32 +84,49 @@ class Web2scraperController extends Controller
                     $agentPromotion = isset($informations['Agent promotionnel']) ? $informations['Agent promotionnel'] : null;
                     $produitQuebec = isset($informations['Produit du Québec']) ? $informations['Produit du Québec'] : null;
 
-                    // Mettre à jour ou créer une nouvelle bouteille
-                    Bouteille::updateOrCreate(
-                        ['id' => $code],
-                        [
-                            'nom' => $nom,
-                            'prix' => $prix,
-                            'pays' => $pays,
-                            'format' => $format,
-                            'type' => $type,
-                            'lienProduit' => $lienProduit,
-                            'srcImage' => $srcImage,
-                            'srcsetImage' => $srcsetImage,
-                            'designation' => $designation,
-                            'degre' => $degre,
-                            'tauxSucre' => $tauxSucre,
-                            'region' => $region,
-                            'cepage' => $cepage,
-                            'couleur' => $couleur,
-                            'millesime' => $millesime,
-                            'producteur' => $producteur,
-                            'agentPromotion' => $agentPromotion,
-                            'produitQuebec' => $produitQuebec,
-                        ]
-                    );
 
-                    echo '';
+                    // Extraire le titre de la pastille de goût
+                    $pastilleGoutTitre = $detailCrawler->filter('.wrapper-taste-tag img')->count() > 0
+                    ? $detailCrawler->filter('.wrapper-taste-tag img')->attr('title')
+                    : null;
+                    $pastilleGoutTitre = str_replace('Pastille de goût :', '', $pastilleGoutTitre);
+
+                    // Extraire l'image de de la pastille de goût
+                    $pastilleImageSrc = null;
+                    $imagePastille = $detailCrawler->filter('.wrapper-taste-tag img');                    if ($imagePastille->count() > 0) {
+                    $pastilleImageSrc = $imagePastille->attr('src');
+                    }
+                    // Gérer le cas où l'imagen'est pas trouvé
+                    $pastilleImageSrc = isset($pastilleImageSrc) ? $pastilleImageSrc : null;
+
+                     //Mettre à jour ou créer une nouvelle bouteille
+                     Bouteille::updateOrCreate(
+                         ['id' => $code],
+                         [
+                             'nom' => $nom,
+                             'prix' => $prix,
+                             'pays' => $pays,
+                             'format' => $format,
+                             'type' => $type,
+                             'lienProduit' => $lienProduit,
+                             'srcImage' => $srcImage,
+                             'srcsetImage' => $srcsetImage,
+                             'designation' => $designation,
+                             'degre' => $degre,
+                             'tauxSucre' => $tauxSucre,
+                             'region' => $region,
+                             'cepage' => $cepage,
+                             'couleur' => $couleur,
+                             'millesime' => $millesime,
+                             'producteur' => $producteur,
+                             'agentPromotion' => $agentPromotion,
+                             'produitQuebec' => $produitQuebec,
+                             'pastilleGoutTitre' => $pastilleGoutTitre,
+                             'pastilleImageSrc' => $pastilleImageSrc,
+                         ]
+                     );
+
+                    echo $pastilleGoutTitre . '<br>';
                 } else {
                     echo 'La requête a échoué avec le code : ' . $detailResponse->getStatusCode();
                     // Gérer l'échec de la requête, par exemple, en enregistrant un message d'erreur.
