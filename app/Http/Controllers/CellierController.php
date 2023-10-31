@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cellier;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CellierController extends Controller
 {
@@ -14,7 +16,8 @@ class CellierController extends Controller
      */
     public function index()
     {
-        //
+        $celliers = Cellier::where('user_id', Auth::id()); 
+        return view('cellier.index', ['$celliers' => $celliers]); 
     }
 
     /**
