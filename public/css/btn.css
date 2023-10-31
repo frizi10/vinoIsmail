@@ -8,4 +8,57 @@
     font-size: 1rem;
     border-radius: 5px;
     min-width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.btn {
+
+}
+
+/* button avec fleche */
+.btn-arrow {
+    display: flex;
+    justify-content: space-between;
+    transition: gap 0.3s ease-in-out;
+    font-style: italic;
+    gap: 0.5rem;
+    min-width: 100%;
+    padding: var(--space-s) var(--space) var(--space-s) var(--space);
+    padding-right: 1rem;
+}
+.btn-arrow:hover {
+    padding-right: .5rem;
+}
+
+/* button defaut rectangle */
+.btn-round {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+    background-color: black;
+    color: white;
+    /* padding: var(--space-s); */
+    /* border: 0.5px solid var(--couleur-accent); */
+    border-radius: 25px;
+    /* color: var(--couleur-accent); */
+    box-shadow: none;
+}
+
+/* à effacer */
+/* .btn-container {
+    margin: 0 var(--space-s) var(--space-s) var(--space-s);
+} */
+
+.btn-prev {
+    left: 0;
+}
+
+.btn-next {
+    right: 0;
 }

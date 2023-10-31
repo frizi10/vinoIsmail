@@ -8,20 +8,28 @@
     justify-content: flex-end;
 }
 
+.form-forgot-psw a{
+    text-align: right;
+}
+
 /* j'essaye de faire centrer le formulaire qui aura un max-width */
 .form-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: var(--space) var(--space);
     min-width: 100%;
 }
 
 form {
+    flex-grow: 1;
     /* max-width: 75ch; */
     display: flex;
     flex-direction: column;
 }
-
+/* .form > * + * {
+	margin-top: var(--space-);
+} */
 .form-input-container {
     display: flex;
     flex-flow: column;
@@ -40,4 +48,14 @@ form label {
     text-transform: uppercase;
     /* text-decoration: underline; */
     font-size: 12px;
+}
+
+.form-border {
+    border: .5px black solid;
+    border-radius: 10px;
+}
+
+.form-button {
+    flex-grow: 1;
+    align-items: flex-end;
 }

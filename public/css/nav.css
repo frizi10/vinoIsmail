@@ -6,12 +6,13 @@
     position: fixed;
     bottom: 0;
     padding-bottom: 0.5em;
+    background-color: white;
 }
 
 .main-nav-item,
 .nav-item {
     list-style: none;
-    font-family: 'Helvetica';
+    font-family: 'Helvetica', Helvetica;
     font-weight: lighter;
 }
 
@@ -35,4 +36,8 @@
     /* text-decoration-color: var(--dark-red); */
     text-decoration-thickness: 4px;
     text-underline-offset: .5em;
+}
+
+.nav-margin {
+    margin-bottom: 80px;
 }
