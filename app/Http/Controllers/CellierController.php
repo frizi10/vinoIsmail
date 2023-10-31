@@ -16,7 +16,18 @@ class CellierController extends Controller
      */
     public function index()
     {
-        $celliers = Cellier::where('user_id', Auth::id())->get(); 
+        $celliers = Cellier::withCount('bouteillesCelliers')
+                            ->with('bouteillesCelliers.bouteille')
+                            ->where('user_id', Auth::id())
+                            ->get(); 
+
+        $celliers->each(function ($cellier) {
+            $cellier->prixTotal = 0; 
+            foreach($cellier->bouteillesCelliers as $bouteilleCellier) {
+                $cellier->prixTotal += $bouteilleCellier->bouteille->prix; 
+            }
+        }); 
+        
         return view('cellier.index', ['celliers' => $celliers]); 
     }
 
