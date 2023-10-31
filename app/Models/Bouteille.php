@@ -31,12 +31,12 @@ class Bouteille extends Model
 
     public function bouteillesCelliers() 
     {
-        return $this->hasMany(BouteillesCelliers::class);
+        return $this->hasMany(BouteilleCellier::class);
     }
 
     public function bouteillesPaniers() 
     {
-        return $this->hasMany(BouteillesPaniers::class);
+        return $this->hasMany(BouteillePanier::class);
     }
 
     public function commentaires() 

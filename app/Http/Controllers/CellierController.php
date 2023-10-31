@@ -16,8 +16,8 @@ class CellierController extends Controller
      */
     public function index()
     {
-        $celliers = Cellier::where('user_id', Auth::id()); 
-        return view('cellier.index', ['$celliers' => $celliers]); 
+        $celliers = Cellier::where('user_id', Auth::id())->get(); 
+        return view('cellier.index', ['celliers' => $celliers]); 
     }
 
     /**
