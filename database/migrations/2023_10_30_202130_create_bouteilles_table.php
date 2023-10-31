@@ -13,6 +13,7 @@ class CreateBouteillesTable extends Migration
      */
     public function up()
     {
+        
         Schema::create('bouteilles', function (Blueprint $table) {
              $table->id();
             $table->string('nom');
@@ -34,6 +35,8 @@ class CreateBouteillesTable extends Migration
             $table->string('cepage')->nullable();
             $table->string('region')->nullable();
             $table->string('produitQuebec')->nullable();
+            $table->string('pastilleGoutTitre')->nullable();
+            $table->string('pastilleImageSrc', 512)->nullable();
             $table->timestamps();
         });
     }
