@@ -50,6 +50,6 @@ section {
     padding: var(--space-s);
 }
 a>div > * + *,
-section > * + * {
+section:not(.card-bouteille) > * + * {
 	margin-top: var(--space-s);
 }

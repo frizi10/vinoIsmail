@@ -70,6 +70,12 @@
 }
 
 
+/* Ex. 12 bouteilles: */
+.card-count {
+    min-width: 100%;
+    text-align: left;
+}
+
 
 /* .card-cellier>a>div {
     display: flex;
@@ -82,3 +88,69 @@
     display: flex;
     min-width: 100%;
 } */
+
+.card-bouteille {
+    /* color: white; */
+    /* background-color: rgba(59, 59, 59, 1); */
+    display: flex;
+    border-radius: 25px;
+    border: 1px solid black;
+    text-align: left;
+    position: relative;
+    /* display: flex; */
+    /* align-items: center; */
+}
+.card-bouteille picture {
+    margin: 0 .25rem;
+}
+.card-bouteille img {
+    height: 120px;
+}
+.card-bouteille a {
+    text-decoration: underline;
+}
+.card-bouteille-info> * + * {
+    margin-top: .25rem;
+    font-size: 12px;
+}
+.card-bouteille-info p {
+    font-size: 16px;
+}
+
+.card-bouteille-qt {
+    display: flex;
+    align-items: center;
+}
+
+.card-bouteille-qt input {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #ccc;
+    margin: 0 10px;
+}
+
+
+/* ======= */
+/* .card-bouteille {
+    display: flex;
+    flex-direction: column;
+} */
+
+.card-bouteille-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-bouteille-qt {
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+}
+
+/* Lorsqu'il y a zéro bouteille */
+.card-transparent {
+    opacity: 0.5;
+}
