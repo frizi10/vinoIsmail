@@ -14,24 +14,38 @@
     font-weight: bold;
 }
 
-.btn {
-
-}
-
 /* button avec fleche */
 .btn-arrow {
     display: flex;
     justify-content: space-between;
-    transition: gap 0.3s ease-in-out;
     font-style: italic;
     gap: 0.5rem;
     min-width: 100%;
     padding: var(--space-s) var(--space) var(--space-s) var(--space);
     padding-right: 1rem;
+    /* Ajout de la transition pour padding-right */
+    transition: gap 0.3s ease-in-out, padding-right 0.3s ease-in-out;
 }
 .btn-arrow:hover {
     padding-right: .5rem;
 }
+
+.btn-action {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    min-width: 100%;
+    padding: calc(var(--space-s) - 2px) calc(var(--space) - 2px) calc(var(--space-s) - 2px) calc(var(--space) - 2px);
+    border: 2px solid transparent;
+    /* Ajout de transitions pour border-color, background-color et color */
+    transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+.btn-action:hover {
+    border-color: black; /* Changement de border à border-color */
+    background-color: white;
+    color: black;
+}
+
 
 /* button defaut rectangle */
 .btn-round {
