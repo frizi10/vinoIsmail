@@ -67,7 +67,7 @@ class CustomAuthController extends Controller
         $user->email = $request->input('email');
         $user->password = Hash::make($request->input('password'));
         $user->save();
-        return redirect(route('home'))->withSuccess('utilisateur enregistré');
+        return redirect(route('welcome'))->withSuccess('Utilisateur enregistré');
     }
 
     public function authentication(Request $request)
@@ -99,7 +99,7 @@ class CustomAuthController extends Controller
         Auth::login($user, $request->get('remember'));
     
 
-        return redirect()->route('celliers.index')->with('success', 'Vous êtes connectés')->with('name', $user->nom);
+        return redirect()->route('welcome')->with('success', 'Vous êtes connectés')->with('name', $user->nom);
             
     }
     
