@@ -14,8 +14,10 @@ Route::get('/', function () {
 
 // Routes nécessitant une authentification
 Route::middleware(['auth'])->group(function () {
-    // Pour se déconnecter
+    // Déconnexion
     Route::get('/logout', [CustomAuthController::class, 'logout'])->name('logout');
+
+    // Pour gérer les bouteilles de la SAQ et personnalisées 
 
     // Pour gérer les celliers d'un utilisateur
     Route::get('/celliers', [CellierController::class, 'index'])->name('celliers.index'); 
@@ -28,9 +30,18 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/celliers/{id}', [BouteilleCellierController::class, 'index'])->name('celliers.show'); 
 
     // Pour gérer les bouteilles d'un cellier
-    Route::get('/Ajouter-bouteilles/{cellier_id}', [BouteilleController::class, 'index'])->name('Ajouter-bouteilles');
-    Route::get('/Ajouter-bouteille-manuellement/{cellier_id}', [BouteilleController::class, 'AjouterbouteilleManuellement'])->name('Ajouter-bouteille-manuellement');
-    Route::post('/addBouteilleManuellementPost', [BouteilleController::class, 'addBouteilleManuellementPost'])->name('addBouteilleManuellementPost');
+
+    // Route::get('/Ajouter-bouteilles/{cellier_id}', [BouteilleController::class, 'index'])->name('Ajouter-bouteilles');
+    // Route::get('/Ajouter-bouteille-manuellement/{cellier_id}', [BouteilleController::class, 'AjouterbouteilleManuellement'])->name('Ajouter-bouteille-manuellement');
+    // Route::post('/addBouteilleManuellementPost', [BouteilleController::class, 'addBouteilleManuellementPost'])->name('addBouteilleManuellementPost');
+    // Route::post('/bouteilles/addBouteille/{id}', [BouteilleController::class, 'addBouteille'])->name('bouteilles.addBouteille');
+    // Route::delete('/bouteilles/{id}', [BouteilleController::class, 'destroy'])->name('bouteilles.destroy');
+
+    // Gérer les bouteilles d'un cellier 
+    Route::get('/bouteilles/{cellier_id}', [BouteilleController::class, 'indexBouteilleCellier'])->name('bouteilles-cellier.index');
+    Route::get('/bouteilles-ajouter/{cellier_id}', [BouteilleController::class, 'createBouteilleCellier'])->name('bouteille-cellier.create');
+    Route::post('/bouteilles-ajouter/{cellier_id}', [BouteilleController::class, 'storeBouteilleCellier'])->name('bouteille-cellier.store');
+    Route::post('/bouteilles-ajouter', [BouteilleController::class, 'store'])->name('bouteille.store');
     Route::post('/bouteilles/addBouteille/{id}', [BouteilleController::class, 'addBouteille'])->name('bouteilles.addBouteille');
     Route::delete('/bouteilles/{id}', [BouteilleController::class, 'destroy'])->name('bouteilles.destroy');
 
@@ -50,7 +61,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/bouteilles/rechercheFooterBouteillePost', [BouteilleController::class, 'indexRecherche'])->name('bouteilles.rechercheFooterBouteillePost');
 
     // Redirection vers HomeController après authentification
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    // Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/', [CustomAuthController::class, 'index'])->name('welcome');
 });
 
 // Routes d'authentification

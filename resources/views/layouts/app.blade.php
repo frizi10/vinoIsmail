@@ -21,7 +21,7 @@
                 </a>
             </li>
             <li class="main-nav-item">        
-                <a href="#">
+                <a href="{{ route('bouteilles.search') }}">
                     <figure class="container-icons-navbar">
                         <img src="{{ asset('assets/icons/add_icon.svg') }}" alt="Recherche">
                         <figcaption class="icons-label">ajouter</figcaption>
