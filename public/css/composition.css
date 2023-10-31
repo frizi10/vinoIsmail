@@ -13,21 +13,43 @@ body {
     
 }
 
-.container,
+/* .container, */
 main {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    gap: var(--space-s);
     align-items: center;
-    gap: var(--space);
-    /* margin: 0 var(--space-s); */
-    padding: var(--space) var(--space);
+    margin: 0 var(--space-s);
     /* border: 2px solid black;
     border-radius: 10px; */
 }
+
+main>div {
+    display: flex;
+    flex-direction: column;
+
+    gap: var(--space-s);
+}
+/* .main > * + * {
+	margin-top: var(--space-);
+} */
+
 
 /* .title-container, */
 header {
     display: flex;
     justify-content: center;
+    margin: var(--space-xs) var(--space-s);
+}
+
+section {
+    min-width: 100%;
+    border: .5px black solid;
+    border-radius: 10px;
+    padding: var(--space-s);
+}
+a>div > * + *,
+section > * + * {
+	margin-top: var(--space-s);
 }
