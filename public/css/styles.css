@@ -1,5 +1,6 @@
 @import url('btn.css');
 @import url('card.css');
+@import url('carousel.css');
 @import url('composition.css');
 @import url('form.css');
 @import url('footer.css');
@@ -14,6 +15,6 @@
 
 /* dev.css */
 
-* {
+/* * {
 	outline: 1px dashed red;
-}
+} */

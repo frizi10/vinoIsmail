@@ -7,12 +7,12 @@
 	margin: 0;
 	padding: 0;
     box-sizing:border-box;
-    background-color: var(--white);
 }
 
 /* -- hériter de la couleur principale (plutôt que le bleu « Google » */
 a {
 	color: inherit;
+	text-decoration: none;
 }
 
 /* -- pas de barre au-dessous des liens de navigation */
