@@ -123,3 +123,31 @@ header>.btn-arrow-top:hover svg {
     transform: translateY(-50%); /* Pour le centrer verticalement par rapport au texte */
 }
 
+
+/* boutons - et + dans les card-bouteille */
+.btn-decrement, .btn-increment {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    color: white;
+    border: none;
+    background-color: black;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-decrement:hover, .btn-increment:hover {
+    background-color: #919191;
+    color: black;
+}
+
+/* icone poubelle */
+.btn-delete {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    bottom: 8px;
+    right: 20px;
+}

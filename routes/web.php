@@ -126,6 +126,8 @@ Route::middleware(['auth'])->group(function () {
     // Route::get('/home', [HomeController::class, 'index'])->name('home');
 });
 
+
+
 // *************** Authentification ****************
 
 // Page de connexion
@@ -136,6 +138,9 @@ Route::post('/login', [CustomAuthController::class, 'authentication'])->name('lo
 Route::get('/register', [CustomAuthController::class, 'create'])->name('register');
 // Stockage d'un nouvel utilisateur dans la BDD
 Route::post('/register', [CustomAuthController::class, 'store'])->name('register.store');
+// Importer data de la SAQ
+Route::get('/scrape', [Web2scraperController::class, 'scrapeData']);
+
 
 
 

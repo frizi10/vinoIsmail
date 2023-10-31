@@ -10,24 +10,32 @@ class Bouteille extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'nom',
+        'prix',
+        'format',
         'pays',
         'region',
-        'couleur',
-        'format',
-        'prix',
+        'cepage',
+        'lienProduit',
         'srcImage',
         'srcsetImage',
-        'producteur',
-        'millesime',
-        'cepage',
-        'tauxSucre',
         'designation',
         'degre',
+        'tauxSucre',
+        'couleur',
+        'producteur',
         'agentPromotion',
         'produitQuebec',
-        'type'
-    ]; 
+        'type',
+        'millesime',
+        'pastilleGoutTitre',
+        'pastilleImageSrc',
+    
+
+      
+    ];
+
 
     public function bouteillesCelliers() 
     {
@@ -48,4 +56,5 @@ class Bouteille extends Model
     {
         return $this->hasMany(Favoris::class);
     }
+
 }
