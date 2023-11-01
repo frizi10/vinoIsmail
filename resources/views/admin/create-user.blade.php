@@ -27,10 +27,10 @@
                 </div>
                 <div class="form-input-container">
                     <label for="password">MOT DE PASSE</label>
-                    <input type="password" id="password" name="password">
+                    <input type="text" id="password" name="password">
                 </div>
             </form>
-            <button type="submit" form="registration">CRÉER UN COMPTE D'UTILISATEUR</button>
+            <button type="submit" form="registration">CRÉER UN COMPTE UTILISATEUR</button>
         </div>
     </div>
 </main>

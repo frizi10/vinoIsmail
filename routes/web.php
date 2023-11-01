@@ -144,10 +144,13 @@ Route::get('/scrape', [Web2scraperController::class, 'scrapeData']);
 // *************** Admin **************** À mettre dans un groupe d'authentification
 
 // Création d'un nouvel utilisateur
-Route::get('/admin-register', [AdminController::class, 'create'])->name('admin.create-user');
+Route::get('/admin/users-create', [AdminController::class, 'create'])->name('admin.create-user');
 // Stockage d'un nouvel utilisateur dans la BDD
-Route::post('/admin-register', [AdminController::class, 'store'])->name('admin.store-user');
-
-
-
+Route::post('/admin/users-create', [AdminController::class, 'store']);
+// Modification d'un utilisateur
+Route::get('/admin/users-edit/{id}', [AdminController::class, 'edit'])->name('admin.edit-user');
+// Stockage de la modification d'un utilisateur dans la BDD
+Route::put('/admin/users-edit/{id}', [AdminController::class, 'update']);
+// Suppression d'un utilisateur
+Route::delete('/admin/users-delete/{id}', [AdminController::class, 'destroy'])->name('admin.destroy-user');
 

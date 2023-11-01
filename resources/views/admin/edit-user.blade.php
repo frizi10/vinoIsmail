@@ -10,36 +10,37 @@
         Modification d'un utilisateur
     </h1>
     <div>
+        <p></p>
         <div class="form-container">
             <form action="" method="post">
                 @method('put')
                 @csrf
                     <div class="form-input-container">
-                        <label for="prenom">Prénom</label>
+                        <label for="prenom">PRÉNOM</label>
                         <input type="text" id="prenom" name="prenom" value="{{ $user->prenom }}">
                     </div>
                     <div class="form-input-container">
-                        <label for="nom">Nom</label>
+                        <label for="nom">NOM</label>
                         <input type="text" id="nom" name="nom" value="{{ $user->nom }}">
                     </div>
                     <div class="form-input-container">
-                        <label for="email">Courriel</label>
+                        <label for="email">COURRIEL</label>
                         <input id="email" name="email" value="{{ $user->email }}"></input>
                     </div>
                     <div class="form-input-container">
-                        <label for="email_verified">Courriel vérifié</label>
+                        <label for="email_verified">COURRIEL VÉRIFIÉ</label>
                         <input id="email_verified" name="email_verified_at" value="{{ $user->email_verified_at }}"></input>
                     </div>
                     <div class="form-input-container">
-                        <label for="password">Mot de passe</label>
+                        <label for="password">MOT DE PASSE</label>
                         <input id="password" name="password" value="{{ $user->password }}"></input>
                     </div>
                     <div class="form-input-container">
-                        <label for="creation">Date de création</label>
+                        <label for="creation">DATE DE CRÉATION</label>
                         <input id="creation" name="created_at" value="{{ $user->created_at }}" readonly></input>
                     </div>
                     <div class="form-input-container">
-                        <label for="update">Date de modification</label>
+                        <label for="update">DATE DE MODIFICATION</label>
                         <input id="update" name="updated_at" value="{{ $user->updated_at }}" readonly></input>
                     </div>
                 <div>
