@@ -9,6 +9,8 @@ class BouteillePanier extends Model
 {
     use HasFactory;
 
+    protected $table = 'bouteilles_paniers';
+
     protected $fillable = [
         'bouteille_id',
         'cellier_id',

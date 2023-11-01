@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cellier;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CellierController extends Controller
 {
@@ -14,7 +16,19 @@ class CellierController extends Controller
      */
     public function index()
     {
-        //
+        $celliers = Cellier::withCount('bouteillesCelliers')
+                            ->with('bouteillesCelliers.bouteille')
+                            ->where('user_id', Auth::id())
+                            ->get(); 
+
+        $celliers->each(function ($cellier) {
+            $cellier->prixTotal = 0; 
+            foreach($cellier->bouteillesCelliers as $bouteilleCellier) {
+                $cellier->prixTotal += $bouteilleCellier->bouteille->prix; 
+            }
+        }); 
+        
+        return view('cellier.index', ['celliers' => $celliers]); 
     }
 
     /**
