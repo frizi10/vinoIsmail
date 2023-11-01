@@ -141,7 +141,12 @@ Route::post('/register', [CustomAuthController::class, 'store'])->name('register
 // Importer data de la SAQ
 Route::get('/scrape', [Web2scraperController::class, 'scrapeData']);
 
+// *************** Admin **************** À mettre dans un groupe d'authentification
 
+// Création d'un nouvel utilisateur
+Route::get('/admin-register', [AdminController::class, 'create'])->name('admin.create-user');
+// Stockage d'un nouvel utilisateur dans la BDD
+Route::post('/admin-register', [AdminController::class, 'store'])->name('admin.store-user');
 
 
 
