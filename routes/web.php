@@ -5,7 +5,7 @@ use App\Http\Controllers\BouteilleCellierController;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\CellierController;
 use App\Http\Controllers\BouteilleController;
-
+use App\Http\Controllers\Web2scraperController;
 
 // Route d'accueil
 Route::get('/', function () {
