@@ -164,10 +164,6 @@ header>.btn-arrow-top:hover svg {
     width: 8rem;
 }
 
-/* <div class="btn-modal-container">
-<button class="btn-modal-action">ajouter</button>
-<button class="btn-modal-cancel">annuler</button>
-</div> */
 .btn-modal-container {
     display: flex;
     min-width: 100%;
