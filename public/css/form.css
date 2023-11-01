@@ -26,6 +26,7 @@ form {
     /* max-width: 75ch; */
     display: flex;
     flex-direction: column;
+    gap: .5rem;
 }
 /* .form > * + * {
 	margin-top: var(--space-);
@@ -35,16 +36,16 @@ form {
     flex-flow: column;
     align-items: flex-start;
     width: 100%;
-    margin-top: var(--space);
+    margin-top: var(--space-s);
 }
 
-form input {
+form input:not(.card-bouteille-qt input) {
     min-width: 100%;
     border: .5px solid var(--black);
-    padding: 0.5em;
+    padding: 0.25em;
 }
 
-form label {
+form label, summary {
     text-transform: uppercase;
     /* text-decoration: underline; */
     font-size: 12px;
@@ -63,4 +64,60 @@ form label {
 /* seulement pour les h1 qui est titre du formulaire */
 .form-h1 {
     margin-top: 1rem;
+}
+
+.form-ajouter-bouteille {
+    padding-bottom: 1rem;
+}
+
+.form-ajouter-bouteille div.form-container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+
+summary {
+    list-style: none;
+    /* padding-bottom: .5rem; */
+    /* font-weight: bold; */
+    cursor: pointer;
+}
+summary::after {
+    content: url("data:image/svg+xml,%3Csvg width='11' height='6' viewBox='0 0 11 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 0.999511L4.70454 4.70405C5.14204 5.14155 5.85795 5.14155 6.29545 4.70405L10 0.999512' stroke='black' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    float: right;
+    margin-right: 0.5em;
+}
+details[open] summary::after {
+    content: url("data:image/svg+xml,%3Csvg width='11' height='6' viewBox='0 0 11 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 5.03223L6.29546 1.32769C5.85796 0.890186 5.14205 0.890186 4.70455 1.32769L1 5.03223' stroke='black' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    float: right;
+}
+details {
+    /* padding-bottom: .5rem; */
+    text-transform: uppercase;
+    text-align: left;
+    /* border-bottom: 0.25px darkgray solid; */
+}
+
+
+/* MODALE AJOUTER */
+.form-modal {
+    margin: 0 1rem .5rem 1rem;
+    padding-top: .5rem;
+}
+/* .form-modal> * + * {
+    margin-top: .5rem;
+} */
+
+
+.form-radio {
+    display: flex;
+    /* margin-left: 1rem; */
+}
+.form-radio input[type="radio"],
+.form-radio label {
+    min-width: auto;
+    display: inline-block;
+    margin-right: 10px;  /* Pour ajouter un peu d'espace entre les éléments */
 }

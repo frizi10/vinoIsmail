@@ -151,3 +151,37 @@ header>.btn-arrow-top:hover svg {
     bottom: 8px;
     right: 20px;
 }
+
+.btn-ajouter {
+    display: flex;
+    justify-content: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: black;
+    color: white;
+    border-radius: 25px;
+    padding: .25rem .5rem;
+    width: 8rem;
+}
+
+.btn-modal-container {
+    display: flex;
+    min-width: 100%;
+    gap: .25rem;
+    margin-top: .5rem;
+}
+.btn-modal-container button {
+    text-transform: uppercase;
+    border-radius: 5px;
+    padding: .5em 0;
+    font-weight: bold;
+    background-color: black;
+    color: white;
+    font-size: 16px;
+}
+.btn-modal-action {
+    flex-grow: 3;
+}
+.btn-modal-cancel {
+    flex-grow: 2;
+}

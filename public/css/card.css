@@ -106,7 +106,7 @@
 .card-bouteille img {
     height: 120px;
 }
-.card-bouteille a {
+.card-bouteille a:not(.btn-ajouter) {
     text-decoration: underline;
 }
 .card-bouteille-info> * + * {
