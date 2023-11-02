@@ -35,7 +35,7 @@ Route::middleware(['auth'])->group(function () {
     // *************** Gestion des bouteilles ****************
 
     // Affichage de toutes les bouteilles
-    Route::get('/bouteilles', [BouteilleController::class, 'index'])->name('bouteille.index');
+    //Route::get('/bouteilles', [BouteilleController::class, 'index'])->name('bouteille.index');
     // Affichage des informations d'une bouteille 
     Route::get('/bouteilles/{bouteille_id}', [BouteilleController::class, 'show'])->name('bouteille.show');
     // Création d'une bouteille personnalisée
@@ -48,6 +48,14 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/bouteilles-modifier/{bouteille_id}', [BouteilleController::class, 'update']);
     // Suppression d'une bouteille personnalisée
     Route::delete('/bouteilles-modifier/{bouteille_id}', [BouteilleController::class, 'destroy'])->name('bouteille.destroy');
+
+    //Ajout par ismail
+    //affichage de toutes les bouteilles de la SAQ
+    Route::get('/bouteilles', [BouteilleController::class, 'index'])->name('bouteille.index');
+    // Recheche par mot clé dans le titre
+    Route::get('/bouteilles-search', [BouteilleController::class, 'search'])->name('bouteille.search');  
+
+
 
     // *************** Gestion des celliers ****************
 
@@ -140,6 +148,8 @@ Route::get('/register', [CustomAuthController::class, 'create'])->name('register
 Route::post('/register', [CustomAuthController::class, 'store'])->name('register.store');
 // Importer data de la SAQ
 Route::get('/scrape', [Web2scraperController::class, 'scrapeData']);
+
+
 
 
 
