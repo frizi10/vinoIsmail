@@ -14,7 +14,18 @@ class BouteilleController extends Controller
      */
     public function index()
     {
-        return view('bouteille.index');
+        $bouteilles = Bouteille::paginate(7);
+       
+        return view('bouteille.index', ['bouteilles'=> $bouteilles]);
+    }
+
+
+    public function search(Request $request) {
+
+        $searchTerm = $request->input('search');
+        $bouteilles = Bouteille::where('nom', 'like', "%$searchTerm%")->paginate(3);
+               
+      return view('bouteille.show-search', ['bouteilles' => $bouteilles]);
     }
 
     /**
