@@ -6,9 +6,10 @@
     ajouter une bouteille
 </header>
 <main>
+    
     <section> <!-- encadré noir (formulaires, filtres et tris) --> 
         <div class="form-container">
-            <form action="" method="" id="">
+            <form action="{{ route('bouteille.search') }}" method="" id="">
                 @csrf
                 <div class="form-input-container">
                     <label for="search">RECHERCHE</label>
@@ -95,17 +96,26 @@
         </div>
     </section>
     <section> <!-- liste des bouteilles de la SAQ --> 
-        <p> 6 résultats : </p>
+        <p> {{$bouteilles->total()}} résultats : </p>
+        @foreach ($bouteilles as $bouteille)
         <div> <!-- encadré noir - fiche --> 
             <picture>
-                <img src="#" alt="Nom de la bouteille">
+                <img src="{{ $bouteille->srcImage }}" alt=" $bouteille->nom">
             </picture>
             <div>
-                <h2>Nom de la bouteille</h2>
-                <p>Vin blanc | 750ml | France</p>
+                <h2>{{ $bouteille->nom }} </h2>
+                <p>{{$bouteille->type}} | {{ $bouteille->format }} | {{$bouteille->pays}}</p>
                 <a href="#"><button>+AJOUTER</button></a>
             </div>
         </div>
+        
+@endforeach
+{{ $bouteilles->links() }}
+
+
     </section>
 </main>
 @endsection
+
+
+
