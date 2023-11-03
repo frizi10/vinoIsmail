@@ -3,7 +3,7 @@
 @extends('layouts.app')
 @section('content')
     <main class="nav-margin">
-        <a href="#" class="btn-round btn-action">+ ajouter un cellier</a>
+        <a href="{{ route('cellier.create') }}" class="btn-round btn-action">+ ajouter un cellier</a>
         <h1>Vos celliers</h1>
         @forelse($celliers as $cellier)
             <section class="card-cellier">
