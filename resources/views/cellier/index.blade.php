@@ -7,7 +7,7 @@
         <h1>Vos celliers</h1>
         @forelse($celliers as $cellier)
             <section class="card-cellier">
-                <a href="#">
+                <a href="{{ route('cellier.show', $cellier->id) }}">
                     <div>
                         <h2>{{ $cellier->nom }}</h2>
                         <div class="card-container-stats">
