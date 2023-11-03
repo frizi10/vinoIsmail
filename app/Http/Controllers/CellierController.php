@@ -75,7 +75,7 @@ class CellierController extends Controller
      */
     public function show(Cellier $cellier_id)
     {
-        //
+        return view('cellier.show', ['cellier' => $cellier_id]); 
     }
 
     /**
