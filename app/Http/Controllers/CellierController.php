@@ -73,7 +73,7 @@ class CellierController extends Controller
      * @param  \App\Models\Cellier  $cellier
      * @return \Illuminate\Http\Response
      */
-    public function show(Cellier $cellier)
+    public function show(Cellier $cellier_id)
     {
         //
     }
@@ -123,6 +123,14 @@ class CellierController extends Controller
      */
     public function destroy($cellier_id)
     {
-        //
+        try {
+            $cellier = Cellier::findOrFail($cellier_id); 
+            $cellier->bouteillesCelliers()->delete(); 
+            $cellier->delete(); 
+            return redirect(route('cellier.index')); 
+        }
+        catch (\Exception $e) {
+            return redirect(route('cellier.index'))->with('error', 'Le cellier n\'existe pas'); 
+        }
     }
 }
