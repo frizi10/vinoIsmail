@@ -49,13 +49,13 @@ class CellierController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $request->validate(
             ['nom' => 'required|max:255'],
             [
                 'nom.required' => 'Le nom du cellier est obligatoire.', 
                 'nom.max' => 'Le nom ne doit pas dépasser 255 caractères.'
             ]
-        ]); 
+        ); 
 
         $newCellier = Cellier::create([
             'nom' => $request->nom, 
@@ -86,7 +86,7 @@ class CellierController extends Controller
      */
     public function edit(Cellier $cellier)
     {
-        //
+        return view('cellier.edit', ['cellier' => $cellier]); 
     }
 
     /**

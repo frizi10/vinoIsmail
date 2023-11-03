@@ -13,7 +13,7 @@
                     <label for="nom">Nom du cellier</label>
                     <input type="text" id="nom" name="nom">
                     @if ($errors->has('nom')) 
-                        <div>{{ $message }}</div>
+                        <div>{{ $errors->first('nom') }}</div>
                     @endif
                 </div>
                 <div class="form-button">
