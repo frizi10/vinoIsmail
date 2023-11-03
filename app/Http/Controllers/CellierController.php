@@ -84,8 +84,10 @@ class CellierController extends Controller
      * @param  \App\Models\Cellier  $cellier
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cellier $cellier)
+    public function edit($cellier_id)
     {
+        $cellier = Cellier::findOrFail($cellier_id); 
+
         return view('cellier.edit', ['cellier' => $cellier]); 
     }
 
@@ -96,9 +98,21 @@ class CellierController extends Controller
      * @param  \App\Models\Cellier  $cellier
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cellier $cellier)
+    public function update(Request $request, $cellier_id)
     {
-        //
+        $request->validate(
+            ['nom' => 'required|max:255'],
+            [
+                'nom.required' => 'Le nom du cellier est obligatoire.', 
+                'nom.max' => 'Le nom ne doit pas dépasser 255 caractères.'
+            ]
+        ); 
+
+        Cellier::findOrFail($cellier_id)->update([
+            'nom' => $request->nom
+        ]);
+
+        return redirect(route('cellier.index'));
     }
 
     /**
@@ -107,7 +121,7 @@ class CellierController extends Controller
      * @param  \App\Models\Cellier  $cellier
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cellier $cellier)
+    public function destroy($cellier_id)
     {
         //
     }
