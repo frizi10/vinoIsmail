@@ -121,3 +121,34 @@ details {
     display: inline-block;
     margin-right: 10px;  /* Pour ajouter un peu d'espace entre les éléments */
 }
+
+/* TAGS */
+
+.tag-container {
+    /* padding: 10px; */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.tag {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    background-color: #ddd;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.tag:hover {
+    background-color: #ccc;
+}
+
+.tag::after {
+    content: '×';
+    display: block;
+    margin-left: 8px;
+    font-weight: bold;
+}

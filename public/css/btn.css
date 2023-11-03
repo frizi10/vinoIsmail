@@ -180,8 +180,8 @@ header>.btn-arrow-top:hover svg {
     font-size: 16px;
 }
 .btn-modal-action {
-    flex-grow: 3;
+    flex-grow: 2;
 }
 .btn-modal-cancel {
-    flex-grow: 2;
+    flex-grow: 1;
 }
