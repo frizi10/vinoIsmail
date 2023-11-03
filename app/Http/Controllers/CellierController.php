@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cellier;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CellierController extends Controller
 {
@@ -14,7 +16,19 @@ class CellierController extends Controller
      */
     public function index()
     {
-        //
+        $celliers = Cellier::withCount('bouteillesCelliers')
+                            ->with('bouteillesCelliers.bouteille')
+                            ->where('user_id', Auth::id())
+                            ->get(); 
+
+        $celliers->each(function ($cellier) {
+            $cellier->prixTotal = 0; 
+            foreach($cellier->bouteillesCelliers as $bouteilleCellier) {
+                $cellier->prixTotal += $bouteilleCellier->bouteille->prix; 
+            }
+        }); 
+        
+        return view('cellier.index', ['celliers' => $celliers]); 
     }
 
     /**
@@ -24,7 +38,7 @@ class CellierController extends Controller
      */
     public function create()
     {
-        //
+        return view('cellier.create');
     }
 
     /**
@@ -35,7 +49,22 @@ class CellierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+            ['nom' => 'required|max:255'],
+            [
+                'nom.required' => 'Le nom du cellier est obligatoire.', 
+                'nom.max' => 'Le nom ne doit pas dépasser 255 caractères.'
+            ]
+        ); 
+
+        $newCellier = Cellier::create([
+            'nom' => $request->nom, 
+            'user_id' => Auth::id()
+        ]);
+
+        $newCellier->save(); 
+
+        return redirect(route('cellier.index')); 
     }
 
     /**
@@ -44,9 +73,9 @@ class CellierController extends Controller
      * @param  \App\Models\Cellier  $cellier
      * @return \Illuminate\Http\Response
      */
-    public function show(Cellier $cellier)
+    public function show(Cellier $cellier_id)
     {
-        //
+        return view('cellier.show', ['cellier' => $cellier_id]); 
     }
 
     /**
@@ -55,9 +84,11 @@ class CellierController extends Controller
      * @param  \App\Models\Cellier  $cellier
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cellier $cellier)
+    public function edit($cellier_id)
     {
-        //
+        $cellier = Cellier::findOrFail($cellier_id); 
+
+        return view('cellier.edit', ['cellier' => $cellier]); 
     }
 
     /**
@@ -67,9 +98,21 @@ class CellierController extends Controller
      * @param  \App\Models\Cellier  $cellier
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cellier $cellier)
+    public function update(Request $request, $cellier_id)
     {
-        //
+        $request->validate(
+            ['nom' => 'required|max:255'],
+            [
+                'nom.required' => 'Le nom du cellier est obligatoire.', 
+                'nom.max' => 'Le nom ne doit pas dépasser 255 caractères.'
+            ]
+        ); 
+
+        Cellier::findOrFail($cellier_id)->update([
+            'nom' => $request->nom
+        ]);
+
+        return redirect(route('cellier.index'));
     }
 
     /**
@@ -78,8 +121,16 @@ class CellierController extends Controller
      * @param  \App\Models\Cellier  $cellier
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cellier $cellier)
+    public function destroy($cellier_id)
     {
-        //
+        try {
+            $cellier = Cellier::findOrFail($cellier_id); 
+            $cellier->bouteillesCelliers()->delete(); 
+            $cellier->delete(); 
+            return redirect(route('cellier.index')); 
+        }
+        catch (\Exception $e) {
+            return redirect(route('cellier.index'))->with('error', 'Le cellier n\'existe pas'); 
+        }
     }
 }

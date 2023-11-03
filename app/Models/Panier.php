@@ -16,7 +16,7 @@ class Panier extends Model
 
     public function bouteillesPaniers() 
     {
-        return $this->hasMany(BouteillesPaniers::class);
+        return $this->hasMany(BouteillePanier::class);
     }
 
     public function user() 
