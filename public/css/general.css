@@ -24,6 +24,14 @@ input, button {
     border-style: none;
 }
 
+select {
+    background-color: white;
+    border: 0.5px solid #000;
+    padding: 5px 10px;
+    border-radius: 10px;
+	min-width: 100%;
+}
+
 /* -- limiter les images à la largeur de leur parent */
 img {
 	max-width: 100%;
@@ -34,3 +42,5 @@ img {
 p {
     max-width: 75ch;
 }
+
+

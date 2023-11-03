@@ -20,9 +20,9 @@ class CreateBouteillesCelliersTable extends Migration
             $table->foreign('bouteille_id')->references('id')->on('bouteilles'); 
             $table->unsignedBigInteger('cellier_id'); 
             $table->foreign('cellier_id')->references('id')->on('celliers'); 
-            $table->date('date_achat');
-            $table->date('date_ouverture');
-            $table->date('date_peremption');
+            $table->date('date_achat')->nullable();
+            $table->date('date_ouverture')->nullable();
+            $table->date('date_peremption')->nullable();
             $table->unsignedInteger('quantite');
         });
     }
