@@ -35,12 +35,14 @@
                             <div class="form-input-container">
                                 <label for="color">Couleur</label>
                                 <select name="color" id="color">
+                                    <option value="">Choisir les options</option>
                                     <option value="white">Blanc</option>
                                 </select>
                             </div>
                             <div class="form-input-container">
                                 <label for="format">Format</label>
                                 <select name="format" id="format">
+                                    <option value="">Choisir les options</option>
                                     <option value="750">750ml</option>
                                 </select>
                             </div>
@@ -61,28 +63,37 @@
                             <div class="form-input-container">
                                 <label for="country">Pays</label>
                                 <select name="country" id="country">
+                                    <option value="">Choisir les options</option>
                                     <option value="canada">Canada</option>
+                                    <option value="usa">États-Unis</option>
+                                    <option value="espagne">Espagne</option>
+                                    <option value="france">France</option>
+                                    <option value="italie">Italie</option>
                                 </select>
                             </div>
                             <div class="form-input-container">
                                 <label for="region">Région</label>
                                 <select name="region" id="region">
+                                    <option value="">Choisir les options</option>
                                     <option value="quebec">Québec</option>
                                 </select>
                             </div>
                             <div class="form-input-container">
                                 <label for="year">Millésime</label>
                                 <select name="year" id="year">
+                                    <option value="">Choisir les options</option>
                                     <option value="2001">2001</option>
                                 </select>
                             </div>
                             <div class="form-input-container">
                                 <label for="grape">Cépage</label>
                                 <select name="grape" id="grape">
+                                    <option value="">Choisir les options</option>
                                     <option value="cabernet-sauv">Cabernet-Sauvignon</option>
                                 </select>
                             </div>
-                        </details>
+                        </details>                        
+                        <div class="tag-container"></div>
                     </form>
                 </div>
                 <div class="form-container">
@@ -186,6 +197,7 @@
             <!-- </div> -->
             <script src="../../js/bottleCounterModal.js"></script>
             <script src="../../js/modalAjouter.js"></script>
+            <script src="../../js/filterTag.js"></script>
         </main>
     <nav class="nav">
         <ul class="nav-list">
