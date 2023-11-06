@@ -4,7 +4,7 @@
 
 <body>
         <header>
-            ajouter une bouteille
+            résultats de recherche
         </header>
         <main class="nav-margin">
             <section class="form-ajouter-bouteille"> <!-- encadré noir (formulaires, filtres et tris) --> 
@@ -97,7 +97,7 @@
                         <div class="form-input-container">
                             <label for="sort">TRIER</label>
                             <select name="sort" id="sort">
-                                <option value="defaut" {{ request('sorter') == 'defaut' ? 'selected' : '' }}></option>
+                                {{-- <option value="defaut" {{ request('sorter') == 'defaut' ? 'selected' : '' }}></option> --}}
 
                                 <option value="name-asc" {{ request('sort') == 'name-asc' ? 'selected' : '' }}>Nom du produit (A-Z)</option>
                                 <option value="name-desc" {{ request('sort') == 'name-desc' ? 'selected' : '' }}>Nom du produit (Z-A)</option>
@@ -118,9 +118,7 @@
                 </picture>
                 <div class="card-bouteille-content">
                     <div class="card-bouteille-info">
-                       
-                            <h2><a href="{{ route('bouteille.show',['bouteille_id'=> $bouteille->id]) }}">{{ $bouteille->nom }}</a></h2>
-                      
+                        <h2><a href="{{ route('bouteille.show',['bouteille_id'=> $bouteille->id]) }}">{{ $bouteille->nom }}</a></h2>
                         <span>{{$bouteille->type}} | {{ $bouteille->format }} | {{$bouteille->pays}}</span>
                         <p>{{$bouteille->prix}} $</p>
                     </div>
@@ -129,7 +127,7 @@
             </section>
           
             @endforeach  
-            {{ $bouteilles->links() }} 
+            {{ $bouteilles->appends(request()->query())->links('pagination.custom') }}
         </section>
     </main>
     @endsection
@@ -167,68 +165,8 @@
                         </form>
                 </dialog>
             <!-- </div> -->
-          
             <script src="../../js/bottleCounterModal.js"></script>
             <script src="../../js/modalAjouter.js"></script>
             <script src="../../js/filterTag.js"></script>
-            {{-- <script src="../../js/sorting.js"></script> --}}
-            {{-- <script src="{{asset('assets/js/sorting.js')}}"></script>   --}}
-
-           
         </main>
-     
-         {{-- tri a deplacer dans le dossier js --}}
-        {{-- <script>
-            document.getElementById('sort').addEventListener('change', function() {
-                document.getElementById('sortingForm').submit();
-            });
-        </script>   --}}
-
-       
         
-    {{-- <nav class="nav">
-        <ul class="nav-list">
-            <li class="nav-item">        
-                <a href="#">
-                    <figure class="nav-icon-container nav-active">
-                        <img src="../../../public/assets/icons/home_icon.svg" alt="Accueil">
-                        <figcaption>accueil</figcaption>
-                    </figure>
-                </a>
-            </li>
-            <li class="nav-item">        
-                <a href="#">
-                    <figure class="nav-icon-container">
-                        <img src="../../../public/assets/icons/add_icon.svg" alt="Recherche">
-                        <figcaption class="icons-label">ajouter</figcaption>
-                    </figure>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#">
-                    <figure class="nav-icon-container">
-                        <img src="../../../public/assets/icons/list_icon.svg" alt="Liste d'achats">
-                        <figcaption>liste</figcaption>
-                    </figure>
-                </a>
-            </li>
-            <li class="nav-item">        
-                <a href="#">
-                    <figure class="nav-icon-container">
-                        <img src="../../../public/assets/icons/cellars_icon.svg" alt="Celliers">
-                        <figcaption>celliers</figcaption>
-                    </figure>
-                </a>
-            </li>
-            <li class="nav-item">         
-                <a href="#">
-                    <figure class="nav-icon-container">
-                        <img src="../../../public/assets/icons/profile_icon.svg" alt="Profil">
-                        <figcaption>profil</figcaption>
-                    </figure>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</body>
-</html> --}}

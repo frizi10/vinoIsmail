@@ -35,9 +35,9 @@ Route::middleware(['auth'])->group(function () {
     // *************** Gestion des bouteilles ****************
 
     // Affichage de toutes les bouteilles
-    Route::get('/bouteilles', [BouteilleController::class, 'index'])->name('bouteille.index');
+    //Route::get('/bouteilles', [BouteilleController::class, 'index'])->name('bouteille.index');
     // Affichage des informations d'une bouteille 
-    Route::get('/bouteilles/{bouteille_id}', [BouteilleController::class, 'show'])->name('bouteille.show');
+// Route::get('/bouteilles/{bouteille_id}', [BouteilleController::class, 'show'])->name('bouteille.show');
     // Création d'une bouteille personnalisée
     Route::get('/bouteilles-ajouter/{bouteille_id}', [BouteilleController::class, 'create'])->name('bouteille.create');
     // Stockage d'une bouteille personnalisée dans la BDD
@@ -48,6 +48,18 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/bouteilles-modifier/{bouteille_id}', [BouteilleController::class, 'update']);
     // Suppression d'une bouteille personnalisée
     Route::delete('/bouteilles-modifier/{bouteille_id}', [BouteilleController::class, 'destroy'])->name('bouteille.destroy');
+
+    //Ajout par ismail
+    //affichage de toutes les bouteilles de la SAQ
+    Route::get('/bouteilles', [BouteilleController::class, 'index'])->name('bouteille.index');
+    // Recheche par mot clé dans le titre
+    Route::get('/bouteilles-search', [BouteilleController::class, 'search'])->name('bouteille.search');
+   //tri
+   Route::get('/sorting', [BouteilleController::class, 'sorting'])->name('bouteille.sorting');
+  //filtre
+   Route::get('/filtrer-produits', [BouteilleController::class, 'filtrerProduits'])->name('filtrer_produits');  
+
+
 
     // *************** Gestion des celliers ****************
 
@@ -120,6 +132,10 @@ Route::get('/scrape', [Web2scraperController::class, 'scrapeData']);
 
 // *************** Admin **************** À mettre dans un groupe d'authentification
 
+
+
+
+
 // Création d'un nouvel utilisateur
 Route::get('/admin/users-create', [AdminController::class, 'create'])->name('admin.create-user');
 // Stockage d'un nouvel utilisateur dans la BDD
@@ -131,3 +147,16 @@ Route::put('/admin/users-edit/{id}', [AdminController::class, 'update']);
 // Suppression d'un utilisateur
 Route::delete('/admin/users-delete/{id}', [AdminController::class, 'destroy'])->name('admin.destroy-user');
 
+
+
+// faire ces fomctionnalite sans auth
+
+//Route::get('/bouteilles', [BouteilleController::class, 'index'])->name('bouteille.index');
+// Recheche par mot clé dans le titre
+//Route::get('/bouteilles-search', [BouteilleController::class, 'search'])->name('bouteille.search');  
+//Route::get('/bouteilles/{bouteille_id}', [BouteilleController::class, 'show'])->name('bouteille.show');
+
+//tri
+//Route::get('/sorting', [BouteilleController::class, 'sorting'])->name('bouteille.sorting');
+//filtre
+//Route::get('/filtrer-produits', [BouteilleController::class, 'filtrerProduits'])->name('filtrer_produits');

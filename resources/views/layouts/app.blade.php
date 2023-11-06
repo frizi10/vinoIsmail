@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://use.typekit.net/dox8qou.css">
+    <link href="{{ asset('css/pagination.css') }}" rel="stylesheet">
     <title>Vino - @yield('title')</title>
 </head>
 <body>
