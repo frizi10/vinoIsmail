@@ -73,9 +73,23 @@ class CellierController extends Controller
      * @param  \App\Models\Cellier  $cellier
      * @return \Illuminate\Http\Response
      */
-    public function show(Cellier $cellier_id)
+    public function show(Cellier $cellier_id, Request $request)
     {
-        return view('cellier.show', ['cellier' => $cellier_id]); 
+        $cellier = $cellier_id;
+
+        $sort = $request->input('sort');
+    
+        if ($sort == 'name-asc') {
+            $cellier->bouteillesCelliers = $cellier->bouteillesCelliers->sortBy('bouteille.nom');
+        } elseif ($sort == 'name-desc') {
+            $cellier->bouteillesCelliers = $cellier->bouteillesCelliers->sortByDesc('bouteille.nom');
+        } elseif ($sort == 'price-asc') {
+            $cellier->bouteillesCelliers = $cellier->bouteillesCelliers->sortBy('bouteille.prix');
+        } elseif ($sort == 'price-desc') {
+            $cellier->bouteillesCelliers = $cellier->bouteillesCelliers->sortByDesc('bouteille.prix');
+        }
+    
+        return view('cellier.show', ['cellier' => $cellier]);
     }
 
     /**

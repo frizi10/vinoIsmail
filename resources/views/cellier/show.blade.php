@@ -28,7 +28,7 @@
             </svg>
         </a>
         <div class="form-container">
-            <form action="{{ route('cellier.show', ['cellier_id' => $cellier->id]) }}" method="" id="sortCellier">
+            <form action="{{ route('cellier.show', ['cellier_id' => $cellier->id]) }}" method="">
                 @csrf
                 <div class="form-input-container">
                     <label for="sortCellier">TRIER</label>
@@ -78,6 +78,5 @@
         
         <script src="{{ asset('js/sortBottles.js') }}"></script>
         <script src="{{ asset('js/bottleCounter.js') }}"></script>
-        <!-- <script src="../../js/bottleCounter.js"></script> -->
     </main>
 @endsection
