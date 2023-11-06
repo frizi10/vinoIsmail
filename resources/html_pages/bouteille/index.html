@@ -40,6 +40,72 @@
                                 Réinitialiser les filtres
                             </button>
                             <div class="form-input-container">
+                                <label for="prix-range">Prix ($)</label>
+                                <div class="form-range">
+                                    <div class="form-range-slider">
+                                        <span class="form-range-selected"></span>
+                                    </div>
+                                    <div class="form-range-input">
+                                        <input type="range" class="min" min="0" max="1000" value="0" step="1">
+                                        <input type="range" class="max" min="0" max="1000" value="1000" step="1">
+                                    </div>
+                                    <div class="form-range-number">      
+                                        <div>
+                                            <label for="min">Min</label>
+                                            <input type="number" name="min" value="0">
+                                        </div>    
+                                        <div>
+                                            <label for="max">Max</label>
+                                            <input type="number" name="max" value="1000">
+                                        </div>    
+                                    </div>
+                                </div>  
+                            </div>
+                            <div class="form-input-container">
+                                <label for="alcohol-range">Degré d'alcool (%)</label>
+                                <div class="form-range">
+                                    <div class="form-range-slider">
+                                        <span class="form-range-selected"></span>
+                                    </div>
+                                    <div class="form-range-input">
+                                        <input type="range" class="min" min="0" max="1000" value="0" step="1">
+                                        <input type="range" class="max" min="0" max="1000" value="1000" step="1">
+                                    </div>
+                                    <div class="form-range-number">      
+                                        <div>
+                                            <label for="min">Min</label>
+                                            <input type="number" name="min" value="0">
+                                        </div>    
+                                        <div>
+                                            <label for="max">Max</label>
+                                            <input type="number" name="max" value="1000">
+                                        </div>    
+                                    </div>
+                                </div>  
+                            </div>
+                            <div class="form-input-container">
+                                <label for="sugar-range">Taux de sucre (g/L)</label>
+                                <div class="form-range">
+                                    <div class="form-range-slider">
+                                        <span class="form-range-selected"></span>
+                                    </div>
+                                    <div class="form-range-input">
+                                        <input type="range" class="min" min="0" max="1000" value="0" step="1">
+                                        <input type="range" class="max" min="0" max="1000" value="1000" step="1">
+                                    </div>
+                                    <div class="form-range-number">      
+                                        <div>
+                                            <label for="min">Min</label>
+                                            <input type="number" name="min" value="0">
+                                        </div>    
+                                        <div>
+                                            <label for="max">Max</label>
+                                            <input type="number" name="max" value="1000">
+                                        </div>    
+                                    </div>
+                                </div>  
+                            </div>
+                            <div class="form-input-container">
                                 <label for="color">Couleur</label>
                                 <select name="color" id="color">
                                     <option value="">Choisir les options</option>
@@ -53,52 +119,6 @@
                                     <option value="750">750ml</option>
                                 </select>
                             </div>
-                            <!-- <div class="form-input-container">
-                                <label for="prix">Prix</label>
-                                <div>
-                                    <div>
-                                        <label for="prix_min">Minimum</label>
-                                        <input id="prix_min" type="number">
-                                    </div>
-                                    <div>
-                                        <label for="prix_max">Maximum</label>
-                                        <input id="prix_max" type="number">
-                                    </div>
-                                </div>
-                            </div> -->
-                            <!-- <div class="form-input-container">
-                                <label for="prix-range">Prix</label>
-                                <div class="range-slider">
-                                    <input type="range" id="prix_min" name="prix_min" min="0" max="1000" value="100" oninput="updateRangeSlider(this.value, 'min')">
-                                    <input type="range" id="prix_max" name="prix_max" min="0" max="1000" value="900" oninput="updateRangeSlider(this.value, 'max')">
-                                    <div class="slider-values">
-                                        <span id="prix_min_label">100</span> - <span id="prix_max_label">900</span>
-                                    </div>
-                                </div>
-                            </div>                             -->
-                            <div class="form-input-container">
-                                <label for="prix-range">Prix</label>
-                                <div class="form-range">
-                                    <div class="form-range-slider">
-                                        <span class="form-range-selected"></span>
-                                    </div>
-                                    <div class="form-range-input">
-                                        <input type="range" class="min" min="0" max="1000" value="0" step="1">
-                                        <input type="range" class="max" min="0" max="1000" value="1000" step="1">
-                                    </div>
-                                    <div class="form-range-price">      
-                                        <div>
-                                            <label for="min">Min</label>
-                                            <input type="number" name="min" value="0">
-                                        </div>    
-                                        <div>
-                                            <label for="max">Max</label>
-                                            <input type="number" name="max" value="1000">
-                                        </div>    
-                                    </div>
-                                </div>  
-                            </div>
-                              
                             <div class="form-input-container">
                                 <label for="country">Pays</label>
                                 <select name="country" id="country">
@@ -238,7 +258,7 @@
             <script src="../../js/bottleCounterModal.js"></script>
             <script src="../../js/modalAjouter.js"></script>
             <script src="../../js/filterTag.js"></script>
-            <script src="../../js/priceSlider.js"></script>
+            <script src="../../js/filterSlider.js"></script>
         </main>
     <nav class="nav">
         <ul class="nav-list">
