@@ -153,10 +153,14 @@ Route::get('/scrape', [Web2scraperController::class, 'scrapeData']);
 
 
 
-// ajout par ismail faire ces fonctionnalite sans auth
+// faire ces fomctionnalite sans auth
 
 Route::get('/bouteilles', [BouteilleController::class, 'index'])->name('bouteille.index');
 // Recheche par mot clé dans le titre
 Route::get('/bouteilles-search', [BouteilleController::class, 'search'])->name('bouteille.search');  
 Route::get('/bouteilles/{bouteille_id}', [BouteilleController::class, 'show'])->name('bouteille.show');
 
+//tri
+Route::get('/sorting', [BouteilleController::class, 'sorting'])->name('bouteille.sorting');
+//filtre
+Route::get('/filtrer-produits', [BouteilleController::class, 'filtrerProduits'])->name('filtrer_produits');
