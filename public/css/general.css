@@ -4,23 +4,24 @@
 
 /* -- rétablir le rythme */
 * {
-	margin: 0;
-	padding: 0;
-    box-sizing:border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 /* -- hériter de la couleur principale (plutôt que le bleu « Google » */
 a {
-	color: inherit;
-	text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
 
 /* -- pas de barre au-dessous des liens de navigation */
 nav a {
-	text-decoration: none;
+    text-decoration: none;
 }
 
-input, button {
+input,
+button {
     border-style: none;
 }
 
@@ -29,13 +30,13 @@ select {
     border: 0.5px solid #000;
     padding: 5px 10px;
     border-radius: 10px;
-	min-width: 100%;
+    min-width: 100%;
 }
 
 /* -- limiter les images à la largeur de leur parent */
 img {
-	max-width: 100%;
-	/* max-height: 100%; */
+    max-width: 100%;
+    /* max-height: 100%; */
 }
 
 /* -- limiter la largeur pour la lisibilité */
@@ -43,4 +44,18 @@ p {
     max-width: 75ch;
 }
 
+table {
+    border-collapse: collapse;
+    min-width: 100%;
+    border: 1px solid black;
+	border-radius: 10px;
+}
+
+th,
+td {
+    border: 1px solid black;
+    padding: .5rem 1rem;
+    text-align: left;
+	width: 50%;
+}
 

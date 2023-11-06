@@ -19,7 +19,7 @@
                         <!-- @csrf -->
                         <div class="form-input-container">
                             <label for="search">RECHERCHE</label>
-                            <input type="text" id="search" name="search">
+                            <input type="search" id="search" name="search">
                         </div>
                     </form>
                     
@@ -32,6 +32,79 @@
                         <hr>
                         <details>
                             <summary>Filtrer</summary>
+                            <button type="button" id="reset-filters" class="btn-reset">
+                                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1.87593 4.23905C3.00136 2.30224 5.0986 1 7.5 1C11.0899 1 14 3.91015 14 7.5C14 11.0899 11.0899 14 7.5 14C3.91015 14 1 11.0899 1 7.5" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M4 5H1V1" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Réinitialiser les filtres
+                            </button>
+                            <div class="form-input-container">
+                                <label for="prix-range">Prix ($)</label>
+                                <div class="form-range">
+                                    <div class="form-range-slider">
+                                        <span class="form-range-selected"></span>
+                                    </div>
+                                    <div class="form-range-input">
+                                        <input type="range" class="min" min="0" max="1000" value="0" step="1">
+                                        <input type="range" class="max" min="0" max="1000" value="1000" step="1">
+                                    </div>
+                                    <div class="form-range-number">      
+                                        <div>
+                                            <label for="min">Min</label>
+                                            <input type="number" name="min" value="0">
+                                        </div>    
+                                        <div>
+                                            <label for="max">Max</label>
+                                            <input type="number" name="max" value="1000">
+                                        </div>    
+                                    </div>
+                                </div>  
+                            </div>
+                            <div class="form-input-container">
+                                <label for="alcohol-range">Degré d'alcool (%)</label>
+                                <div class="form-range">
+                                    <div class="form-range-slider">
+                                        <span class="form-range-selected"></span>
+                                    </div>
+                                    <div class="form-range-input">
+                                        <input type="range" class="min" min="0" max="1000" value="0" step="1">
+                                        <input type="range" class="max" min="0" max="1000" value="1000" step="1">
+                                    </div>
+                                    <div class="form-range-number">      
+                                        <div>
+                                            <label for="min">Min</label>
+                                            <input type="number" name="min" value="0">
+                                        </div>    
+                                        <div>
+                                            <label for="max">Max</label>
+                                            <input type="number" name="max" value="1000">
+                                        </div>    
+                                    </div>
+                                </div>  
+                            </div>
+                            <div class="form-input-container">
+                                <label for="sugar-range">Taux de sucre (g/L)</label>
+                                <div class="form-range">
+                                    <div class="form-range-slider">
+                                        <span class="form-range-selected"></span>
+                                    </div>
+                                    <div class="form-range-input">
+                                        <input type="range" class="min" min="0" max="1000" value="0" step="1">
+                                        <input type="range" class="max" min="0" max="1000" value="1000" step="1">
+                                    </div>
+                                    <div class="form-range-number">      
+                                        <div>
+                                            <label for="min">Min</label>
+                                            <input type="number" name="min" value="0">
+                                        </div>    
+                                        <div>
+                                            <label for="max">Max</label>
+                                            <input type="number" name="max" value="1000">
+                                        </div>    
+                                    </div>
+                                </div>  
+                            </div>
                             <div class="form-input-container">
                                 <label for="color">Couleur</label>
                                 <select name="color" id="color">
@@ -45,20 +118,6 @@
                                     <option value="">Choisir les options</option>
                                     <option value="750">750ml</option>
                                 </select>
-                            </div>
-                            <div class="form-input-container">
-                                <label for="prix">Prix</label>
-                                <!-- <span>Erreur prix</span> -->
-                                <div>
-                                    <div>
-                                        <label for="prix_min">Minimum</label>
-                                        <input id="prix_min" type="number">
-                                    </div>
-                                    <div>
-                                        <label for="prix_max">Maximum</label>
-                                        <input id="prix_max" type="number">
-                                    </div>
-                                </div>
                             </div>
                             <div class="form-input-container">
                                 <label for="country">Pays</label>
@@ -93,7 +152,8 @@
                                 </select>
                             </div>
                         </details>                        
-                        <div class="tag-container"></div>
+                        <div class="tag-container">
+                        </div>
                     </form>
                 </div>
                 <div class="form-container">
@@ -198,6 +258,7 @@
             <script src="../../js/bottleCounterModal.js"></script>
             <script src="../../js/modalAjouter.js"></script>
             <script src="../../js/filterTag.js"></script>
+            <script src="../../js/filterSlider.js"></script>
         </main>
     <nav class="nav">
         <ul class="nav-list">
