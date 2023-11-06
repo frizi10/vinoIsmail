@@ -9,6 +9,20 @@
     <title>Vino - @yield('title')</title>
 </head>
 <body>
+    @if(session('success'))
+        <div role="alert">
+            <strong>{{ session('success') }}</strong>
+        </div>
+    @endif
+    @if(!$errors->isEmpty())
+        <div role="alert">
+            <ul>
+            @foreach($errors->all() as $error)
+                <li>{{$error}}</li>
+            @endforeach
+            </ul>
+        </div>
+    @endif
     @yield('content')
     <nav class="main-nav">
         <ul class="main-nav-list">
