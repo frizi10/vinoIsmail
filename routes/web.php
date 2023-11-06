@@ -5,7 +5,7 @@ use App\Http\Controllers\BouteilleCellierController;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\CellierController;
 use App\Http\Controllers\BouteilleController;
-
+use App\Http\Controllers\Web2scraperController;
 
 // Route d'accueil
 Route::get('/', function () {
@@ -101,29 +101,6 @@ Route::middleware(['auth'])->group(function () {
     // Modification de la quantité de bouteilles se trouvant dans une même liste
     Route::put('/listes/{liste_id}/bouteilles/{bouteille_id}', [BouteilleController::class, 'modifierQuantiteListe'])->name('bouteilles.modifierQuantiteListe');
 
-    // Anciennes routes de gestion des bouteilles 
-    // Route::get('/bouteilles/search', [BouteilleController::class, 'search'])->name('bouteilles.search');
-    // Route::get('/bouteilles/addBouteilleSearch/{id}', [BouteilleController::class, 'addBouteilleSearch'])->name('bouteilles.addBouteilleSearch');
-
-    // Anciennes routes des bouteilles d'un cellier
-    // Route::get('/Ajouter-bouteilles/{cellier_id}', [BouteilleController::class, 'index'])->name('Ajouter-bouteilles');
-    // Route::get('/Ajouter-bouteille-manuellement/{cellier_id}', [BouteilleController::class, 'AjouterbouteilleManuellement'])->name('Ajouter-bouteille-manuellement');
-    // Route::post('/addBouteilleManuellementPost', [BouteilleController::class, 'addBouteilleManuellementPost'])->name('addBouteilleManuellementPost');
-    // Route::post('/bouteilles/addBouteille/{id}', [BouteilleController::class, 'addBouteille'])->name('bouteilles.addBouteille');
-    // Route::delete('/bouteilles/{id}', [BouteilleController::class, 'destroy'])->name('bouteilles.destroy');
-    // Route::get('/mon-cellier', [CellierController::class, 'index'])->name('mon-cellier');
-    // Route::get('/celliers/{cellier_id}', [BouteilleCellierController::class, 'index'])->name('celliers.show'); 
-
-    // Pour modifier la quantité d'une bouteille dans un cellier
-    // Route::get('/modifierQte/{bouteille_id}', [BouteilleController::class, 'modifierBouteille'])->name('modifier-Qte');
-    // Route::post('/modifierQte/{bouteille_id}', [BouteilleController::class, 'modifierQteBouteille'])->name('modifier-Qte');
-
-    // Recherche de bouteilles pour le footer
-    // Route::get('/bouteilles/rechercheFooterBouteille', [BouteilleController::class, 'rechercheFooterBouteille'])->name('bouteilles.rechercheFooterBouteille');
-    // Route::post('/bouteilles/rechercheFooterBouteillePost', [BouteilleController::class, 'indexRecherche'])->name('bouteilles.rechercheFooterBouteillePost');
-
-    // Redirection vers HomeController après authentification
-    // Route::get('/home', [HomeController::class, 'index'])->name('home');
 });
 
 
@@ -141,8 +118,16 @@ Route::post('/register', [CustomAuthController::class, 'store'])->name('register
 // Importer data de la SAQ
 Route::get('/scrape', [Web2scraperController::class, 'scrapeData']);
 
+// *************** Admin **************** À mettre dans un groupe d'authentification
 
-
-
-
+// Création d'un nouvel utilisateur
+Route::get('/admin/users-create', [AdminController::class, 'create'])->name('admin.create-user');
+// Stockage d'un nouvel utilisateur dans la BDD
+Route::post('/admin/users-create', [AdminController::class, 'store']);
+// Modification d'un utilisateur
+Route::get('/admin/users-edit/{id}', [AdminController::class, 'edit'])->name('admin.edit-user');
+// Stockage de la modification d'un utilisateur dans la BDD
+Route::put('/admin/users-edit/{id}', [AdminController::class, 'update']);
+// Suppression d'un utilisateur
+Route::delete('/admin/users-delete/{id}', [AdminController::class, 'destroy'])->name('admin.destroy-user');
 
