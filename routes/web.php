@@ -115,8 +115,6 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
-
-
 // *************** Authentification ****************
 
 // Page de connexion
