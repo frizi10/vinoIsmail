@@ -164,6 +164,8 @@ header>.btn-arrow-top:hover svg {
     width: 8rem;
 }
 
+
+/* Dans MODAL */
 .btn-modal-container {
     display: flex;
     min-width: 100%;
@@ -184,4 +186,14 @@ header>.btn-arrow-top:hover svg {
 }
 .btn-modal-cancel {
     flex-grow: 1;
+}
+
+
+.btn-reset {
+    display: flex;
+    align-items: center;
+    gap: .25rem;
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin-top: .5rem;
 }
