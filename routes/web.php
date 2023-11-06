@@ -37,7 +37,7 @@ Route::middleware(['auth'])->group(function () {
     // Affichage de toutes les bouteilles
     //Route::get('/bouteilles', [BouteilleController::class, 'index'])->name('bouteille.index');
     // Affichage des informations d'une bouteille 
-    Route::get('/bouteilles/{bouteille_id}', [BouteilleController::class, 'show'])->name('bouteille.show');
+// Route::get('/bouteilles/{bouteille_id}', [BouteilleController::class, 'show'])->name('bouteille.show');
     // Création d'une bouteille personnalisée
     Route::get('/bouteilles-ajouter/{bouteille_id}', [BouteilleController::class, 'create'])->name('bouteille.create');
     // Stockage d'une bouteille personnalisée dans la BDD
@@ -51,9 +51,9 @@ Route::middleware(['auth'])->group(function () {
 
     //Ajout par ismail
     //affichage de toutes les bouteilles de la SAQ
-    Route::get('/bouteilles', [BouteilleController::class, 'index'])->name('bouteille.index');
+   // Route::get('/bouteilles', [BouteilleController::class, 'index'])->name('bouteille.index');
     // Recheche par mot clé dans le titre
-    Route::get('/bouteilles-search', [BouteilleController::class, 'search'])->name('bouteille.search');  
+   // Route::get('/bouteilles-search', [BouteilleController::class, 'search'])->name('bouteille.search');  
 
 
 
@@ -153,6 +153,10 @@ Route::get('/scrape', [Web2scraperController::class, 'scrapeData']);
 
 
 
+// ajout par ismail faire ces fonctionnalite sans auth
 
-
+Route::get('/bouteilles', [BouteilleController::class, 'index'])->name('bouteille.index');
+// Recheche par mot clé dans le titre
+Route::get('/bouteilles-search', [BouteilleController::class, 'search'])->name('bouteille.search');  
+Route::get('/bouteilles/{bouteille_id}', [BouteilleController::class, 'show'])->name('bouteille.show');
 
