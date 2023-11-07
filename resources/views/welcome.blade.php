@@ -4,7 +4,13 @@
 <header>
     vino
 </header>
-@if(Auth::check())
+@auth
+@if(Auth::user()->nom == "Admin")
+<!-- En attendant -->
+<main class="nav-margin">
+    <h1>Bienvenue sur l'interface d'aministration {{ Auth::user()->prenom}}!</h1>
+</main>
+@else
 <main class="nav-margin">
     <h1>Bonjour {{ Auth::user()->prenom }}!</h1>
     <section>
@@ -99,6 +105,7 @@
     </div>
     <script src="../js/carousel.js"></script>
 </main>
+@endif
 @else
 <main>
     <div class="welcome">
@@ -137,9 +144,8 @@
             <div class="link">
                 <a href="{{ route('register') }}">CRÉER UN COMPTE</a>
             </div>
-
         </form>
     </div>
 </main>
-@endif
+@endauth
 @endsection

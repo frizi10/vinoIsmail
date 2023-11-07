@@ -16,7 +16,7 @@
     @auth
     @if(Auth::user()->nom == "Admin")
     <nav class="main-nav">
-        <ul class="admin-nav-list">
+        <ul class="nav-admin-list">
             <li class="main-nav-item">        
                 <a href="{{ route('admin.index') }}">
                     <figure class="container-icons-navbar active">

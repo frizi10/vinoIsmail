@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 @section("title", "Liste d'utilisateurs")
 @section('content')
 <header>
@@ -20,9 +20,9 @@
         <table>
             <thead>
                 <tr>
-                    <th>Prénom</th>
-                    <th>Nom</th>
-                    <th>Action</th>
+                    <th>PRÉNOM</th>
+                    <th>NOM</th>
+                    <th>ACTION</th>
                 </tr>
             </thead>
             <tbody>
