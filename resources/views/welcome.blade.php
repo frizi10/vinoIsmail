@@ -24,7 +24,7 @@
             </div>
             <div class="form-input-container">
                 <label for="password">PASSWORD</label>
-                <input type="text" id="password" name="password">
+                <input type="password" id="password" name="password">
                 @error('password')
                     <span class="error-message">{{ $message }}</span>
                 @enderror

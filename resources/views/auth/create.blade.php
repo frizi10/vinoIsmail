@@ -67,14 +67,14 @@
             </div>
             <div class="form-input-container">
                 <label for="password">Mot de passe</label>
-                <input type="text" id="password" name="password">
+                <input type="password" id="password" name="password">
                 @error('password')
                     <span class="error-message">{{ $message }}</span>
                 @enderror
             </div>
             <div class="form-input-container">
                 <label for="repeat-password">Répéter mot de passe</label>
-                <input type="text" id="repeat-password" name="password_confirmation">
+                <input type="password" id="repeat-password" name="password_confirmation">
                 @error('password_confirmation')
                     <span class="error-message">{{ $message }}</span>
                 @enderror
