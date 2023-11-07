@@ -6,6 +6,7 @@ use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\CellierController;
 use App\Http\Controllers\BouteilleController;
 use App\Http\Controllers\Web2scraperController;
+use App\Http\Controllers\AdminController;
 
 // Route d'accueil
 Route::get('/', function () {
@@ -56,10 +57,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/bouteilles-search', [BouteilleController::class, 'search'])->name('bouteille.search');
    //tri
    Route::get('/sorting', [BouteilleController::class, 'sorting'])->name('bouteille.sorting');
-  //filtre
+    //filtre
    Route::get('/filtrer-produits', [BouteilleController::class, 'filtrerProduits'])->name('filtrer_produits');  
-
-
 
     // *************** Gestion des celliers ****************
 
@@ -130,10 +129,10 @@ Route::get('/scrape', [Web2scraperController::class, 'scrapeData']);
 
 // *************** Admin **************** À mettre dans un groupe d'authentification
 
-
-
-
-
+// Affichage de tous les utilisateurs
+Route::get('/admin/users', [AdminController::class, 'index'])->name('admin.index');
+// Affichage d'un utilisateur
+Route::get('/admin/users-show/{id}', [AdminController::class, 'show'])->name('admin.show-user');
 // Création d'un nouvel utilisateur
 Route::get('/admin/users-create', [AdminController::class, 'create'])->name('admin.create-user');
 // Stockage d'un nouvel utilisateur dans la BDD
