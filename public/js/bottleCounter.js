@@ -17,6 +17,7 @@ document.querySelectorAll('.card-bouteille-qt').forEach(function(counter) {
         let currentValue = parseInt(input.value, 10);
         if (currentValue > 0) {
             input.value = currentValue - 1;
+            updateQuantity(input.value);
         }
         checkValue();
     });
@@ -24,8 +25,33 @@ document.querySelectorAll('.card-bouteille-qt').forEach(function(counter) {
     incrementButton.addEventListener('click', function() {
         let currentValue = parseInt(input.value, 10);
         input.value = currentValue + 1;
+        updateQuantity(input.value);
         checkValue();
     });
+
+    async function updateQuantity(newQuantity) {
+        let id = card.id;  
+        let url = `/bouteilles-celliers-modifier/${id}`;
+        try {
+            const response = await fetch(url, { 
+                method: 'PUT',
+                headers: {
+                    'Content-Type' : 'application/json', 
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }, 
+                body: JSON.stringify({ quantite: newQuantity })
+            });
+            
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+    
+            const data = await response.json();
+            console.log(data.message); 
+        } catch (error) {
+            console.error('Error: ', error); 
+        }
+    }
 
     function checkValue() {
         let currentValue = parseInt(input.value, 10);

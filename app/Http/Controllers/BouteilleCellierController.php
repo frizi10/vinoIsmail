@@ -67,9 +67,22 @@ class BouteilleCellierController extends Controller
      * @param  \App\Models\BouteilleCellier  $bouteilleCellier
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, BouteilleCellier $bouteilleCellier)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate(
+            ['quantite' => 'required|min: 0|integer'],
+            [
+                'nom.required' => 'La quantité est obligatoire.', 
+                'nom.min' => 'La quantité doit être supérieure ou égale à zéro.',
+                'nom.integer' => 'La quantité doit être entière, sans décimal.'
+            ]
+        ); 
+
+        BouteilleCellier::findOrFail($id)->update([
+            'quantite' => $request->quantite
+        ]);
+
+        return response()->json(['message' => 'Mise à jour réussie'], 200);
     }
 
     /**
