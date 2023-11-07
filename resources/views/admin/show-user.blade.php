@@ -1,5 +1,5 @@
 <!-- Informations détaillées sur un utilisateur particulier -->
-@extends('layouts.admin')
+@extends('layouts.app')
 @section('title', 'Utilisateur')
 @section('content')
 <header>

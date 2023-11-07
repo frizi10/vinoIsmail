@@ -35,6 +35,8 @@ Route::middleware(['auth'])->group(function () {
 
     // *************** Gestion des bouteilles ****************
 
+    // Importer data de la SAQ
+    Route::get('/scrape', [Web2scraperController::class, 'scrapeData']);
     // Affichage de toutes les bouteilles
     Route::get('/bouteilles', [BouteilleController::class, 'index'])->name('bouteille.index');
     // Affichage des informations d'une bouteille 
@@ -124,8 +126,6 @@ Route::post('/login', [CustomAuthController::class, 'authentication'])->name('lo
 Route::get('/register', [CustomAuthController::class, 'create'])->name('register');
 // Stockage d'un nouvel utilisateur dans la BDD
 Route::post('/register', [CustomAuthController::class, 'store'])->name('register.store');
-// Importer data de la SAQ
-Route::get('/scrape', [Web2scraperController::class, 'scrapeData']);
 
 // *************** Admin **************** À mettre dans un groupe d'authentification
 
