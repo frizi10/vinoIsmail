@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 @section('title', "Création d'un utilisateur")
 @section('content')
 <header>

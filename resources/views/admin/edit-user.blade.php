@@ -1,5 +1,5 @@
 <!-- Modification d'un utilisateur existant et suppression -->
-@extends('layouts.admin')
+@extends('layouts.app')
 @section('title', 'Modification d'utilisateur')
 @section('content')
 <header>
