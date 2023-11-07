@@ -79,6 +79,7 @@ class CustomAuthController extends Controller
         ], [
             
             'email.required' => 'Veuillez saisir votre adresse email',
+            'email.email' => 'Veuillez entrer une adresse email valide',
             'password.required' => 'Veuillez saisir votre mot de passe',
             ]
         );
