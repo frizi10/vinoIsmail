@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\CustomAuthController;
+use App\Http\Controllers\CustomAuthController;
 
 class AdminController extends Controller
 {
-        /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -76,10 +76,9 @@ class AdminController extends Controller
      * @param  \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $id)
     {
-        $customAuthController = app(CustomAuthController::class);
-        return $customAuthController->show($user);
+        return view('admin.show-user', ['user' => $id]);
     }
 
     /**
