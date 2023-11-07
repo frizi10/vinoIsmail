@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Liste d'utilisateurs')
+@section("title", "Liste d'utilisateurs")
 @section('content')
 <header>
     utilisateurs
@@ -13,26 +13,26 @@
             </div>
         </form>
     </div>
-    <div>
+    <div class="admin-table-container">
         <table>
             <thead>
-                <tr>Prénom</tr>
-                <tr>Nom</tr>
-                <tr>Action</tr>
+                <tr>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Action</th>
+                </tr>
             </thead>
             <tbody>
-                {{-- @forelse($users as $user) --}}
+                @forelse($users as $user)
                 <tr>
-                    <td>{{-- {{ $user->prenom }} --}}</td>
-                    <td>{{-- {{ $user->nom }} --}}</td>
-                    <td><a href="#" class="text-dark">Mettre à jour</a></td>
-                    {{-- {{ route('profil.edit', $user->id) }} --}}
+                    <td>{{ $user->prenom }}</td>
+                    <td>{{ $user->nom }}</td>
+                    <td><a href="{{ route('admin.show-user', $user->id) }}"><button class="btn-ajouter">Mettre à jour</button></a></td>
                 </tr>
-                {{-- @empty --}}
-                <tr>Aucun utilisateur</tr>
-                {{-- @endforelse --}}
+                @empty
+                <p>Aucun utilisateur</p>
+                @endforelse
             </tbody>
-            <th></th>
         </table>
     </div>
 </main>
