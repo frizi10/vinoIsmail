@@ -35,7 +35,7 @@ Route::middleware(['auth'])->group(function () {
     // *************** Gestion des bouteilles ****************
 
     // Affichage de toutes les bouteilles
-    //Route::get('/bouteilles', [BouteilleController::class, 'index'])->name('bouteille.index');
+    Route::get('/bouteilles', [BouteilleController::class, 'index'])->name('bouteille.index');
     // Affichage des informations d'une bouteille 
 // Route::get('/bouteilles/{bouteille_id}', [BouteilleController::class, 'show'])->name('bouteille.show');
     // Création d'une bouteille personnalisée
