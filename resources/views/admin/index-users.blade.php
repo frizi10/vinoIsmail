@@ -5,6 +5,9 @@
     utilisateurs
 </header>
 <main>
+    <div class="btn-submit">
+        <a href="{{ route('admin.create-user') }}">ajouter un utilisateur</a>
+    </div>
     <div class="form-container">
         <form action="">
             <div class="form-input-container">
