@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\CustomAuthController;
 
 class AdminController extends Controller
@@ -37,28 +38,34 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            $request->validate([
-                'nom'      => 'required|min:2|max:20|alpha',
-                'email'    => 'required|email',
-                'password' => 'required|min:6'
-            ],
-            [
-                'nom.required'      => "Veuillez saisir le nom",
-                'nom.min'           => "Le nom doit contenir au moins 2 caractères",
-                'nom.max'           => "Le nom ne doit pas dépasser 20 caractères",
-                'nom.alpha'         => "Le nom ne doit contenir que des lettres",
-                'email.required'    => "Veuillez saisir l'adresse courriel",
-                'password.required' => "Veuillez saisir le mot de passe",
-                'password.min'      => "Le mot de passe doit contenir au moins 6 caractères"
-            ]);
+        $request->validate([
+            'nom'      => 'required|min:2|max:20|alpha',
+            'email'    => 'required|email|unique:users',
+            'password' => 'required|min:6'
+        ],
+        [
+            'nom.required'      => "Veuillez saisir le nom",
+            'nom.min'           => "Le nom doit contenir au moins 2 caractères",
+            'nom.max'           => "Le nom ne doit pas dépasser 20 caractères",
+            'nom.alpha'         => "Le nom ne doit contenir que des lettres",
+            'email.required'    => "Veuillez saisir l'adresse courriel",
+            'email.unique'      => "Un compte existe déjà pour ce courriel",
+            'password.required' => "Veuillez saisir le mot de passe",
+            'password.min'      => "Le mot de passe doit contenir au moins 6 caractères"
+        ]);
 
+        try {
             $user = new User;
             $user->nom = $request->input('nom');
             $user->email = $request->input('email');
             $user->password = Hash::make($request->input('password'));
             $user->save();
-            return redirect(route('admin.index-users'))->withSuccess('Nouvel utilisateur enregistré');
+
+            if ($request->input('role') == 'administrateur') {
+                $user->assignRole('Admin');
+            }
+
+            return redirect(route('admin.index'))->withSuccess('Nouvel utilisateur enregistré');
         } catch (\Exception $e) {
             return redirect(route('admin.create-user'))->withErrors(["Erreur d'enregistrement"]);
         }
@@ -96,31 +103,26 @@ class AdminController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        $request->validate([
+            'nom'      => 'min:2|max:20|alpha',
+            'email'    => 'email'
+        ],
+        [
+            'nom.min'           => "Le nom doit contenir au moins 2 caractères",
+            'nom.max'           => "Le nom ne doit pas dépasser 20 caractères",
+            'nom.alpha'         => "Le nom ne doit contenir que des lettres",
+            'email.email'       => "Le courriel entré est invalide"
+        ]);
+
         try {
-            $request->validate([
-                'nom'      => 'required|min:2|max:20|alpha',
-                'email'    => 'required|email',
-                'password' => 'required|min:6'
-            ],
-            [
-                'nom.required'      => "Veuillez saisir le nom",
-                'nom.min'           => "Le nom doit contenir au moins 2 caractères",
-                'nom.max'           => "Le nom ne doit pas dépasser 20 caractères",
-                'nom.alpha'         => "Le nom ne doit contenir que des lettres",
-                'email.required'    => "Veuillez saisir l'adresse courriel",
-                'password.required' => "Veuillez saisir le mot de passe",
-                'password.min'      => "Le mot de passe doit contenir au moins 6 caractères"
+            $user->update([
+                'nom' => $request->nom,
+                'email' => $request->email
             ]);
     
-            $user->nom = $request->input('nom');
-            $user->email = $request->input('email');
-            $user->email_verified_at = $request->input('email_verified');
-            $user->password = Hash::make($request->input('password'));
-            $user->save();
-            
-            return redirect(route('admin.show-user', $user->id))->withSuccess('Utilisateur mis à jour');
+            return redirect(route('admin.show-user', $user->id))->withSuccess('Profil mis à jour avec succès');
         } catch (\Exception $e) {
-            return redirect(route('admin.edit-user', $user->id))->withErrors(["Erreur de mise à jour"]);
+            return redirect(route('admin.edit-user', $user->id))->withErrors(['erreur' => "Une erreur s'est produite lors de la mise à jour du profil"]);
         }
     }
 
