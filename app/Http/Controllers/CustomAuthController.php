@@ -62,6 +62,12 @@ class CustomAuthController extends Controller
         return redirect(route('welcome'))->withSuccess('Compte créé avec succès, vous pouvez maintenant vous connecter.');
     }
 
+    /**
+     * Authentification / log in of a resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function authentication(Request $request)
     {
         $request->validate([
@@ -97,6 +103,11 @@ class CustomAuthController extends Controller
         }
     }
 
+    /**
+     * Log out a resource in storage.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function logout(){
         Auth::logout();
         Session::flush();
@@ -134,24 +145,20 @@ class CustomAuthController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        try {
-            $request->validate([
-                'nom'   => 'required|min:2|max:20|alpha',
-                'email' => 'required|email',
-            ],
-            [
-                'nom.required'   => 'Veuillez saisir votre nom',
-                'nom.min'        => 'Votre nom doit contenir au moins 2 caractères',
-                'nom.max'        => 'Votre nom ne doit pas dépasser 20 caractères',
-                'nom.alpha'      => 'Votre nom ne doit contenir que des lettres',
-                'email.required' => 'Veuillez saisir votre adresse courriel', 
-                'email.email'    => 'Veuillez saisir un courriel valide'
-            ]); 
+        $request->validate([
+            'nom'   => 'required|min:2|max:20|alpha',
+            'email' => 'required|email',
+        ],
+        [
+            'nom.required'   => 'Veuillez saisir votre nom',
+            'nom.min'        => 'Votre nom doit contenir au moins 2 caractères',
+            'nom.max'        => 'Votre nom ne doit pas dépasser 20 caractères',
+            'nom.alpha'      => 'Votre nom ne doit contenir que des lettres',
+            'email.required' => 'Veuillez saisir votre adresse courriel', 
+            'email.email'    => 'Veuillez saisir un courriel valide'
+        ]); 
 
-            // if ($request->fails()) {
-            //     return view('profil.edit', $user->id, ['user' => $user, 'errors' => $request->errors()]);
-            // }
-    
+        try {
             $user->update([
                 'nom' => $request->nom,
                 'email' => $request->email
@@ -159,7 +166,7 @@ class CustomAuthController extends Controller
     
             return redirect(route('profil.show', $user->id))->withSuccess('Profil mis à jour avec succès');
         } catch (\Exception $e) {
-            return redirect(route('profil.edit', $user->id))->withErrors(["Une erreur s'est produite lors de la mise à jour du profil"]);
+            return redirect(route('profil.edit', $user->id))->withErrors(['erreur' => "Une erreur s'est produite lors de la mise à jour du profil"]);
         }
     }
 
@@ -171,7 +178,12 @@ class CustomAuthController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        try {
+            $user->delete();
+            return redirect()->route('admin.show-user')->withSuccess('Utilisateur supprimé avec succès');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.show-user')->withErrors(["Une erreur s'est produite lors de la suppression de l'utilisateur"]);
+        }
     }
 
 }

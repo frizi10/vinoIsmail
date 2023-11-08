@@ -8,6 +8,11 @@
 <main class="nav-margin">
     <section>
         <h2>Mes informations</h2>
+        @if(session('success'))
+            <div>
+                {{ session('success') }}
+            </div>
+        @endif
         <div class="info-profil"><span>Nom :</span><span class="info-value">{{ $user->nom }}</span></div>
         <div class="info-profil"><span>Courriel :</span><span class="info-value">{{ $user->email }}</span></div>
 
