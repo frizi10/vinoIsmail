@@ -1,21 +1,23 @@
 /******/ (() => { // webpackBootstrap
 var __webpack_exports__ = {};
-/*!****************************************!*\
-  !*** ./resources/js/modalSupprimer.js ***!
-  \****************************************/
-// Sélectionner le bouton "Supprimer"
-var supprimerButton = document.querySelector('.btn-supprimer');
+/*!***************************************!*\
+  !*** ./resources/js/modalDeplacer.js ***!
+  \***************************************/
+// Sélectionner tous les boutons "Déplacer"
+var deplacerButtons = document.querySelectorAll('.btn-deplacer');
 
 // Sélectionner la fenêtre modale
-var modal = document.getElementById('modal-supprimer');
+var modal = document.getElementById('modal-deplacer');
 
-// Ajouter un événement d'écouteur de clic au bouton "Supprimer"
-supprimerButton.addEventListener('click', function (event) {
-  // Empêcher le comportement par défaut du lien (qui est de naviguer vers une nouvelle page)
-  event.preventDefault();
+// Ajouter un événement d'écouteur de clic à chaque bouton "Deplacer"
+deplacerButtons.forEach(function (button) {
+  button.addEventListener('click', function (event) {
+    // Empêcher le comportement par défaut du lien (qui est de naviguer vers une nouvelle page)
+    event.preventDefault();
 
-  // Ouvrir la fenêtre modale
-  modal.showModal();
+    // Ouvrir la fenêtre modale
+    modal.showModal();
+  });
 });
 
 // Sélectionner le bouton "annuler" dans la fenêtre modale

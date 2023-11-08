@@ -1,129 +1,43 @@
+/******/ (() => { // webpackBootstrap
+var __webpack_exports__ = {};
+/*!**************************************!*\
+  !*** ./resources/js/modalAjouter.js ***!
+  \**************************************/
 // Sélectionner tous les boutons "+ Ajouter"
-document.addEventListener('DOMContentLoaded', function() {
-    let bouteilleID; 
-    let url = '/celliers-json';
-    const ajouterButtons = document.querySelectorAll('.btn-ajouter');
-    
-    // Sélectionner la fenêtre modale
-    const modal = document.getElementById('modal-ajouter');
-    
-    // Ajouter un événement d'écouteur de clic à chaque bouton "+ Ajouter"
-    ajouterButtons.forEach(function(button) {
-        button.addEventListener('click', function(event) {
-            // Empêcher le comportement par défaut du lien (qui est de naviguer vers une nouvelle page)
-            event.preventDefault();
-            bouteilleID = button.getAttribute('data-bouteille-id'); 
-    
-            // Ouvrir la fenêtre modale
-            modal.showModal();
-        });
-    });
-    // Sélectionner le bouton "annuler" dans la fenêtre modale
-    const closeModalButton = document.querySelector('.btn-modal-cancel');
-    
-    // Ajouter un événement d'écouteur de clic au bouton "annuler"
-    closeModalButton.addEventListener('click', function(event) {
-        // Empêcher le comportement par défaut du bouton (qui est de soumettre le formulaire)
-        event.preventDefault();
-    
-        // Fermer la fenêtre modale
-        modal.close();
-    });
-    
-    // Fermer la fenêtre modale lorsque l'utilisateur clique en dehors de celle-ci
-    window.addEventListener('click', function(event) {
-        if (event.target === modal) {
-            modal.close();
-        }
-    });
+var ajouterButtons = document.querySelectorAll('.btn-ajouter');
 
-    const form = document.querySelector('#form-ajouter'); 
-    const listRadio = document.querySelector('#location-liste'); 
-    const cellierRadio = document.querySelector('#location-cellier'); 
-    let selectLocation = document.querySelector('#select-location'); 
-    let labelLocation = document.querySelector('#label-location'); 
+// Sélectionner la fenêtre modale
+var modal = document.getElementById('modal-ajouter');
 
-    listRadio.addEventListener('change', function(event) {
-        selectLocation.innerHTML = ''; 
-        labelLocation.innerHTML = 'Choisir la liste'; 
-        loadOptions('liste'); 
-    }); 
+// Ajouter un événement d'écouteur de clic à chaque bouton "+ Ajouter"
+ajouterButtons.forEach(function (button) {
+  button.addEventListener('click', function (event) {
+    // Empêcher le comportement par défaut du lien (qui est de naviguer vers une nouvelle page)
+    event.preventDefault();
 
-    cellierRadio.addEventListener('change', function(event) {
-        selectLocation.innerHTML = 'Choisir le cellier'; 
-        loadOptions('cellier'); 
-    }); 
+    // Ouvrir la fenêtre modale
+    modal.showModal();
+  });
+});
 
-    async function loadOptions(type) {
-        if (type === 'liste') {
-            url = '/celliers-json'; 
-        }
-        else if (type === 'cellier') {
-            url = '/celliers-json'; 
-        }
-        
-        try {
-            const response = await fetch(url, { 
-                method: 'GET',
-                headers: {
-                    'Content-Type' : 'application/json', 
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                }
-            });
-            
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-    
-            const data = await response.json();
-            data.forEach(option => {
-                let optionElement = document.createElement('option'); 
-                optionElement.value = option.id; 
-                optionElement.textContent = option.nom; 
-                selectLocation.appendChild(optionElement); 
-            });
-        } 
-        catch (error) {
-            console.error('Error: ', error); 
-        }
-    }
+// Sélectionner le bouton "annuler" dans la fenêtre modale
+var closeModalButton = document.querySelector('.btn-modal-cancel');
 
-    form.addEventListener('submit', function(event) {
-        const quantiteBouteille = document.querySelector('#quantite-bouteille').value; 
-        const idLocation = document.querySelector('#select-location').value;
-        event.preventDefault(); 
-        ajouterBouteille(quantiteBouteille, idLocation, bouteilleID); 
+// Ajouter un événement d'écouteur de clic au bouton "annuler"
+closeModalButton.addEventListener('click', function (event) {
+  // Empêcher le comportement par défaut du bouton (qui est de soumettre le formulaire)
+  event.preventDefault();
 
-        async function ajouterBouteille(newQuantity, locationId, bouteilleId) {
-            try {
-                const response = await fetch(url, { 
-                    method: 'POST',
-                    headers: {
-                        'Content-Type' : 'application/json', 
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                    }, 
-                    body: JSON.stringify({ 
-                        quantite: newQuantity,
-                        location_id: locationId,
-                        bouteille_id: bouteilleId
-                    })
-                });
-                
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-        
-                const data = await response.json();
-                console.log(data.message); 
-            } catch (error) {
-                console.error('Error: ', error); 
-            }
-        }
-    }); 
-})
+  // Fermer la fenêtre modale
+  modal.close();
+});
 
-
-
+// Fermer la fenêtre modale lorsque l'utilisateur clique en dehors de celle-ci
+window.addEventListener('click', function (event) {
+  if (event.target === modal) {
+    modal.close();
+  }
+});
 
 // CODE POUR CSS DE LA FENETRE MODALE - J'ai essayé plus tôt de mettre un div modal-container pour pouvoir mieux centrer la fenetre modale avec des margins, mais ca ne marchait pas (à réessayer!!!)
 // // Sélectionner tous les boutons "+ Ajouter"
@@ -164,3 +78,5 @@ document.addEventListener('DOMContentLoaded', function() {
 //         modal.close();
 //     }
 // });
+/******/ })()
+;

@@ -12,6 +12,14 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
+   .js('resources/js/bottleCounter.js', 'public/js')
+   .js('resources/js/bottleCounterModal.js', 'public/js')
+   .js('resources/js/carousel.js', 'public/js')
+   .js('resources/js/filterSlider.js', 'public/js')
+   .js('resources/js/filterTag.js', 'public/js')
+   .js('resources/js/modalAjouter.js', 'public/js')
+   .js('resources/js/modalDeplacer.js', 'public/js')
+   .js('resources/js/modalSupprimer.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
         //
     ]);
