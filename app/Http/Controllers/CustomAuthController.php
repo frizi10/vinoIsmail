@@ -38,7 +38,6 @@ class CustomAuthController extends Controller
      */
     public function store(Request $request)
     {
-
         //  dd($request->all());
         $request->validate([
             'nom' => 'required|min:2|max:20|alpha',
