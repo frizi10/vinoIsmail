@@ -134,17 +134,17 @@ Route::post('/register', [CustomAuthController::class, 'store'])->name('register
 // Affichage de tous les utilisateurs
 Route::get('/admin/users', [AdminController::class, 'index'])->name('admin.index');
 // Affichage d'un utilisateur
-Route::get('/admin/users-show/{id}', [AdminController::class, 'show'])->name('admin.show-user');
+Route::get('/admin/users-show/{user}', [AdminController::class, 'show'])->name('admin.show-user');
 // Création d'un nouvel utilisateur
 Route::get('/admin/users-create', [AdminController::class, 'create'])->name('admin.create-user');
 // Stockage d'un nouvel utilisateur dans la BDD
 Route::post('/admin/users-create', [AdminController::class, 'store']);
 // Modification d'un utilisateur
-Route::get('/admin/users-edit/{id}', [AdminController::class, 'edit'])->name('admin.edit-user');
+Route::get('/admin/users-edit/{user}', [AdminController::class, 'edit'])->name('admin.edit-user');
 // Stockage de la modification d'un utilisateur dans la BDD
-Route::put('/admin/users-edit/{id}', [AdminController::class, 'update']);
+Route::put('/admin/users-edit/{user}', [AdminController::class, 'update']);
 // Suppression d'un utilisateur
-Route::delete('/admin/users-delete/{id}', [AdminController::class, 'destroy'])->name('admin.destroy-user');
+Route::delete('/admin/users-delete/{user}', [AdminController::class, 'destroy'])->name('admin.destroy-user');
 
 
 
