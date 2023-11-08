@@ -5,17 +5,27 @@
 
 @section('content')
 <header>
-  utilisateur
+<a href="{{ route('admin.index') }}" class="btn-arrow-top">
+        <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.4247 7C17.977 7 18.4247 7.44772 18.4247 8C18.4247 8.55228 17.977 9 17.4247 9L17.4247 7ZM0.498398 8.70711C0.107874 8.31658 0.107874 7.68342 0.498398 7.29289L6.86236 0.928933C7.25288 0.538409 7.88605 0.538409 8.27657 0.928933C8.6671 1.31946 8.6671 1.95262 8.27657 2.34315L2.61972 8L8.27657 13.6569C8.6671 14.0474 8.6671 14.6805 8.27657 15.0711C7.88605 15.4616 7.25288 15.4616 6.86236 15.0711L0.498398 8.70711ZM17.4247 9L1.20551 9L1.20551 7L17.4247 7L17.4247 9Z" fill="black"/>
+        </svg>
+        utilisateurs
+    </a>
 </header>
 <main class="nav-margin">
     <section>
         <h2>Informations de l'utilisateur</h2>
-        @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
+        @if($errors->any())
+            <div>
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
         @endif
         <div class="info-profil"><span>Nom :</span><span class="info-value">{{ $user->nom }}</span></div>
+        <div class="info-profil"><span>Rôle :</span><span class="info-value">{{ $user->getRoleNames()->first() == "Admin" ? 'Administrateur' : 'Utilisateur' }}</span></div>
         <div class="info-profil"><span>Courriel :</span><span class="info-value">{{ $user->email }}</span></div>
         <div class="info-profil">
           <span>Courriel vérifié :</span><span class="info-value">
@@ -50,10 +60,12 @@
             <hr>
             <p><strong>ATTENTION!</strong> Cette action est irréversible et entraînera la perte de toutes les données associées à ce compte.</p>
             <p>Veuillez entrer votre mot de passe administrateur pour confirmer la suppression du compte</p>
-            <form action="" class="form-modal">
+            <form action="{{ route('admin.destroy-user', $user->id) }}" method="post" class="form-modal">
+                @csrf
+                @method('DELETE')
                     <div class="form-input-container">
-                        <label for="">Mot de passe</label>
-                        <input type="password" id="" name="">
+                        <label for="password">Mot de passe</label>
+                        <input type="password" id="password" name="password">
                     </div>
                     <div class="btn-modal-container">
                         <button class="btn-modal-action btn-red">supprimer</button>
