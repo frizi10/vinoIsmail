@@ -13,7 +13,7 @@ class BouteilleListe extends Model
 
     protected $fillable = [
         'bouteille_id',
-        'cellier_id',
+        'liste_id',
         'quantite' 
     ]; 
 
