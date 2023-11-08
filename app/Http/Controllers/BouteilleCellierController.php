@@ -14,7 +14,7 @@ class BouteilleCellierController extends Controller
      */
     public function index()
     {
-        
+        //
     }
 
     /**

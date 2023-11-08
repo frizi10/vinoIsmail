@@ -66,6 +66,8 @@ Route::middleware(['auth'])->group(function () {
 
     // Affichage de tous les celliers
     Route::get('/celliers', [CellierController::class, 'index'])->name('cellier.index'); 
+    // Affichage de tous les celliers en JSON
+    Route::get('/celliers-json', [CellierController::class, 'indexJSON']); 
     // Affichage d'un cellier et de ses bouteilles
     Route::get('/celliers/{cellier_id}/bouteilles', [CellierController::class, 'show'])->name('cellier.show');
     // Création d'un cellier
@@ -84,9 +86,9 @@ Route::middleware(['auth'])->group(function () {
     // Ajout d'une bouteille à un cellier
     Route::post('/celliers/{cellier_id}/bouteilles/{bouteille_id}', [BouteilleController::class, 'ajouterAuCellier'])->name('bouteilles.ajouterCellier');
     // Retrait d'une bouteille d'un cellier
-    Route::delete('/bouteilles/{id}', [BouteilleController::class, 'retirerDuCellier'])->name('bouteilles.retirerCellier');
+    Route::delete('/celliers/{cellier_id}/bouteilles-celliers-modifier/{bouteille_cellier}', [BouteilleCellierController::class, 'destroy'])->name('bouteilleCellier.delete');
     // Modification de la quantité de bouteilles se trouvant dans un même cellier
-    Route::put('/celliers/{cellier_id}/bouteilles/{bouteille_id}', [BouteilleController::class, 'modifierQuantiteCellier'])->name('bouteilles.modifierQuantiteCellier');
+    Route::put('/bouteilles-celliers-modifier/{id}', [BouteilleCellierController::class, 'update']);
 
     // *************** Gestion des listes ****************
 
