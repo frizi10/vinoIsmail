@@ -116,8 +116,13 @@
         <img src="{{ asset('assets/img/img_connexion.jpeg') }}" alt="Bouteille au marché" class="welcome-img">
     </picture>
     @if(session('success'))
-        <div class="alert alert-success">
+        <div>
             {{ session('success') }}
+        </div>
+    @endif
+    @if($errors->has('erreur'))
+        <div>
+            {{ $errors->first('erreur') }}
         </div>
     @endif
     <div class="form-container">
