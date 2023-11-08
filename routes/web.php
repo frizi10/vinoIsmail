@@ -6,6 +6,7 @@ use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\CellierController;
 use App\Http\Controllers\BouteilleController;
 use App\Http\Controllers\Web2scraperController;
+use App\Http\Controllers\AdminController;
 
 // Route d'accueil
 Route::get('/', function () {
@@ -34,10 +35,12 @@ Route::middleware(['auth'])->group(function () {
 
     // *************** Gestion des bouteilles ****************
 
+    // Importer data de la SAQ
+    Route::get('/scrape', [Web2scraperController::class, 'scrapeData']);
     // Affichage de toutes les bouteilles
     Route::get('/bouteilles', [BouteilleController::class, 'index'])->name('bouteille.index');
     // Affichage des informations d'une bouteille 
-// Route::get('/bouteilles/{bouteille_id}', [BouteilleController::class, 'show'])->name('bouteille.show');
+    Route::get('/bouteilles/{bouteille_id}', [BouteilleController::class, 'show'])->name('bouteille.show');
     // Création d'une bouteille personnalisée
     Route::get('/bouteilles-ajouter/{bouteille_id}', [BouteilleController::class, 'create'])->name('bouteille.create');
     // Stockage d'une bouteille personnalisée dans la BDD
@@ -56,10 +59,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/bouteilles-search', [BouteilleController::class, 'search'])->name('bouteille.search');
    //tri
    Route::get('/sorting', [BouteilleController::class, 'sorting'])->name('bouteille.sorting');
-  //filtre
+    //filtre
    Route::get('/filtrer-produits', [BouteilleController::class, 'filtrerProduits'])->name('filtrer_produits');  
-
-
 
     // *************** Gestion des celliers ****************
 
@@ -115,8 +116,6 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
-
-
 // *************** Authentification ****************
 
 // Page de connexion
@@ -127,15 +126,13 @@ Route::post('/login', [CustomAuthController::class, 'authentication'])->name('lo
 Route::get('/register', [CustomAuthController::class, 'create'])->name('register');
 // Stockage d'un nouvel utilisateur dans la BDD
 Route::post('/register', [CustomAuthController::class, 'store'])->name('register.store');
-// Importer data de la SAQ
-Route::get('/scrape', [Web2scraperController::class, 'scrapeData']);
 
 // *************** Admin **************** À mettre dans un groupe d'authentification
 
-
-
-
-
+// Affichage de tous les utilisateurs
+Route::get('/admin/users', [AdminController::class, 'index'])->name('admin.index');
+// Affichage d'un utilisateur
+Route::get('/admin/users-show/{id}', [AdminController::class, 'show'])->name('admin.show-user');
 // Création d'un nouvel utilisateur
 Route::get('/admin/users-create', [AdminController::class, 'create'])->name('admin.create-user');
 // Stockage d'un nouvel utilisateur dans la BDD

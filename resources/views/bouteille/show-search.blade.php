@@ -4,7 +4,7 @@
 
 <body>
         <header>
-            résultats de recherche
+            ajouter une bouteille
         </header>
         <main class="nav-margin">
             <section class="form-ajouter-bouteille"> <!-- encadré noir (formulaires, filtres et tris) --> 

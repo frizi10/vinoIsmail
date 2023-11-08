@@ -44,20 +44,21 @@ class CustomAuthController extends Controller
             'nom' => 'required|min:2|max:20|alpha',
             'prenom' => 'required|min:2|max:20|alpha',
             'email' => 'required|email',
-            'password' => 'required|min:6',
+            'password' => 'required|min:6|confirmed'
         ],
         [
             'nom.required' => 'Veuillez saisir votre nom',
             'nom.min' => 'Votre nom doit contenir au moins 2 caractères',
             'nom.max' => 'Votre nom ne doit pas dépasser 20 caractères',
             'nom.alpha' => 'Votre nom ne doit contenir que des lettres',
-            'prenom.required' => 'Veuillez saisir votre prenom',
-            'prenom.min' => 'Votre prenom doit contenir au moins 2 caractères',
-            'prenom.max' => 'Votre prenom ne doit pas dépasser 20 caractères',
-            'prenom.alpha' => 'Votre prenom ne doit contenir que des lettres',
+            'prenom.required' => 'Veuillez saisir votre prénom',
+            'prenom.min' => 'Votre prénom doit contenir au moins 2 caractères',
+            'prenom.max' => 'Votre prénom ne doit pas dépasser 20 caractères',
+            'prenom.alpha' => 'Votre prénom ne doit contenir que des lettres',
             'email.required' => 'Veuillez saisir votre adresse email',
             'password.required' => 'Veuillez saisir votre mot de passe',
             'password.min' => 'Votre mot de passe doit contenir au moins 6 caractères',
+            'password.confirmed' => 'Les mots de passe ne correspondent pas'
         ]
     );
 
@@ -78,6 +79,7 @@ class CustomAuthController extends Controller
         ], [
             
             'email.required' => 'Veuillez saisir votre adresse email',
+            'email.email' => 'Veuillez entrer une adresse email valide',
             'password.required' => 'Veuillez saisir votre mot de passe',
             ]
         );
@@ -98,9 +100,8 @@ class CustomAuthController extends Controller
     
         Auth::login($user, $request->get('remember'));
     
-
-        return redirect()->route('welcome')->with('success', 'Vous êtes connectés')->with('name', $user->nom);
-            
+        return redirect()->route('welcome'); 
+        // return redirect()->route('welcome')->with('success', 'Vous êtes connectés')->with('name', $user->nom);
     }
     
 
