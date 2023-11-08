@@ -6,12 +6,14 @@
 @import url('footer.css');
 @import url('general.css');
 @import url('grid.css');
+@import url('info.css');
 @import url('link.css');
 @import url('modal.css');
 @import url('nav.css');
 @import url('typography.css');
 @import url('variables.css');
 @import url('welcome.css');
+@import url('btn-test.css');
 
 /* dev.css */
 

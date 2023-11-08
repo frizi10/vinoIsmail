@@ -25,6 +25,7 @@ button {
     border-style: none;
 }
 
+
 /* -- limiter les images à la largeur de leur parent */
 img {
     max-width: 100%;
