@@ -14,7 +14,7 @@ class BouteilleCellierController extends Controller
      */
     public function index()
     {
-        
+        //
     }
 
     /**
@@ -34,8 +34,13 @@ class BouteilleCellierController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        BouteilleCellier::updateOrCreate(
+            ['cellier_id' => $request->location_id, 'bouteille_id' => $request->bouteille_id],
+            ['quantite' => $request->quantite]
+        ); 
+
+        return response()->json(['message' => 'Mise à jour réussie'], 200);
     }
 
     /**
@@ -72,9 +77,9 @@ class BouteilleCellierController extends Controller
         $request->validate(
             ['quantite' => 'required|min: 0|integer'],
             [
-                'nom.required' => 'La quantité est obligatoire.', 
-                'nom.min' => 'La quantité doit être supérieure ou égale à zéro.',
-                'nom.integer' => 'La quantité doit être entière, sans décimal.'
+                'quantite.required' => 'La quantité est obligatoire.', 
+                'quantite.min' => 'La quantité doit être supérieure ou égale à zéro.',
+                'quantite.integer' => 'La quantité doit être entière, sans décimal.'
             ]
         ); 
 

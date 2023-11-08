@@ -19,7 +19,6 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'nom',
-        'prenom',
         'email',
         'password',
     ];
@@ -63,8 +62,8 @@ class User extends Authenticatable
         return $this->hasMany(Favoris::class);
     }
 
-    public function paniers() 
+    public function listes() 
     {
-        return $this->hasMany(Panier::class);
+        return $this->hasMany(Liste::class);
     }
 }

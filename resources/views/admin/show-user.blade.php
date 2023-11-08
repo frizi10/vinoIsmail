@@ -7,7 +7,7 @@
 </header>
 <main>
     <div class="admin-show-container">
-        <h1> {{ $user->prenom }} {{ $user->nom }} </h1>
+        <h1> {{ $user->nom }} </h1>
         <div class="admin-table-container-show">
           <div class="table-row">
               <div class="table-header">Courriel</div>
@@ -50,7 +50,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      Confirmez-vous la suppression de l'utilisateur {{ $user->prenom }} {{ $user->nom }}? 
+      Confirmez-vous la suppression de l'utilisateur {{ $user->nom }}? 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>

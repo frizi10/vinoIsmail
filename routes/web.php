@@ -7,6 +7,7 @@ use App\Http\Controllers\CellierController;
 use App\Http\Controllers\BouteilleController;
 use App\Http\Controllers\Web2scraperController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ListeController;
 
 // Route d'accueil
 Route::get('/', function () {
@@ -66,6 +67,8 @@ Route::middleware(['auth'])->group(function () {
 
     // Affichage de tous les celliers
     Route::get('/celliers', [CellierController::class, 'index'])->name('cellier.index'); 
+    // Affichage de tous les celliers en JSON
+    Route::get('/celliers-json', [CellierController::class, 'indexJSON']); 
     // Affichage d'un cellier et de ses bouteilles
     Route::get('/celliers/{cellier_id}/bouteilles', [CellierController::class, 'show'])->name('cellier.show');
     // Création d'un cellier
@@ -82,11 +85,11 @@ Route::middleware(['auth'])->group(function () {
     // *************** Gestion des bouteilles d'un cellier ****************
 
     // Ajout d'une bouteille à un cellier
-    Route::post('/celliers/{cellier_id}/bouteilles/{bouteille_id}', [BouteilleController::class, 'ajouterAuCellier'])->name('bouteilles.ajouterCellier');
+    Route::post('/celliers-json', [BouteilleCellierController::class, 'store']);
     // Retrait d'une bouteille d'un cellier
-    Route::delete('/bouteilles/{id}', [BouteilleController::class, 'retirerDuCellier'])->name('bouteilles.retirerCellier');
+    Route::delete('/celliers/{cellier_id}/bouteilles-celliers-modifier/{bouteille_cellier}', [BouteilleCellierController::class, 'destroy'])->name('bouteilleCellier.delete');
     // Modification de la quantité de bouteilles se trouvant dans un même cellier
-    Route::put('/celliers/{cellier_id}/bouteilles/{bouteille_id}', [BouteilleController::class, 'modifierQuantiteCellier'])->name('bouteilles.modifierQuantiteCellier');
+    Route::put('/bouteilles-celliers-modifier/{id}', [BouteilleCellierController::class, 'update']);
 
     // *************** Gestion des listes ****************
 
@@ -157,3 +160,5 @@ Route::delete('/admin/users-delete/{id}', [AdminController::class, 'destroy'])->
 //Route::get('/sorting', [BouteilleController::class, 'sorting'])->name('bouteille.sorting');
 //filtre
 //Route::get('/filtrer-produits', [BouteilleController::class, 'filtrerProduits'])->name('filtrer_produits');
+
+//Route::get('/scrape', [Web2scraperController::class, 'scrapeData']);

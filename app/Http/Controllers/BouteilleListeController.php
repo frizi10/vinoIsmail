@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BouteillePanier;
+use App\Models\BouteilleListe;
 use Illuminate\Http\Request;
 
-class BouteillePanierController extends Controller
+class BouteilleListeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class BouteillePanierController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\BouteillePanier  $bouteillePanier
+     * @param  \App\Models\BouteilleListe  $bouteilleListe
      * @return \Illuminate\Http\Response
      */
-    public function show(BouteillePanier $bouteillePanier)
+    public function show(BouteilleListe $bouteilleListe)
     {
         //
     }
@@ -52,10 +52,10 @@ class BouteillePanierController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\BouteillePanier  $bouteillePanier
+     * @param  \App\Models\BouteilleListe  $bouteilleListe
      * @return \Illuminate\Http\Response
      */
-    public function edit(BouteillePanier $bouteillePanier)
+    public function edit(BouteilleListe $bouteilleListe)
     {
         //
     }
@@ -64,10 +64,10 @@ class BouteillePanierController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\BouteillePanier  $bouteillePanier
+     * @param  \App\Models\BouteilleListe  $bouteilleListe
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, BouteillePanier $bouteillePanier)
+    public function update(Request $request, BouteilleListe $bouteilleListe)
     {
         //
     }
@@ -75,10 +75,10 @@ class BouteillePanierController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\BouteillePanier  $bouteillePanier
+     * @param  \App\Models\BouteilleListe  $bouteilleListe
      * @return \Illuminate\Http\Response
      */
-    public function destroy(BouteillePanier $bouteillePanier)
+    public function destroy(BouteilleListe $bouteilleListe)
     {
         //
     }

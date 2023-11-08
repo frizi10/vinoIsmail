@@ -14,9 +14,6 @@ class BouteilleCellier extends Model
     protected $fillable = [
         'bouteille_id',
         'cellier_id',
-        'date_achat',
-        'date_ouverture',
-        'peremption',
         'quantite' 
     ]; 
 

@@ -8,11 +8,11 @@
 @if(Auth::user()->nom == "Admin")
 <!-- En attendant -->
 <main class="nav-margin">
-    <h1>Bienvenue sur l'interface d'aministration {{ Auth::user()->prenom}}!</h1>
+    <h1>Bienvenue sur l'interface d'aministration {{ Auth::user()->nom}}!</h1>
 </main>
 @else
 <main class="nav-margin">
-    <h1>Bonjour {{ Auth::user()->prenom }}!</h1>
+    <h1>Bonjour {{ Auth::user()->nom }}!</h1>
     <section>
         <h2>Vos Celliers</h2>
         <div class="card-container-stats">

@@ -40,7 +40,6 @@ class AdminController extends Controller
         try {
             $request->validate([
                 'nom'      => 'required|min:2|max:20|alpha',
-                'prenom'   => 'required|min:2|max:20|alpha',
                 'email'    => 'required|email',
                 'password' => 'required|min:6'
             ],
@@ -49,10 +48,6 @@ class AdminController extends Controller
                 'nom.min'           => "Le nom doit contenir au moins 2 caractères",
                 'nom.max'           => "Le nom ne doit pas dépasser 20 caractères",
                 'nom.alpha'         => "Le nom ne doit contenir que des lettres",
-                'prenom.required'   => "Veuillez saisir le prénom",
-                'prenom.min'        => "Le prénom doit contenir au moins 2 caractères",
-                'prenom.max'        => "Le prenom ne doit pas dépasser 20 caractères",
-                'prenom.alpha'      => "Le prénom ne doit contenir que des lettres",
                 'email.required'    => "Veuillez saisir l'adresse courriel",
                 'password.required' => "Veuillez saisir le mot de passe",
                 'password.min'      => "Le mot de passe doit contenir au moins 6 caractères"
@@ -60,7 +55,6 @@ class AdminController extends Controller
 
             $user = new User;
             $user->nom = $request->input('nom');
-            $user->prenom = $request->input('prenom');
             $user->email = $request->input('email');
             $user->password = Hash::make($request->input('password'));
             $user->save();
@@ -105,7 +99,6 @@ class AdminController extends Controller
         try {
             $request->validate([
                 'nom'      => 'required|min:2|max:20|alpha',
-                'prenom'   => 'required|min:2|max:20|alpha',
                 'email'    => 'required|email',
                 'password' => 'required|min:6'
             ],
@@ -114,17 +107,12 @@ class AdminController extends Controller
                 'nom.min'           => "Le nom doit contenir au moins 2 caractères",
                 'nom.max'           => "Le nom ne doit pas dépasser 20 caractères",
                 'nom.alpha'         => "Le nom ne doit contenir que des lettres",
-                'prenom.required'   => "Veuillez saisir le prénom",
-                'prenom.min'        => "Le prénom doit contenir au moins 2 caractères",
-                'prenom.max'        => "Le prenom ne doit pas dépasser 20 caractères",
-                'prenom.alpha'      => "Le prénom ne doit contenir que des lettres",
                 'email.required'    => "Veuillez saisir l'adresse courriel",
                 'password.required' => "Veuillez saisir le mot de passe",
                 'password.min'      => "Le mot de passe doit contenir au moins 6 caractères"
             ]);
     
             $user->nom = $request->input('nom');
-            $user->prenom = $request->input('prenom');
             $user->email = $request->input('email');
             $user->password = Hash::make($request->input('password'));
             $user->save();

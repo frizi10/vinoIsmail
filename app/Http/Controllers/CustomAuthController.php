@@ -42,7 +42,6 @@ class CustomAuthController extends Controller
         //  dd($request->all());
         $request->validate([
             'nom' => 'required|min:2|max:20|alpha',
-            'prenom' => 'required|min:2|max:20|alpha',
             'email' => 'required|email',
             'password' => 'required|min:6|confirmed'
         ],
@@ -51,10 +50,6 @@ class CustomAuthController extends Controller
             'nom.min' => 'Votre nom doit contenir au moins 2 caractères',
             'nom.max' => 'Votre nom ne doit pas dépasser 20 caractères',
             'nom.alpha' => 'Votre nom ne doit contenir que des lettres',
-            'prenom.required' => 'Veuillez saisir votre prénom',
-            'prenom.min' => 'Votre prénom doit contenir au moins 2 caractères',
-            'prenom.max' => 'Votre prénom ne doit pas dépasser 20 caractères',
-            'prenom.alpha' => 'Votre prénom ne doit contenir que des lettres',
             'email.required' => 'Veuillez saisir votre adresse email',
             'password.required' => 'Veuillez saisir votre mot de passe',
             'password.min' => 'Votre mot de passe doit contenir au moins 6 caractères',
@@ -64,7 +59,6 @@ class CustomAuthController extends Controller
 
         $user = new User;
         $user->nom = $request->input('nom');
-        $user->prenom = $request->input('prenom');
         $user->email = $request->input('email');
         $user->password = Hash::make($request->input('password'));
         $user->save();

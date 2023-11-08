@@ -51,7 +51,7 @@
             </p>
         </div>
         @foreach($cellier->bouteillesCelliers as $bouteillesCelliers)
-        <section class="card-bouteille">
+        <section class="card-bouteille" id="{{ $bouteillesCelliers->id }}">
             <picture>
                 <img src="{{ $bouteillesCelliers->bouteille->srcImage }}" alt="{{ $bouteillesCelliers->bouteille->nom }}">
             </picture>
@@ -71,6 +71,7 @@
                     <button class="btn-decrement">-</button>
                     <input type="text" value="{{ $bouteillesCelliers->quantite }}" min="0" readonly>
                     <button class="btn-increment">+</button>
+                    <form action="" class="form-delete"></form>
                 </div>
             </div>
         </section>

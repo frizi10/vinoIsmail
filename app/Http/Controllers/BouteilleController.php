@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bouteille;
+use App\Models\Cellier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BouteilleController extends Controller
 {
@@ -15,8 +17,8 @@ class BouteilleController extends Controller
     public function index()
     {
         $bouteilles = Bouteille::paginate(7);
-       
-        return view('bouteille.index', ['bouteilles'=> $bouteilles]);
+        $celliers = Cellier::where('user_id', Auth::id())->get();
+        return view('bouteille.index', ['bouteilles'=> $bouteilles, 'celliers' => $celliers]);
     }
 
 
