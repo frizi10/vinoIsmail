@@ -15,20 +15,19 @@
         Modification d'un utilisateur
     </h1>
     @if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
-
-@if($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+        <div>
+            {{ session('success') }}
+        </div>
+    @endif
+    @if($errors->any())
+        <div>
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="form-container">
         <form action="/admin/users-edit/{{ $user->id }}" method="post" id="adminModifierUtilisateur">
             @method('put')
@@ -48,18 +47,6 @@
                 @enderror
             </div>
             <div class="form-input-container">
-                <label for="email_verified">Courriel vérifié</label>
-                <select name="email_verified" id="email_verified">
-                    @if(empty($user->email_verified_at))
-                        <option value="" selected>Non</option>
-                        <option value="">Yes</option>
-                    @else
-                        <option value="0" {{ ($user->email_verified_at == 0) ? 'selected' : '' }}>Non</option>
-                        <option value="1" {{ ($user->email_verified_at == 1) ? 'selected' : '' }}>Oui</option>
-                    @endif
-                </select>
-            </div>
-            <div class="form-input-container">
                 <label for="password">Mot de passe</label>
                 <input id="password" name="password" value="{{ $user->password }}" disabled></input>
                 @error('password')
@@ -74,7 +61,6 @@
                 <label for="udate">Date de modification</label>
                 <input id="update" name="created_at" value="{{ $user->updated_at }}" disabled></input>
             </div>
-
             <div class="form-button">
                 <button type="submit" form="adminModifierUtilisateur" class="btn-submit">Mettre à jour</button>
             </div>

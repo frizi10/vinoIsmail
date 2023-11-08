@@ -8,6 +8,20 @@
     <div class="btn-submit">
         <a href="{{ route('admin.create-user') }}">ajouter un utilisateur</a>
     </div>
+    @if(session('success'))
+        <div>
+            {{ session('success') }}
+        </div>
+    @endif
+    @if($errors->any())
+        <div>
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="form-container">
         <form action="">
             <div class="form-input-container">
@@ -28,6 +42,11 @@
                 @forelse($users as $user)
                 <tr>
                     <td>{{ $user->nom }}</td>
+                    @if($user->hasRole('Admin'))
+                        <p>Role: Administrateur</p>
+                    @else
+                        <p>Role: Utilisateur</p>
+                    @endif
                     <td><a href="{{ route('admin.show-user', $user->id) }}"><button class="btn-ajouter">Mettre à jour</button></a></td>
                 </tr>
                 @empty
