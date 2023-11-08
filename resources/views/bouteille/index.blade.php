@@ -9,7 +9,7 @@
         <main class="nav-margin">
             <section class="form-ajouter-bouteille"> <!-- encadré noir (formulaires, filtres et tris) --> 
                 <div class="form-container">
-                    <form action="{{ route('bouteille.search') }}" method="" id="">
+                    <form action="{{ route('bouteille.search') }}" method="GET" id="searchForm">
                         <!-- @csrf -->
                         <div class="form-input-container">
                             <label for="search">RECHERCHE</label>
@@ -22,22 +22,26 @@
                     <a href="#">BOUTEILLE PERSONNALISÉE</a>
                 </div>
                 <div class="form-container">
-                    <form action="" method="" id="">
+                    <form action="{{ route('filtrer_produits') }}" method="" id="">
                         <hr>
                         <details>
                             <summary>Filtrer</summary>
                             <div class="form-input-container">
-                                <label for="color">Couleur</label>
-                                <select name="color" id="color">
+                                <label for="coleur">Couleur</label>
+                                <select name="couleur" id="couleur">
                                     <option value="">Choisir les options</option>
-                                    <option value="white">Blanc</option>
+                                    <option value="Blanc">Blanc</option>
+                                    <option value="Rouge">Rouge</option>
+                                    <option value="Rosé">Rosé</option>
                                 </select>
                             </div>
                             <div class="form-input-container">
                                 <label for="format">Format</label>
                                 <select name="format" id="format">
                                     <option value="">Choisir les options</option>
+                                    <option value="250">250ml</option>
                                     <option value="750">750ml</option>
+                                    <option value="1L">1L</option>
                                 </select>
                             </div>
                             <div class="form-input-container">
@@ -46,17 +50,17 @@
                                 <div>
                                     <div>
                                         <label for="prix_min">Minimum</label>
-                                        <input id="prix_min" type="number">
+                                        <input name="prix_min"  id="prix_min" type="number">
                                     </div>
                                     <div>
                                         <label for="prix_max">Maximum</label>
-                                        <input id="prix_max" type="number">
+                                        <input name="prix_max"  id="prix_max" type="number">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-input-container">
                                 <label for="country">Pays</label>
-                                <select name="country" id="country">
+                                <select name="pays" id="pays">
                                     <option value="">Choisir les options</option>
                                     <option value="canada">Canada</option>
                                     <option value="usa">États-Unis</option>
@@ -73,10 +77,10 @@
                                 </select>
                             </div>
                             <div class="form-input-container">
-                                <label for="year">Millésime</label>
-                                <select name="year" id="year">
+                                <label for="millesime">Millésime</label>
+                                <select name="millesime" id="millesime">
                                     <option value="">Choisir les options</option>
-                                    <option value="2001">2001</option>
+                                    <option value="2020">2020</option>
                                 </select>
                             </div>
                             <div class="form-input-container">
@@ -88,11 +92,12 @@
                             </div>
                         </details>                        
                         <div class="tag-container"></div>
+                        <button type="submit">Filtrer</button>
                     </form>
                 </div>
                 <div class="form-container">
                     <hr>
-                    <form action="{{ route('bouteille.sorting') }}" method="" id="sortingForm">
+                    <form action="{{ route('bouteille.sorting') }}" method="GET" id="sortingForm">
                         <!-- @csrf -->
                         <div class="form-input-container">
                             <label for="sort">TRIER</label>
@@ -109,7 +114,7 @@
                 </div>
             </section>
             <div class="card-count">
-                <p>{{$bouteilles->total()}} bouteilles :</p>
+                {{-- <p>{{$bouteilles->total()}} bouteilles :</p> --}}
             </div>
             @foreach ($bouteilles as $bouteille)
             <section class="card-bouteille">
@@ -119,7 +124,7 @@
                 <div class="card-bouteille-content">
                     <div class="card-bouteille-info">
                        
-                            <h2><a href="{{ route('bouteille.show',['bouteille_id'=> $bouteille->id]) }}">{{ $bouteille->nom }}</a></h2>
+                            <h2><a href="{{ route('bouteille.show',['bouteille_id'=> $bouteille->id]) }}" class="bottle-link">{{ $bouteille->nom }}</a></h2>
                       
                         <span>{{$bouteille->type}} | {{ $bouteille->format }} | {{$bouteille->pays}}</span>
                         <p>{{$bouteille->prix}} $</p>
@@ -129,7 +134,7 @@
             </section>
           
             @endforeach  
-            {{ $bouteilles->links() }} 
+             {{ $bouteilles->links() }}
         </section>
     </main>
     @endsection
@@ -171,8 +176,8 @@
             <script src="../../js/bottleCounterModal.js"></script>
             <script src="../../js/modalAjouter.js"></script>
             <script src="../../js/filterTag.js"></script>
-            {{-- <script src="../../js/sorting.js"></script> --}}
-            {{-- <script src="{{asset('assets/js/sorting.js')}}"></script>   --}}
+             <script src="../../js/sorting.js"></script>  
+             {{-- <script src="{{asset('assets/js/sorting.js')}}" ></script>   --}}
 
            
         </main>
