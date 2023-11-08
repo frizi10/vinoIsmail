@@ -26,7 +26,7 @@
         <form action="">
             <div class="form-input-container">
                 <label for="search_users">RECHERCHE</label>
-                <input type="text" id="search_users">
+                <input type="text" id="search_users" placeholder="Nom / Identifiant">
             </div>
         </form>
     </div>
@@ -42,9 +42,9 @@
             </thead>
             <tbody>
                 @forelse($users as $user)
-                <tr>
-                    <td>{{ $user->id }}</td>
-                    <td>{{ $user->nom }}</td>
+                <tr class="user-row">
+                    <td class="user-id">{{ $user->id }}</td>
+                    <td class="user-name">{{ $user->nom }}</td>
                     @if($user->getRoleNames()->first() == "Admin")
                         <td>Administrateur</td>
                     @else
@@ -59,4 +59,25 @@
         </table>
     </div>
 </main>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('search_users');
+    const tableRows = document.querySelectorAll('.user-row');
+
+    searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+
+        tableRows.forEach(function(row) {
+            const userName = row.querySelector('.user-name').textContent.toLowerCase();
+            const userId = row.querySelector('.user-id').textContent.toLowerCase();
+
+            if (userName.includes(searchTerm) || userId.includes(searchTerm)) {
+                row.style.display = 'table-row';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+});
+</script>
 @endsection
