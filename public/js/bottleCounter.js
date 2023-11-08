@@ -32,7 +32,8 @@ document.querySelectorAll('.card-bouteille-qt').forEach(function(counter) {
 
     async function updateQuantity(newQuantity) {
         let id = card.id;
-        let url = `/bouteilles-celliers-modifier/${id}`;
+        let location = card.getAttribute('data-location'); 
+        let url = `/bouteilles-${location}-modifier/${id}`;
         try {
             const response = await fetch(url, { 
                 method: 'PUT',

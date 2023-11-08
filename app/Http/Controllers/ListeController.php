@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Liste;
+use App\Models\Cellier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -109,8 +110,10 @@ class ListeController extends Controller
         } elseif ($sort == 'price-desc') {
             $liste->bouteillesListes = $liste->bouteillesListes->sortByDesc('bouteille.prix');
         }
+
+        $celliers = Cellier::where('user_id', Auth::id())->get();
     
-        return view('liste.show', ['liste' => $liste]);
+        return view('liste.show', ['liste' => $liste, 'celliers' => $celliers]);
     }
 
     /**
