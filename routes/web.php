@@ -151,12 +151,14 @@ Route::delete('/admin/users-delete/{id}', [AdminController::class, 'destroy'])->
 
 // faire ces fomctionnalite sans auth
 
-//Route::get('/bouteilles', [BouteilleController::class, 'index'])->name('bouteille.index');
+Route::get('/bouteilles', [BouteilleController::class, 'index'])->name('bouteille.index');
 // Recheche par mot clé dans le titre
-//Route::get('/bouteilles-search', [BouteilleController::class, 'search'])->name('bouteille.search');  
-//Route::get('/bouteilles/{bouteille_id}', [BouteilleController::class, 'show'])->name('bouteille.show');
+Route::get('/bouteilles-search', [BouteilleController::class, 'search'])->name('bouteille.search');  
+Route::get('/bouteilles/{bouteille_id}', [BouteilleController::class, 'show'])->name('bouteille.show');
 
 //tri
-//Route::get('/sorting', [BouteilleController::class, 'sorting'])->name('bouteille.sorting');
+Route::get('/sorting', [BouteilleController::class, 'sorting'])->name('bouteille.sorting');
 //filtre
-//Route::get('/filtrer-produits', [BouteilleController::class, 'filtrerProduits'])->name('filtrer_produits');
+Route::get('/filtrer-produits', [BouteilleController::class, 'filtrerProduits'])->name('filtrer_produits');
+
+
