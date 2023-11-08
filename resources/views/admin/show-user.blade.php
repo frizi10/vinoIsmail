@@ -15,6 +15,7 @@
           </div>
           <div class="table-row">
               <div class="table-header">Courriel vérifié</div>
+              @if(empty($user->email_verified_at))
               <div class="table-data">    
                 @if(empty($user->email_verified_at))
                   Non
@@ -37,8 +38,7 @@
           </div>
       </div>
     </div>
-
-    <a href="{{ route('profil.edit', $user->id) }}" class="btn-submit">Modifier</a>
+    <a href="{{ route('admin.edit-user', $user->id) }}" class="btn-submit">Modifier</a>
     <button class="btn-submit" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">Supprimer</button>
 
 <!-- Modal -->
