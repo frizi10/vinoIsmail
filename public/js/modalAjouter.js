@@ -41,14 +41,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const listRadio = document.querySelector('#location-liste'); 
     const cellierRadio = document.querySelector('#location-cellier'); 
     let selectLocation = document.querySelector('#select-location'); 
+    let labelLocation = document.querySelector('#label-location'); 
 
     listRadio.addEventListener('change', function(evt) {
         selectLocation.innerHTML = ''; 
+        labelLocation.innerHTML = 'Choisir la liste'; 
         loadOptions('liste'); 
     }); 
 
     cellierRadio.addEventListener('change', function(evt) {
-        selectLocation.innerHTML = ''; 
+        selectLocation.innerHTML = 'Choisir le cellier'; 
         loadOptions('cellier'); 
     }); 
 
