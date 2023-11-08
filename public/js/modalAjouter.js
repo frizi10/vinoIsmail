@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function loadOptions(type) {
         if (type === 'liste') {
-            url = '/celliers-json'; 
+            url = '/listes-json'; 
         }
         else if (type === 'cellier') {
             url = '/celliers-json'; 

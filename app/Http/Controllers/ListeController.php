@@ -29,6 +29,28 @@ class ListeController extends Controller
         
         return view('liste.index', ['listes' => $listes]); 
     }
+    
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexJSON()
+    {
+        $listes = Liste::withCount('bouteillesListes')
+                            ->with('bouteillesListes.bouteille')
+                            ->where('user_id', Auth::id())
+                            ->get(); 
+
+        $listes->each(function ($liste) {
+            $liste->prixTotal = 0; 
+            foreach($liste->bouteillesListes as $bouteilleListe) {
+                $liste->prixTotal += $bouteilleListe->bouteille->prix; 
+            }
+        }); 
+        
+        return response()->json($listes);
+    }
 
     /**
      * Show the form for creating a new resource.
