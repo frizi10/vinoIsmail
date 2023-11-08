@@ -8,5 +8,6 @@
     "/js/modalAjouter.js": "/js/modalAjouter.js",
     "/js/modalDeplacer.js": "/js/modalDeplacer.js",
     "/js/modalSupprimer.js": "/js/modalSupprimer.js",
+    "/js/sortBottles.js": "/js/sortBottles.js",
     "/css/app.css": "/css/app.css"
 }
