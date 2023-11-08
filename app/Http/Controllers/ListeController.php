@@ -72,9 +72,23 @@ class ListeController extends Controller
      * @param  \App\Models\Liste  $liste
      * @return \Illuminate\Http\Response
      */
-    public function show(Liste $liste)
+    public function show(Liste $liste_id, Request $request)
     {
-        //
+        $liste = $liste_id;
+
+        $sort = $request->input('sort');
+    
+        if ($sort == 'name-asc') {
+            $liste->bouteillesListes = $liste->bouteillesListes->sortBy('bouteille.nom');
+        } elseif ($sort == 'name-desc') {
+            $liste->bouteillesListes = $liste->bouteillesListes->sortByDesc('bouteille.nom');
+        } elseif ($sort == 'price-asc') {
+            $liste->bouteillesListes = $liste->bouteillesListes->sortBy('bouteille.prix');
+        } elseif ($sort == 'price-desc') {
+            $liste->bouteillesListes = $liste->bouteillesListes->sortByDesc('bouteille.prix');
+        }
+    
+        return view('liste.show', ['liste' => $liste]);
     }
 
     /**
