@@ -9,7 +9,7 @@
 </header>
 <main class="nav-margin">
     <section>
-        <h2>Informations</h2>
+        <h2>Informations de l'utilisateur</h2>
         @if(session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
