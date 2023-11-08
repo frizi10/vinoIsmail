@@ -90,7 +90,7 @@ class AdminController extends Controller
     public function edit(Request $request, User $id)
     {
         $user = User::find($id);
-        return view('admin.edit-users', ['user'=>$user]);
+        return view('admin.edit-user', ['user' => $id]);
     }
 
     /**
