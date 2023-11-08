@@ -40,6 +40,13 @@
                 @enderror
             </div>
             <div class="form-input-container">
+                <label for="role">Rôle</label>
+                <select name="role" id="role">
+                    <option value="Admin" {{ $user->getRoleNames()->first() == "Admin" ? 'selected' : '' }}>Administrateur</option>
+                    <option value="" {{ $user->getRoleNames()->first() != "Admin" ? 'selected' : '' }}>Utilisateur</option>
+                </select>
+            </div>
+            <div class="form-input-container">
                 <label for="email">Courriel</label>
                 <input id="email" name="email" value="{{ $user->email }}"></input>
                 @error('email')
