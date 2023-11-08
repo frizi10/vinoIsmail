@@ -8,6 +8,8 @@ use App\Http\Controllers\BouteilleController;
 use App\Http\Controllers\Web2scraperController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ListeController;
+use Spatie\Permission\Middlewares\RoleMiddleware;
+use App\Http\Middleware\CheckRole;
 
 // Route d'accueil
 Route::get('/', function () {
@@ -116,6 +118,24 @@ Route::middleware(['auth'])->group(function () {
     // Modification de la quantité de bouteilles se trouvant dans une même liste
     Route::put('/listes/{liste_id}/bouteilles/{bouteille_id}', [BouteilleController::class, 'modifierQuantiteListe'])->name('bouteilles.modifierQuantiteListe');
 
+    // *************** Admin ****************
+    Route::middleware('role:Admin')->group(function () {
+        // Affichage de tous les utilisateurs
+        Route::get('/admin/users', [AdminController::class, 'index'])->name('admin.index');
+        // Affichage d'un utilisateur
+        Route::get('/admin/users-show/{user}', [AdminController::class, 'show'])->name('admin.show-user');
+        // Création d'un nouvel utilisateur
+        Route::get('/admin/users-create', [AdminController::class, 'create'])->name('admin.create-user');
+        // Stockage d'un nouvel utilisateur dans la BDD
+        Route::post('/admin/users-create', [AdminController::class, 'store']);
+        // Modification d'un utilisateur
+        Route::get('/admin/users-edit/{user}', [AdminController::class, 'edit'])->name('admin.edit-user');
+        // Stockage de la modification d'un utilisateur dans la BDD
+        Route::put('/admin/users-edit/{user}', [AdminController::class, 'update']);
+        // Suppression d'un utilisateur
+        Route::delete('/admin/users-delete/{user}', [AdminController::class, 'destroy'])->name('admin.destroy-user');
+    });
+
 });
 
 // *************** Authentification ****************
@@ -128,24 +148,6 @@ Route::post('/login', [CustomAuthController::class, 'authentication'])->name('lo
 Route::get('/register', [CustomAuthController::class, 'create'])->name('register');
 // Stockage d'un nouvel utilisateur dans la BDD
 Route::post('/register', [CustomAuthController::class, 'store'])->name('register.store');
-
-// *************** Admin **************** À mettre dans un groupe d'authentification
-
-// Affichage de tous les utilisateurs
-Route::get('/admin/users', [AdminController::class, 'index'])->name('admin.index');
-// Affichage d'un utilisateur
-Route::get('/admin/users-show/{user}', [AdminController::class, 'show'])->name('admin.show-user');
-// Création d'un nouvel utilisateur
-Route::get('/admin/users-create', [AdminController::class, 'create'])->name('admin.create-user');
-// Stockage d'un nouvel utilisateur dans la BDD
-Route::post('/admin/users-create', [AdminController::class, 'store']);
-// Modification d'un utilisateur
-Route::get('/admin/users-edit/{user}', [AdminController::class, 'edit'])->name('admin.edit-user');
-// Stockage de la modification d'un utilisateur dans la BDD
-Route::put('/admin/users-edit/{user}', [AdminController::class, 'update']);
-// Suppression d'un utilisateur
-Route::delete('/admin/users-delete/{user}', [AdminController::class, 'destroy'])->name('admin.destroy-user');
-
 
 
 // faire ces fomctionnalite sans auth
