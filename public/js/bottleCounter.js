@@ -39,6 +39,60 @@ document.querySelectorAll('.card-bouteille-qt').forEach(function (counter) {
       deleteButton.style.display = 'none';
     }
   }
+    // Masquer initialement le bouton supprimer
+    deleteButton.style.display = 'none';
+
+    decrementButton.addEventListener('click', function() {
+        let currentValue = parseInt(input.value, 10);
+        if (currentValue > 0) {
+            input.value = currentValue - 1;
+            updateQuantity(input.value);
+        }
+        checkValue();
+    });
+
+    incrementButton.addEventListener('click', function() {
+        let currentValue = parseInt(input.value, 10);
+        input.value = currentValue + 1;
+        updateQuantity(input.value);
+        checkValue();
+    });
+
+    async function updateQuantity(newQuantity) {
+        let id = card.id;
+        let location = card.getAttribute('data-location'); 
+        let url = `/bouteilles-${location}-modifier/${id}`;
+        try {
+            const response = await fetch(url, { 
+                method: 'PUT',
+                headers: {
+                    'Content-Type' : 'application/json', 
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }, 
+                body: JSON.stringify({ quantite: newQuantity })
+            });
+            
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+    
+            const data = await response.json();
+            console.log(data.message); 
+        } catch (error) {
+            console.error('Error: ', error); 
+        }
+    }
+
+    function checkValue() {
+        let currentValue = parseInt(input.value, 10);
+        if (currentValue === 0) {
+            card.classList.add('card-transparent');
+            deleteButton.style.display = 'block';
+        } else {
+            card.classList.remove('card-transparent');
+            deleteButton.style.display = 'none';
+        }
+    }
 
   // Vérifier initialement la valeur du compteur
   checkValue();

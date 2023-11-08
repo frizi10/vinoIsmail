@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BouteilleCellierController;
+use App\Http\Controllers\BouteilleListeController;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\CellierController;
 use App\Http\Controllers\BouteilleController;
@@ -94,6 +95,8 @@ Route::middleware(['auth'])->group(function () {
 
     // Affichage de toutes les listes
     Route::get('/listes', [ListeController::class, 'index'])->name('liste.index'); 
+    // Affichage de tous les celliers en JSON
+    Route::get('/listes-json', [ListeController::class, 'indexJSON']); 
     // Affichage d'une liste et de ses bouteilles
     Route::get('/listes/{liste_id}/bouteilles', [ListeController::class, 'show'])->name('liste.show');
     // Création d'une liste
@@ -110,11 +113,11 @@ Route::middleware(['auth'])->group(function () {
     // *************** Gestion des bouteilles d'une liste ****************
 
     // Ajout d'une bouteille à une liste
-    Route::post('/listes/{liste_id}/bouteilles/{bouteille_id}', [BouteilleController::class, 'ajouterAListe'])->name('bouteilles.ajouterListe');
+    Route::post('/listes-json', [BouteilleListeController::class, 'store']);
     // Retrait d'une bouteille d'une liste
-    Route::delete('/bouteilles/{id}', [BouteilleController::class, 'retirerDeListe'])->name('bouteilles.retirerListe');
+    Route::delete('/listes/{liste_id}/bouteilles-listes-modifier/{bouteille_liste}', [BouteilleListeController::class, 'destroy'])->name('bouteillListe.delete');
     // Modification de la quantité de bouteilles se trouvant dans une même liste
-    Route::put('/listes/{liste_id}/bouteilles/{bouteille_id}', [BouteilleController::class, 'modifierQuantiteListe'])->name('bouteilles.modifierQuantiteListe');
+    Route::put('/bouteilles-listes-modifier/{id}', [BouteilleListeController::class, 'update']);
 
 });
 

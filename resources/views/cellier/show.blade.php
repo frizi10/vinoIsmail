@@ -51,7 +51,7 @@
             </p>
         </div>
         @foreach($cellier->bouteillesCelliers as $bouteillesCelliers)
-        <section class="card-bouteille" id="{{ $bouteillesCelliers->id }}">
+        <section class="card-bouteille" id="{{ $bouteillesCelliers->id }}" data-location="celliers">
             <picture>
                 <img src="{{ $bouteillesCelliers->bouteille->srcImage }}" alt="{{ $bouteillesCelliers->bouteille->nom }}">
             </picture>
