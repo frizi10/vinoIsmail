@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\CustomAuthController;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -120,6 +121,8 @@ class AdminController extends Controller
                 'email' => $request->email
             ]);
     
+            $user->syncRoles([$request->role]);
+
             return redirect(route('admin.show-user', $user->id))->withSuccess('Profil mis à jour avec succès');
         } catch (\Exception $e) {
             return redirect(route('admin.edit-user', $user->id))->withErrors(['erreur' => "Une erreur s'est produite lors de la mise à jour du profil"]);
@@ -130,12 +133,23 @@ class AdminController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\User  $user
+     * @param  \App\Models\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $user, Request $request)
     {
-        $user->delete();
-
-        return redirect(route('admin.index-users'))->withSuccess('Utilisateur supprimé'); 
+        $request->validate([
+            'password' => 'required',
+        ], 
+        [
+            'password.required' => "Le mot de passe est requis pour supprimer un compte"
+        ]);
+    
+        if (Hash::check($request->password, Auth::user()->password)) {
+            $user->delete();
+            return redirect()->route('admin.index')->withSuccess('Compte supprimé avec succès.');
+        } else {
+            return back()->withErrors(['erreur' => 'Le mot de passe est incorrect.']);
+        }
     }
 }
