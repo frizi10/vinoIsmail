@@ -174,15 +174,23 @@ class CustomAuthController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\User  $user
+     * @param  \App\Models\Request  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $user, Request $request)
     {
-        try {
+        $request->validate([
+            'password' => 'required',
+        ], 
+        [
+            'password.required' => "Le mot de passe est requis pour supprimer un compte"
+        ]);
+    
+        if (Hash::check($request->password, $user->password)) {
             $user->delete();
-            return redirect()->route('admin.show-user')->withSuccess('Utilisateur supprimé avec succès');
-        } catch (\Exception $e) {
-            return redirect()->route('admin.show-user')->withErrors(["Une erreur s'est produite lors de la suppression de l'utilisateur"]);
+            return redirect()->route('welcome')->withSuccess('Compte supprimé avec succès.');
+        } else {
+            return back()->withErrors(['erreur' => 'Le mot de passe est incorrect.']);
         }
     }
 

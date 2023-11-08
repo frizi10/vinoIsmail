@@ -13,6 +13,15 @@
                 {{ session('success') }}
             </div>
         @endif
+        @if($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="info-profil"><span>Nom :</span><span class="info-value">{{ $user->nom }}</span></div>
         <div class="info-profil"><span>Courriel :</span><span class="info-value">{{ $user->email }}</span></div>
 
@@ -42,15 +51,17 @@
             <hr>
             <p><strong>ATTENTION!</strong> Cette action est irréversible et entraînera la perte de toutes les données associées à ce compte.</p>
             <p>Veuillez entrer le mot de passe pour confirmer la suppression du compte</p>
-            <form action="" class="form-modal">
-                    <div class="form-input-container">
-                        <label for="">Mot de passe</label>
-                        <input type="password" id="" name="">
-                    </div>
-                    <div class="btn-modal-container">
-                        <button class="btn-modal-action btn-red">ajouter</button>
-                        <button class="btn-modal-cancel btn-green">annuler</button>
-                    </div>
+            <form action="{{ route('profil.destroy', $user->id) }}" method="post" class="form-modal">
+                @csrf
+                @method('DELETE')
+                <div class="form-input-container">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="password">
+                </div>
+                <div class="btn-modal-container">
+                    <button class="btn-modal-action btn-red">supprimer</button>
+                    <button class="btn-modal-cancel btn-green">annuler</button>
+                </div>
             </form>
         </dialog>
     <!-- </div> -->
