@@ -20,7 +20,6 @@
         <table>
             <thead>
                 <tr>
-                    <th>PRÉNOM</th>
                     <th>NOM</th>
                     <th>ACTION</th>
                 </tr>
@@ -28,7 +27,6 @@
             <tbody>
                 @forelse($users as $user)
                 <tr>
-                    <td>{{ $user->prenom }}</td>
                     <td>{{ $user->nom }}</td>
                     <td><a href="{{ route('admin.show-user', $user->id) }}"><button class="btn-ajouter">Mettre à jour</button></a></td>
                 </tr>

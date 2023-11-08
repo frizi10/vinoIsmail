@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Panier extends Model
+class Liste extends Model
 {
     use HasFactory;
 
@@ -14,9 +14,9 @@ class Panier extends Model
         'user_id'
     ]; 
 
-    public function bouteillesPaniers() 
+    public function bouteillesListes() 
     {
-        return $this->hasMany(BouteillePanier::class);
+        return $this->hasMany(BouteilleListe::class);
     }
 
     public function user() 

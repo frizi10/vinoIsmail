@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Panier;
+use App\Models\Liste;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class PanierController extends Controller
+class ListeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +42,10 @@ class PanierController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Panier  $panier
+     * @param  \App\Models\Liste  $liste
      * @return \Illuminate\Http\Response
      */
-    public function show(Panier $panier)
+    public function show(Liste $liste)
     {
         //
     }
@@ -52,10 +53,10 @@ class PanierController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Panier  $panier
+     * @param  \App\Models\Liste  $liste
      * @return \Illuminate\Http\Response
      */
-    public function edit(Panier $panier)
+    public function edit(Liste $liste)
     {
         //
     }
@@ -64,10 +65,10 @@ class PanierController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Panier  $panier
+     * @param  \App\Models\Liste  $liste
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Panier $panier)
+    public function update(Request $request, Liste $liste)
     {
         //
     }
@@ -75,10 +76,10 @@ class PanierController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Panier  $panier
+     * @param  \App\Models\Liste  $liste
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Panier $panier)
+    public function destroy(Liste $liste)
     {
         //
     }

@@ -42,9 +42,9 @@ class Bouteille extends Model
         return $this->hasMany(BouteilleCellier::class);
     }
 
-    public function bouteillesPaniers() 
+    public function bouteillesListes() 
     {
-        return $this->hasMany(BouteillePanier::class);
+        return $this->hasMany(BouteilleListe::class);
     }
 
     public function commentaires() 

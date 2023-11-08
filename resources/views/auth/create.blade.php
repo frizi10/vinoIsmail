@@ -12,13 +12,6 @@
         <form action="{{ route('register.store') }}" method="post" id="registration">
             @csrf
             <div class="form-input-container">
-                <label for="prenom">Prénom</label>
-                <input type="text" id="prenom" name="prenom">
-                @error('prenom')
-                    <span class="error-message">{{ $message }}</span>
-                @enderror
-            </div>
-            <div class="form-input-container">
                 <label for="nom">Nom</label>
                 <input type="text" id="nom" name="nom">
                 @error('nom')

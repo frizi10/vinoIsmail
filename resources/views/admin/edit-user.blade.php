@@ -16,10 +16,6 @@
                 @method('put')
                 @csrf
                     <div class="form-input-container">
-                        <label for="prenom">PRÉNOM</label>
-                        <input type="text" id="prenom" name="prenom" value="{{ $user->prenom }}">
-                    </div>
-                    <div class="form-input-container">
                         <label for="nom">NOM</label>
                         <input type="text" id="nom" name="nom" value="{{ $user->nom }}">
                     </div>

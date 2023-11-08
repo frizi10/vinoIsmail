@@ -7,6 +7,7 @@ use App\Http\Controllers\CellierController;
 use App\Http\Controllers\BouteilleController;
 use App\Http\Controllers\Web2scraperController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ListeyController;
 
 // Route d'accueil
 Route::get('/', function () {
@@ -159,3 +160,5 @@ Route::delete('/admin/users-delete/{id}', [AdminController::class, 'destroy'])->
 //Route::get('/sorting', [BouteilleController::class, 'sorting'])->name('bouteille.sorting');
 //filtre
 //Route::get('/filtrer-produits', [BouteilleController::class, 'filtrerProduits'])->name('filtrer_produits');
+
+//Route::get('/scrape', [Web2scraperController::class, 'scrapeData']);
