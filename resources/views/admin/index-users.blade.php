@@ -4,7 +4,7 @@
 <header>
     utilisateurs
 </header>
-<main>
+<main class="nav-margin">
     <div class="btn-submit">
         <a href="{{ route('admin.create-user') }}">ajouter un utilisateur</a>
     </div>
@@ -31,21 +31,24 @@
         </form>
     </div>
     <div class="admin-table-container">
-        <table>
+        <table class="admin-table">
             <thead>
                 <tr>
+                    <th>IDENTIFIANT</th>    
                     <th>NOM</th>
+                    <th>RÔLE</th>
                     <th>ACTION</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse($users as $user)
                 <tr>
+                    <td>{{ $user->id }}</td>
                     <td>{{ $user->nom }}</td>
-                    @if($user->hasRole('Admin'))
-                        <p>Role: Administrateur</p>
+                    @if($user->getRoleNames()->first() == "Admin")
+                        <td>Administrateur</td>
                     @else
-                        <p>Role: Utilisateur</p>
+                        <td>Utilisateur</td>
                     @endif
                     <td><a href="{{ route('admin.show-user', $user->id) }}"><button class="btn-ajouter">Mettre à jour</button></a></td>
                 </tr>
