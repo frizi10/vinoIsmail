@@ -70,9 +70,9 @@ class AdminController extends Controller
      * @param  \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $id)
+    public function show(User $user)
     {
-        return view('admin.show-user', ['user' => $id]);
+        return view('admin.show-user', ['user' => $user]);
     }
 
     /**
@@ -81,10 +81,10 @@ class AdminController extends Controller
      * @param  \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, User $id)
+    public function edit(Request $request, User $user)
     {
-        $user = User::find($id);
-        return view('admin.edit-user', ['user' => $id]);
+        // $user = User::find($id);
+        return view('admin.edit-user', ['user' => $user]);
     }
 
     /**
@@ -114,12 +114,13 @@ class AdminController extends Controller
     
             $user->nom = $request->input('nom');
             $user->email = $request->input('email');
+            $user->email_verified_at = $request->input('email_verified');
             $user->password = Hash::make($request->input('password'));
             $user->save();
             
-            return redirect(route('admin.index-users'))->withSuccess('Utilisateur mis à jour');
+            return redirect(route('admin.show-user', $user->id))->withSuccess('Utilisateur mis à jour');
         } catch (\Exception $e) {
-            return redirect(route('admin.edit-user', $user))->withErrors(["Erreur de mise à jour"]);
+            return redirect(route('admin.edit-user', $user->id))->withErrors(["Erreur de mise à jour"]);
         }
     }
 
