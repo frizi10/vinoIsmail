@@ -7,7 +7,7 @@ use App\Http\Controllers\CellierController;
 use App\Http\Controllers\BouteilleController;
 use App\Http\Controllers\Web2scraperController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ListeyController;
+use App\Http\Controllers\ListeController;
 
 // Route d'accueil
 Route::get('/', function () {
