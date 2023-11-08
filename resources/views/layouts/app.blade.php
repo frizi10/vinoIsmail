@@ -88,7 +88,7 @@
                 </a>
             </li>
             <li class="main-nav-item">         
-                <a href="#">
+                <a href="{{ route('profil.show', Auth::user()->id) }}">
                     <figure class="container-icons-navbar">
                         <img src="{{ asset('assets/icons/profile_icon.svg') }}" alt="Profil">
                         <figcaption>profil</figcaption>
