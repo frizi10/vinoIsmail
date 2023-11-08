@@ -1,6 +1,7 @@
 // Sélectionner tous les boutons "+ Ajouter"
 document.addEventListener('DOMContentLoaded', function() {
     let bouteilleID; 
+    let url = '/celliers-json';
     const ajouterButtons = document.querySelectorAll('.btn-ajouter');
     
     // Sélectionner la fenêtre modale
@@ -8,16 +9,15 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Ajouter un événement d'écouteur de clic à chaque bouton "+ Ajouter"
     ajouterButtons.forEach(function(button) {
-        bouteilleID = button.getAttribute('data-bouteille-id'); 
         button.addEventListener('click', function(event) {
             // Empêcher le comportement par défaut du lien (qui est de naviguer vers une nouvelle page)
             event.preventDefault();
+            bouteilleID = button.getAttribute('data-bouteille-id'); 
     
             // Ouvrir la fenêtre modale
             modal.showModal();
         });
     });
-    
     // Sélectionner le bouton "annuler" dans la fenêtre modale
     const closeModalButton = document.querySelector('.btn-modal-cancel');
     
@@ -43,19 +43,18 @@ document.addEventListener('DOMContentLoaded', function() {
     let selectLocation = document.querySelector('#select-location'); 
     let labelLocation = document.querySelector('#label-location'); 
 
-    listRadio.addEventListener('change', function(evt) {
+    listRadio.addEventListener('change', function(event) {
         selectLocation.innerHTML = ''; 
         labelLocation.innerHTML = 'Choisir la liste'; 
         loadOptions('liste'); 
     }); 
 
-    cellierRadio.addEventListener('change', function(evt) {
+    cellierRadio.addEventListener('change', function(event) {
         selectLocation.innerHTML = 'Choisir le cellier'; 
         loadOptions('cellier'); 
     }); 
 
     async function loadOptions(type) {
-        let url;  
         if (type === 'liste') {
             url = '/celliers-json'; 
         }
@@ -77,7 +76,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
     
             const data = await response.json();
-            console.log(data.message); 
             data.forEach(option => {
                 let optionElement = document.createElement('option'); 
                 optionElement.value = option.id; 
@@ -90,8 +88,37 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    form.addEventListener('submit', function(evt) {
-        //WIP
+    form.addEventListener('submit', function(event) {
+        const quantiteBouteille = document.querySelector('#quantite-bouteille').value; 
+        const idLocation = document.querySelector('#select-location').value;
+        event.preventDefault(); 
+        ajouterBouteille(quantiteBouteille, idLocation, bouteilleID); 
+
+        async function ajouterBouteille(newQuantity, locationId, bouteilleId) {
+            try {
+                const response = await fetch(url, { 
+                    method: 'POST',
+                    headers: {
+                        'Content-Type' : 'application/json', 
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    }, 
+                    body: JSON.stringify({ 
+                        quantite: newQuantity,
+                        location_id: locationId,
+                        bouteille_id: bouteilleId
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+        
+                const data = await response.json();
+                console.log(data.message); 
+            } catch (error) {
+                console.error('Error: ', error); 
+            }
+        }
     }); 
 })
 

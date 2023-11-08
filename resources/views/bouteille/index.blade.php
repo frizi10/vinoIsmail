@@ -151,7 +151,7 @@
                                     <label for="select-location" id="label-location">Choisir le cellier</label>
                                     <select name="select-location" id="select-location">
                                         @forelse ($celliers as $cellier)
-                                            <option value="$cellier->id">{{ $cellier->nom }}</option>
+                                            <option value="{{ $cellier->id }}">{{ $cellier->nom }}</option>
                                         @empty 
                                             <option value="">Vous n'avez aucun cellier</option>
                                         @endforelse
@@ -159,7 +159,7 @@
                                 </div>
                                 <div class="card-bouteille-qt">
                                     <button class="btn-decrement">-</button>
-                                    <input type="text" value="1" min="1" readonly>
+                                    <input type="text" value="1" min="1" id="quantite-bouteille" readonly>
                                     <button class="btn-increment">+</button>
                                 </div>
                                 <div class="btn-modal-container">
