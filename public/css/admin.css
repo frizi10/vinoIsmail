@@ -3,34 +3,21 @@
     padding: 1rem 1rem;
 }
 
+.admin-table th:nth-child(1),
+.admin-table td:nth-child(1) {
+    width: 10%; 
+}
+
+.admin-table th,
+.admin-table td {
+    width: 45%; 
+    box-sizing: border-box;
+}
+
 .admin-show-container {
     width: 100%; 
 }
 
-/* .admin-table-container-show {
-    display: flex;
-    flex-wrap: wrap; 
-    border: 1px solid #000000; 
-    border-radius: 10px; 
-    margin: .5rem;
-}
-
-.table-row{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #000000;
-}
-
-.table-header {
-    width: 8rem;
-    text-align: left; 
-    margin: 1rem;
-}
-
-.table-data{
-    max-width: ;
-} */
 .admin-table-container-show {
     display: flex;
     flex-direction: column;

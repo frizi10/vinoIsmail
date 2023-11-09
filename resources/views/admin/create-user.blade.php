@@ -8,9 +8,30 @@
     <h1 class="form-h1">
         Créer un compte utilisateur
     </h1>
+    @if(session('success'))
+        <div>
+            {{ session('success') }}
+        </div>
+    @endif
+    @if($errors->any())
+        <div>
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="form-container">
-        <form action="{{ route('register.store') }}" method="post" id="registration">
+        <form action="/admin/users-create/" method="post" id="registration">
             @csrf
+            <div class="form-input-container">
+                <label for="role">Rôle</label>
+                <select name="role" id="role">
+                    <option value="utilisateur" selected>Utilisateur</option>
+                    <option value="administrateur">Administrateur</option>
+                </select>
+            </div>
             <div class="form-input-container">
                 <label for="nom">Nom</label>
                 <input type="text" id="nom" name="nom">

@@ -4,30 +4,52 @@
 <header>
     utilisateurs
 </header>
-<main>
+<main class="nav-margin">
     <div class="btn-submit">
         <a href="{{ route('admin.create-user') }}">ajouter un utilisateur</a>
     </div>
+    @if(session('success'))
+        <div>
+            {{ session('success') }}
+        </div>
+    @endif
+    @if($errors->any())
+        <div>
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="form-container">
         <form action="">
             <div class="form-input-container">
                 <label for="search_users">RECHERCHE</label>
-                <input type="text" id="search_users">
+                <input type="text" id="search_users" placeholder="Nom / Identifiant">
             </div>
         </form>
     </div>
     <div class="admin-table-container">
-        <table>
+        <table class="admin-table">
             <thead>
                 <tr>
+                    <th>IDENTIFIANT</th>    
                     <th>NOM</th>
+                    <th>RÔLE</th>
                     <th>ACTION</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse($users as $user)
-                <tr>
-                    <td>{{ $user->nom }}</td>
+                <tr class="user-row">
+                    <td class="user-id">{{ $user->id }}</td>
+                    <td class="user-name">{{ $user->nom }}</td>
+                    @if($user->getRoleNames()->first() == "Admin")
+                        <td>Administrateur</td>
+                    @else
+                        <td>Utilisateur</td>
+                    @endif
                     <td><a href="{{ route('admin.show-user', $user->id) }}"><button class="btn-ajouter">Mettre à jour</button></a></td>
                 </tr>
                 @empty
@@ -37,4 +59,25 @@
         </table>
     </div>
 </main>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('search_users');
+    const tableRows = document.querySelectorAll('.user-row');
+
+    searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+
+        tableRows.forEach(function(row) {
+            const userName = row.querySelector('.user-name').textContent.toLowerCase();
+            const userId = row.querySelector('.user-id').textContent.toLowerCase();
+
+            if (userName.includes(searchTerm) || userId.includes(searchTerm)) {
+                row.style.display = 'table-row';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+});
+</script>
 @endsection
