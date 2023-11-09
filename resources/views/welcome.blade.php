@@ -103,7 +103,7 @@
             </svg>
         </a>
     </div>
-    <script src="../js/carousel.js"></script>
+    <script src="{{ asset('js/carousel.js') }}"></script>
 </main>
 @endif
 @else

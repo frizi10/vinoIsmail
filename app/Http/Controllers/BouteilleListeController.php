@@ -35,7 +35,12 @@ class BouteilleListeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        BouteilleListe::updateOrCreate(
+            ['liste_id' => $request->location_id, 'bouteille_id' => $request->bouteille_id],
+            ['quantite' => $request->quantite]
+        ); 
+
+        return response()->json(['message' => 'Mise à jour réussie'], 200);
     }
 
     /**
@@ -67,9 +72,22 @@ class BouteilleListeController extends Controller
      * @param  \App\Models\BouteilleListe  $bouteilleListe
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, BouteilleListe $bouteilleListe)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate(
+            ['quantite' => 'required|min: 0|integer'],
+            [
+                'quantite.required' => 'La quantité est obligatoire.', 
+                'quantite.min' => 'La quantité doit être supérieure ou égale à zéro.',
+                'quantite.integer' => 'La quantité doit être entière, sans décimal.'
+            ]
+        ); 
+
+        BouteilleListe::findOrFail($id)->update([
+            'quantite' => $request->quantite
+        ]);
+
+        return response()->json(['message' => 'Mise à jour réussie'], 200);
     }
 
     /**
@@ -78,8 +96,9 @@ class BouteilleListeController extends Controller
      * @param  \App\Models\BouteilleListe  $bouteilleListe
      * @return \Illuminate\Http\Response
      */
-    public function destroy(BouteilleListe $bouteilleListe)
+    public function destroy($liste_id, BouteilleListe $bouteille_liste)
     {
-        //
+        BouteilleListe::select()->where('id', $bouteille_liste->id)->delete(); 
+        return redirect(route('liste.show', $liste_id));
     }
 }
