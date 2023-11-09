@@ -36,6 +36,7 @@ Route::middleware(['auth'])->group(function () {
 
     // *************** Gestion des bouteilles ****************
 
+    
     // Importer data de la SAQ
     Route::get('/scrape', [Web2scraperController::class, 'scrapeData']);
     // Affichage de toutes les bouteilles
@@ -114,8 +115,8 @@ Route::middleware(['auth'])->group(function () {
 
     // Ajout d'une bouteille à une liste
     Route::post('/listes-json', [BouteilleListeController::class, 'store']);
-    // Retrait d'une bouteille d'une liste
-    Route::delete('/listes/{liste_id}/bouteilles-listes-modifier/{bouteille_liste}', [BouteilleListeController::class, 'destroy'])->name('bouteillListe.delete');
+    // Retrait d'une bouteille d'un cellier
+    Route::delete('/listes/{liste_id}/bouteilles-listes-modifier/{bouteille_liste}', [BouteilleListeController::class, 'destroy'])->name('bouteilleListe.delete');
     // Modification de la quantité de bouteilles se trouvant dans une même liste
     Route::put('/bouteilles-listes-modifier/{id}', [BouteilleListeController::class, 'update']);
 

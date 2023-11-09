@@ -24,7 +24,7 @@ class ListeController extends Controller
         $listes->each(function ($liste) {
             $liste->prixTotal = 0; 
             foreach($liste->bouteillesListes as $bouteilleListe) {
-                $liste->prixTotal += $bouteilleListe->bouteille->prix; 
+                $liste->prixTotal += $bouteilleListe->bouteille->prix * $bouteilleListe->quantite; 
             }
         }); 
         
@@ -159,8 +159,16 @@ class ListeController extends Controller
      * @param  \App\Models\Liste  $liste
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Liste $liste)
+    public function destroy($liste_id)
     {
-        //
+        try {
+            $liste = Liste::findOrFail($liste_id); 
+            $liste->bouteillesListes()->delete(); 
+            $liste->delete(); 
+            return redirect(route('liste.index')); 
+        }
+        catch (\Exception $e) {
+            return redirect(route('liste.index'))->with('error', 'Le cellier n\'existe pas'); 
+        }
     }
 }
