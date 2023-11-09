@@ -96,8 +96,9 @@ class BouteilleListeController extends Controller
      * @param  \App\Models\BouteilleListe  $bouteilleListe
      * @return \Illuminate\Http\Response
      */
-    public function destroy(BouteilleListe $bouteilleListe)
+    public function destroy($liste_id, BouteilleListe $bouteille_liste)
     {
-        //
+        BouteilleListe::select()->where('id', $bouteille_liste->id)->delete(); 
+        return redirect(route('liste.show', $liste_id));
     }
 }
