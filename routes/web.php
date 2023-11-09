@@ -59,12 +59,13 @@ Route::middleware(['auth'])->group(function () {
     //Ajout par ismail
     //affichage de toutes les bouteilles de la SAQ
     Route::get('/bouteilles', [BouteilleController::class, 'index'])->name('bouteille.index');
+    //affichage par bouetille
+    Route::get('/bouteilles/{bouteille_id}', [BouteilleController::class, 'show'])->name('bouteille.show');
+
     // Recheche par mot clé dans le titre
-    Route::get('/bouteilles-search', [BouteilleController::class, 'search'])->name('bouteille.search');
+    //Route::get('/bouteilles-search', [BouteilleController::class, 'search'])->name('bouteille.search');
    //tri
-   Route::get('/sorting', [BouteilleController::class, 'sorting'])->name('bouteille.sorting');
-    //filtre
-   Route::get('/filtrer-produits', [BouteilleController::class, 'filtrerProduits'])->name('filtrer_produits');  
+
 
     // *************** Gestion des celliers ****************
 
@@ -158,12 +159,12 @@ Route::post('/register', [CustomAuthController::class, 'store'])->name('register
 
 //Route::get('/bouteilles', [BouteilleController::class, 'index'])->name('bouteille.index');
 // Recheche par mot clé dans le titre
-//Route::get('/bouteilles-search', [BouteilleController::class, 'search'])->name('bouteille.search');  
-//Route::get('/bouteilles/{bouteille_id}', [BouteilleController::class, 'show'])->name('bouteille.show');
+//Route::get('/bouteilles-search', [BouteilleController::class, 'search'])->name('bouteille.search');  /Route::get('/bouteilles/{bouteille_id}', [BouteilleController::class, 'show'])->name('bouteille.show');
 
-//tri
+//tri a effacer
 //Route::get('/sorting', [BouteilleController::class, 'sorting'])->name('bouteille.sorting');
 //filtre
 //Route::get('/filtrer-produits', [BouteilleController::class, 'filtrerProduits'])->name('filtrer_produits');
 
-//Route::get('/scrape', [Web2scraperController::class, 'scrapeData']);
+Route::get('/scrape', [Web2scraperController::class, 'scrapeData']);
+
