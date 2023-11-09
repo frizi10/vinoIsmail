@@ -8,9 +8,15 @@
     <link rel="stylesheet" href="https://use.typekit.net/dox8qou.css">
     <link href="{{ asset('css/pagination.css') }}" rel="stylesheet">
     <title>Vino - @yield('title')</title>
+    
 </head>
 <body>
-    @yield('content')
+    
+      
+            @yield('content')
+       
+            
+    
     <nav class="main-nav">
         <ul class="main-nav-list">
             <li class="main-nav-item">        
@@ -55,5 +61,57 @@
             </li>
         </ul>
     </nav>
+    <script src="{{asset('assets/js/modalAjouter.js')}}" ></script>  
+
+    <script src="{{asset('assets/js/sorting.js')}}"></script> 
+    <script src="{{asset('assets/js/layoutApp.js')}}"></script> 
+    <script src="{{asset('assets/js/index.js')}}"></script> 
+    {{-- <script src="{{asset('assets/js/sorting.js')}}"></script>  --}}
+     {{-- <script src="{{asset('assets/js/search.js')}}"></script>   --}}
+     
+    {{-- <script src="{{asset('assets/js/search.js')}}" ></script>  --}}
+  
+
+    {{-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Écoutez les changements dans le champ de recherche
+            document.getElementById('search').addEventListener('input', function() {
+                var route = document.getElementById('searchForm').getAttribute('action');
+                var formData = new FormData(document.getElementById('searchForm'));
+                var routeWithParams = route + '?' + new URLSearchParams(formData).toString();
+                loadPage(routeWithParams);
+            });
+
+            // Fonction pour charger la page via une requête AJAX
+            function loadPage(route) {
+                fetch(route)
+                    .then(response => response.text())
+                    .then(html => {
+                        document.getElementById('app-container').innerHTML = html;
+                    });
+            }
+
+            // Écoutez les clics sur les liens de bouteilles
+            document.addEventListener('click', function(event) {
+                if (event.target.classList.contains('bottle-link')) {
+                    event.preventDefault();
+                    var route = event.target.getAttribute('href');
+                    loadPage(route);
+                }
+            });
+        });
+    </> --}}
+    {{-- <script src="{{asset('assets/js/search.js')}}" ></script>   --}}
+   
+   
+</body>
+</html>
+
+
+
+
+
+
+
 </body>
 </html>
