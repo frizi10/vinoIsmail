@@ -30,6 +30,28 @@ class CellierController extends Controller
         
         return view('cellier.index', ['celliers' => $celliers]); 
     }
+    
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexJSON()
+    {
+        $celliers = Cellier::withCount('bouteillesCelliers')
+                            ->with('bouteillesCelliers.bouteille')
+                            ->where('user_id', Auth::id())
+                            ->get(); 
+
+        $celliers->each(function ($cellier) {
+            $cellier->prixTotal = 0; 
+            foreach($cellier->bouteillesCelliers as $bouteilleCellier) {
+                $cellier->prixTotal += $bouteilleCellier->bouteille->prix; 
+            }
+        }); 
+        
+        return response()->json($celliers);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -73,9 +95,23 @@ class CellierController extends Controller
      * @param  \App\Models\Cellier  $cellier
      * @return \Illuminate\Http\Response
      */
-    public function show(Cellier $cellier_id)
+    public function show(Cellier $cellier_id, Request $request)
     {
-        return view('cellier.show', ['cellier' => $cellier_id]); 
+        $cellier = $cellier_id;
+
+        $sort = $request->input('sort');
+    
+        if ($sort == 'name-asc') {
+            $cellier->bouteillesCelliers = $cellier->bouteillesCelliers->sortBy('bouteille.nom');
+        } elseif ($sort == 'name-desc') {
+            $cellier->bouteillesCelliers = $cellier->bouteillesCelliers->sortByDesc('bouteille.nom');
+        } elseif ($sort == 'price-asc') {
+            $cellier->bouteillesCelliers = $cellier->bouteillesCelliers->sortBy('bouteille.prix');
+        } elseif ($sort == 'price-desc') {
+            $cellier->bouteillesCelliers = $cellier->bouteillesCelliers->sortByDesc('bouteille.prix');
+        }
+    
+        return view('cellier.show', ['cellier' => $cellier]);
     }
 
     /**

@@ -4,7 +4,7 @@
 
 <body>
         <header>
-            résultats de recherche
+            ajouter une bouteille
         </header>
         <main class="nav-margin">
             <section class="form-ajouter-bouteille"> <!-- encadré noir (formulaires, filtres et tris) --> 
@@ -124,6 +124,9 @@
                 <div class="card-bouteille-content">
                     <div class="card-bouteille-info">
                         <h2><a href="{{ route('bouteille.show',['bouteille_id'=> $bouteille->id]) }}" class="bottle-link">{{ $bouteille->nom }}</a></h2>
+
+                        <h2><a href="#">{{ $bouteille->nom }}</a></h2>
+
                         <span>{{$bouteille->type}} | {{ $bouteille->format }} | {{$bouteille->pays}}</span>
                         <p>{{$bouteille->prix}} $</p>
                     </div>

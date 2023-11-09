@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BouteillePanier extends Model
+class BouteilleListe extends Model
 {
     use HasFactory;
 
-    protected $table = 'bouteilles_paniers';
+    protected $table = 'bouteilles_listes';
 
     protected $fillable = [
         'bouteille_id',
-        'cellier_id',
+        'liste_id',
         'quantite' 
     ]; 
 
@@ -22,8 +22,8 @@ class BouteillePanier extends Model
         return $this->belongsTo(Bouteille::class);
     }
 
-    public function panier() 
+    public function liste() 
     {
-        return $this->belongsTo(Panier::class);
+        return $this->belongsTo(Liste::class);
     }
 }

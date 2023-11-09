@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://use.typekit.net/dox8qou.css">
     <link href="{{ asset('css/pagination.css') }}" rel="stylesheet">
@@ -11,12 +12,48 @@
     
 </head>
 <body>
-    
-      
-            @yield('content')
-       
-            
-    
+    @yield('content')
+    <!-- Si authentifié et administrateur -->
+    @auth
+    @if(Auth::user()->nom == "Admin")
+    <nav class="main-nav">
+        <ul class="nav-admin-list">
+            <li class="main-nav-item">        
+                <a href="{{ route('admin.index') }}">
+                    <figure class="container-icons-navbar active">
+                        <img src="{{ asset('assets/icons/admin_users_icon.svg') }}" alt="Accueil">
+                        <figcaption>utilisateurs</figcaption>
+                    </figure>
+                </a>
+            </li>
+            <li class="main-nav-item">        
+                <a href="{{ route('bouteille.index') }}">
+                    <figure class="container-icons-navbar">
+                        <img src="{{ asset('assets/icons/add_icon.svg') }}" alt="Recherche">
+                        <figcaption class="icons-label">bouteilles</figcaption>
+                    </figure>
+                </a>
+            </li>
+            <li class="main-nav-item">
+                <a href="#">
+                    <figure class="container-icons-navbar">
+                        <img src="{{ asset('assets/icons/admin_stats_icon.svg') }}" alt="Liste d'achats">
+                        <figcaption>statistiques</figcaption>
+                    </figure>
+                </a>
+            </li>
+            <li class="main-nav-item">         
+                <a href="#">
+                    <figure class="container-icons-navbar">
+                        <img src="{{ asset('assets/icons/profile_icon.svg') }}" alt="Profil">
+                        <figcaption>profil</figcaption>
+                    </figure>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- Si authentifié mais pas administrateur-->
+    @else
     <nav class="main-nav">
         <ul class="main-nav-list">
             <li class="main-nav-item">        
@@ -52,7 +89,7 @@
                 </a>
             </li>
             <li class="main-nav-item">         
-                <a href="#">
+                <a href="{{ route('profil.show', Auth::user()->id) }}">
                     <figure class="container-icons-navbar">
                         <img src="{{ asset('assets/icons/profile_icon.svg') }}" alt="Profil">
                         <figcaption>profil</figcaption>
@@ -61,49 +98,13 @@
             </li>
         </ul>
     </nav>
-    <script src="{{asset('assets/js/modalAjouter.js')}}" ></script>  
-
-    <script src="{{asset('assets/js/sorting.js')}}"></script> 
-    <script src="{{asset('assets/js/layoutApp.js')}}"></script> 
-    <script src="{{asset('assets/js/index.js')}}"></script> 
-    {{-- <script src="{{asset('assets/js/sorting.js')}}"></script>  --}}
-     {{-- <script src="{{asset('assets/js/search.js')}}"></script>   --}}
-     
-    {{-- <script src="{{asset('assets/js/search.js')}}" ></script>  --}}
-  
-
-    {{-- <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Écoutez les changements dans le champ de recherche
-            document.getElementById('search').addEventListener('input', function() {
-                var route = document.getElementById('searchForm').getAttribute('action');
-                var formData = new FormData(document.getElementById('searchForm'));
-                var routeWithParams = route + '?' + new URLSearchParams(formData).toString();
-                loadPage(routeWithParams);
-            });
-
-            // Fonction pour charger la page via une requête AJAX
-            function loadPage(route) {
-                fetch(route)
-                    .then(response => response.text())
-                    .then(html => {
-                        document.getElementById('app-container').innerHTML = html;
-                    });
-            }
-
-            // Écoutez les clics sur les liens de bouteilles
-            document.addEventListener('click', function(event) {
-                if (event.target.classList.contains('bottle-link')) {
-                    event.preventDefault();
-                    var route = event.target.getAttribute('href');
-                    loadPage(route);
-                }
-            });
-        });
-    </> --}}
-    {{-- <script src="{{asset('assets/js/search.js')}}" ></script>   --}}
-   
-   
+    @endif
+    <!-- Si pas authentifié -->
+    @else
+    <footer>
+        © <span>vino</span> 2023. (version 1.1) - Tous droits réservés.
+    </footer>
+    @endauth
 </body>
 </html>
 

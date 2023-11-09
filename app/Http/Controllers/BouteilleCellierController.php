@@ -14,7 +14,7 @@ class BouteilleCellierController extends Controller
      */
     public function index()
     {
-        
+        //
     }
 
     /**
@@ -34,8 +34,13 @@ class BouteilleCellierController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        BouteilleCellier::updateOrCreate(
+            ['cellier_id' => $request->location_id, 'bouteille_id' => $request->bouteille_id],
+            ['quantite' => $request->quantite]
+        ); 
+
+        return response()->json(['message' => 'Mise à jour réussie'], 200);
     }
 
     /**
@@ -67,9 +72,22 @@ class BouteilleCellierController extends Controller
      * @param  \App\Models\BouteilleCellier  $bouteilleCellier
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, BouteilleCellier $bouteilleCellier)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate(
+            ['quantite' => 'required|min: 0|integer'],
+            [
+                'quantite.required' => 'La quantité est obligatoire.', 
+                'quantite.min' => 'La quantité doit être supérieure ou égale à zéro.',
+                'quantite.integer' => 'La quantité doit être entière, sans décimal.'
+            ]
+        ); 
+
+        BouteilleCellier::findOrFail($id)->update([
+            'quantite' => $request->quantite
+        ]);
+
+        return response()->json(['message' => 'Mise à jour réussie'], 200);
     }
 
     /**
@@ -78,8 +96,9 @@ class BouteilleCellierController extends Controller
      * @param  \App\Models\BouteilleCellier  $bouteilleCellier
      * @return \Illuminate\Http\Response
      */
-    public function destroy(BouteilleCellier $bouteilleCellier)
+    public function destroy($cellier_id, BouteilleCellier $bouteille_cellier)
     {
-        //
+        BouteilleCellier::select()->where('id', $bouteille_cellier->id)->delete(); 
+        return redirect(route('cellier.show', $cellier_id));
     }
 }

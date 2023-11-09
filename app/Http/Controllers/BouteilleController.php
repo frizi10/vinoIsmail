@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bouteille;
+use App\Models\Cellier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BouteilleController extends Controller
 {
     /**
+
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -80,6 +83,7 @@ class BouteilleController extends Controller
     public function index(Request $request)
     {
         $bouteillesQuery = Bouteille::query();
+        $celliers = Cellier::where('user_id', Auth::id())->get();
 
         // Récupération des paramètres de recherche
         $nom = $request->input('search');
@@ -162,7 +166,7 @@ class BouteilleController extends Controller
         $millesimes = Bouteille::distinct()->pluck('millesime');
         $cepages = Bouteille::distinct()->pluck('cepage');
 
-        return view('bouteille.index', compact('bouteilles', 'couleurs', 'formats', 'lesPays', 'regions', 'millesimes', 'cepages'));
+        return view('bouteille.index', compact('bouteilles', 'couleurs', 'formats', 'lesPays', 'regions', 'millesimes', 'cepages', 'celliers'));
     }
 
 }

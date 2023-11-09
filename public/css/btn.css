@@ -142,14 +142,19 @@ header>.btn-arrow-top:hover svg {
     color: black;
 }
 
-/* icone poubelle */
-.btn-delete {
+/* icone poubelle et button DEPLACER */
+.btn-delete, .btn-deplacer {
     background: none;
     border: none;
     cursor: pointer;
     position: absolute;
     bottom: 8px;
     right: 20px;
+}
+.btn-deplacer {
+    font-size: 14px;
+    text-transform: uppercase;
+    text-decoration: underline;
 }
 
 .btn-ajouter {
@@ -177,9 +182,12 @@ header>.btn-arrow-top:hover svg {
     border-radius: 5px;
     padding: .5em 0;
     font-weight: bold;
-    background-color: black;
+    /* background-color: black; */
     color: white;
     font-size: 16px;
+}
+.btn-modal-container button:not(.btn-red, .btn-green) {
+    background-color: black;
 }
 .btn-modal-action {
     flex-grow: 2;
@@ -196,4 +204,32 @@ header>.btn-arrow-top:hover svg {
     padding: 5px 10px;
     border-radius: 10px;
     margin-top: .5rem;
+}
+
+.btn-mt {
+    margin-top: 1rem;
+}
+
+.btn-grey {
+    background-color: rgb(63, 63, 63);
+}
+.btn-grey:hover {
+    border-color: grey;
+    background-color: grey;
+}
+
+.btn-red {
+    background-color: rgba(213, 0, 0, 1);
+}
+.btn-red:hover {
+    border-color: rgb(197, 23, 23);
+    background-color: rgb(197, 23, 23);
+}
+
+.btn-green {
+    background-color: rgba(45, 142, 0, 1);
+}
+.btn-green:hover {
+    border-color: rgb(34, 108, 0);
+    background-color: rgb(34, 108, 0);
 }
