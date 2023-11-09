@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
-use Spatie\Permission\Models\Role;
+// use Spatie\Permission\Models\Role;
+use App\Http\Controllers\CellierController;
 
 class CustomAuthController extends Controller
 {
@@ -18,7 +19,12 @@ class CustomAuthController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        $totals = CellierController::calculerTotalCellier();
+
+        $totalPrix = $totals['totalPrix'];
+        $totalQuantite = $totals['totalQuantite'];
+    
+        return view('welcome', compact('totalPrix', 'totalQuantite'));
     }
 
     /**
