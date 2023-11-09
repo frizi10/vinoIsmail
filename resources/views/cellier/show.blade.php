@@ -66,14 +66,17 @@
                         {{ $bouteillesCelliers->bouteille->type }} | {{ $bouteillesCelliers->bouteille->format }} | {{ $bouteillesCelliers->bouteille->pays }}
                     </span>
                     <p>
-                        {{ $bouteillesCelliers->bouteille->prix }} $
+                        {{ number_format($bouteillesCelliers->bouteille->prix * $bouteillesCelliers->quantite, 2) }}$
                     </p>
                 </div>
                 <div class="card-bouteille-qt">
                     <button class="btn-decrement">-</button>
                     <input type="text" value="{{ $bouteillesCelliers->quantite }}" min="0" readonly>
                     <button class="btn-increment">+</button>
-                    <form action="" class="form-delete"></form>
+                    <form action="{{ route('bouteilleCellier.delete', ['cellier_id' => $cellier->id, 'bouteille_cellier' => $bouteillesCelliers->id]) }}" class="form-delete" method="post">
+                        @csrf
+                        @method('delete')
+                    </form>
                 </div>
             </div>
         </section>
