@@ -9,35 +9,31 @@
         <main class="nav-margin">
             <section class="form-ajouter-bouteille"> <!-- encadré noir (formulaires, filtres et tris) --> 
                 <div class="form-container">
-                    <form action="{{ route('bouteille.search') }}" method="" id="">
-                        <!-- @csrf -->
+                    <form action="{{ route('bouteille.index') }}" method="GET" id="searchForm">
+                          @csrf  
                         <div class="form-input-container">
                             <label for="search">RECHERCHE</label>
-                            <input type="text" id="search" name="search">
+                            <input type="text" id="search" name="search" value="{{Request::input('search')}}">
                         </div>
-                    </form>
-                    
-                </div>
-                <div class="link link-right">
-                    <a href="#">BOUTEILLE PERSONNALISÉE</a>
-                </div>
-                <div class="form-container">
-                    <form action="" method="" id="">
-                        <hr>
+                         <hr>
                         <details>
                             <summary>Filtrer</summary>
                             <div class="form-input-container">
-                                <label for="color">Couleur</label>
-                                <select name="color" id="color">
+                                <label for="couleur">Couleur</label>
+                                <select name="couleur" id="couleur" class="filter-select">
                                     <option value="">Choisir les options</option>
-                                    <option value="white">Blanc</option>
+                                    @foreach($couleurs as $couleur)
+                                        <option value="{{ $couleur }}" @if(Request::input('couleur') == $couleur) selected @endif>{{ $couleur }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-input-container">
                                 <label for="format">Format</label>
                                 <select name="format" id="format">
                                     <option value="">Choisir les options</option>
-                                    <option value="750">750ml</option>
+                                    @foreach($formats as $format)
+                                        <option value="{{ $format }}" @if(Request::input('format') == $format) selected @endif>{{ $format }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-input-container">
@@ -46,70 +42,81 @@
                                 <div>
                                     <div>
                                         <label for="prix_min">Minimum</label>
-                                        <input id="prix_min" type="number">
+                                        <input name="prix_min" id="prix_min" type="number"
+                                               @if(Request::has('prix_min')) value="{{ Request::input('prix_min') }}" @endif>
+                                        
                                     </div>
                                     <div>
-                                        <label for="prix_max">Maximum</label>
-                                        <input id="prix_max" type="number">
+                                        <label for="prix_max">Minimum</label>
+                                        <input name="prix_max" id="prix_max" type="number"
+                                            @if(Request::has('prix_max')) value="{{ Request::input('prix_max') }}" @endif>
+
                                     </div>
                                 </div>
                             </div>
                             <div class="form-input-container">
                                 <label for="country">Pays</label>
-                                <select name="country" id="country">
+                                <select name="pays" id="pays">
                                     <option value="">Choisir les options</option>
-                                    <option value="canada">Canada</option>
-                                    <option value="usa">États-Unis</option>
-                                    <option value="espagne">Espagne</option>
-                                    <option value="france">France</option>
-                                    <option value="italie">Italie</option>
+                                    @foreach($lesPays as $pays)
+                                        <option value="{{ $pays }}" @if(Request::input('pays') == $pays) selected @endif>{{ $pays }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-input-container">
                                 <label for="region">Région</label>
                                 <select name="region" id="region">
                                     <option value="">Choisir les options</option>
-                                    <option value="quebec">Québec</option>
+                                    @foreach($regions as $region)
+                                        <option value="{{ $region }}" @if(Request::input('region') == $region) selected @endif>{{ $region }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-input-container">
-                                <label for="year">Millésime</label>
-                                <select name="year" id="year">
+                                <label for="millesime">Millésime</label>
+                                <select name="millesime" id="millesime">
                                     <option value="">Choisir les options</option>
-                                    <option value="2001">2001</option>
+                                    @foreach($millesimes as $millesimeOption)
+                                        <option value="{{ $millesimeOption }}" @if(Request::input('millesime') == $millesimeOption) selected @endif>{{ $millesimeOption }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-input-container">
-                                <label for="grape">Cépage</label>
-                                <select name="grape" id="grape">
+                                <label for="cepage">Cépage</label>
+                                <label for="cepage">Cépage</label>
+                                <select name="cepage" id="cepage">
                                     <option value="">Choisir les options</option>
-                                    <option value="cabernet-sauv">Cabernet-Sauvignon</option>
+                                    @foreach($cepages as $cepageOption)
+                                        <option value="{{ $cepageOption }}" @if(Request::input('cepage') == $cepageOption) selected @endif>{{ $cepageOption }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </details>                        
                         <div class="tag-container"></div>
-                    </form>
-                </div>
-                <div class="form-container">
                     <hr>
-                    <form action="{{ route('bouteille.sorting') }}" method="" id="sortingForm">
-                        <!-- @csrf -->
-                        <div class="form-input-container">
-                            <label for="sort">TRIER</label>
-                            <select name="sort" id="sort">
-                                <option value="defaut" {{ request('sorter') == 'defaut' ? 'selected' : '' }}></option>
-
-                                <option value="name-asc" {{ request('sort') == 'name-asc' ? 'selected' : '' }}>Nom du produit (A-Z)</option>
-                                <option value="name-desc" {{ request('sort') == 'name-desc' ? 'selected' : '' }}>Nom du produit (Z-A)</option>
-                                <option value="price-asc" {{ request('sort') == 'price-asc' ? 'selected' : '' }}>Prix ($-$$$)</option>
-                                <option value="price-desc" {{ request('sortt') == 'price-desc' ? 'selected' : '' }}>Prix ($$$-$)</option>
-                            </select>
-                        </div>
-                    </form>
+                    <div class="form-input-container">
+                        <label for="sort">TRIER</label>
+                        <select name="sort" id="sort">
+                            <option >Choisir l'option de tri</option>
+                            <option value="name-asc" {{ request('sort') == 'name-asc' ? 'selected' : '' }}>Nom du produit (A-Z)</option>
+                            <option value="name-desc" {{ request('sort') == 'name-desc' ? 'selected' : '' }}>Nom du produit (Z-A)</option>
+                            <option value="price-asc" {{ request('sort') == 'price-asc' ? 'selected' : '' }}>Prix ($-$$$)</option>
+                            <option value="price-desc" {{ request('sort') == 'price-desc' ? 'selected' : '' }}>Prix ($$$-$)</option>
+                        </select>
                 </div>
+                        
+                        <button type="submit">Valider</button>
+                    </form>
+                    
+                    
+                </div>
+                <div class="link link-right">
+                    <a href="#">BOUTEILLE PERSONNALISÉE</a>
+                </div>
+               
             </section>
             <div class="card-count">
-                <p>{{$bouteilles->total()}} bouteilles :</p>
+                <p>{{$bouteilles->total()}} bouteilles :</p> 
             </div>
             @foreach ($bouteilles as $bouteille)
             <section class="card-bouteille">
@@ -119,7 +126,11 @@
                 <div class="card-bouteille-content">
                     <div class="card-bouteille-info">
                        
-                            <h2><a href="#">{{ $bouteille->nom }}</a></h2>
+
+                            <h2><a href="{{ route('bouteille.show',['bouteille_id'=> $bouteille->id]) }}" class="bottle-link">{{ $bouteille->nom }}</a></h2>
+
+                           
+
                       
                         <span>{{$bouteille->type}} | {{ $bouteille->format }} | {{$bouteille->pays}}</span>
                         <p>{{$bouteille->prix}} $</p>
@@ -131,10 +142,11 @@
             </section>
           
             @endforeach  
-            {{ $bouteilles->links() }} 
+             {{ $bouteilles->links() }}
         </section>
     </main>
-    @endsection
+    
+    
 
             <!-- <div class="modal-container"> -->
                 <dialog id="modal-ajouter" class="modal">
@@ -151,13 +163,13 @@
                                 </div>
                                 <div class="form-input-container">
                                     <label for="select-location" id="label-location">Choisir le cellier</label>
-                                    <select name="select-location" id="select-location">
+                                    {{-- <select name="select-location" id="select-location">
                                         @forelse ($celliers as $cellier)
                                             <option value="{{ $cellier->id }}">{{ $cellier->nom }}</option>
                                         @empty 
                                             <option value="">Vous n'avez aucun cellier</option>
                                         @endforelse
-                                    </select>
+                                    </select> --}}
                                 </div>
                                 <div class="card-bouteille-qt">
                                     <button class="btn-decrement">-</button>
@@ -168,25 +180,19 @@
                                     <button class="btn-modal-action">ajouter</button>
                                     <button class="btn-modal-cancel">annuler</button>
                                 </div>
-                        </form>
+                        </form> 
                 </dialog>
             <!-- </div> -->
           
-            <script src="../../js/bottleCounterModal.js"></script>
+            {{-- <script src="../../js/bottleCounterModal.js"></script>
             <script src="../../js/modalAjouter.js"></script>
             <script src="../../js/filterTag.js"></script>
-            {{-- <script src="../../js/sorting.js"></script> --}}
-            {{-- <script src="{{asset('assets/js/sorting.js')}}"></script>   --}}
+             <script src="../../js/sorting.js"></script>   --}}
+              {{-- - <script src="{{asset('assets/js/search.js')}}" ></script>    --}}
 
            
         </main>
      
-         {{-- tri a deplacer dans le dossier js --}}
-        {{-- <script>
-            document.getElementById('sort').addEventListener('change', function() {
-                document.getElementById('sortingForm').submit();
-            });
-        </script>   --}}
 
        
         
@@ -236,3 +242,9 @@
     </nav>
 </body>
 </html> --}}
+@section('scripts')
+    <script src="{{ asset('asseets/js/index.js') }}"></script>
+@endsection
+    @endsection
+</body>
+</html>

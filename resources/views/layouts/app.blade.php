@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://use.typekit.net/dox8qou.css">
     <link href="{{ asset('css/pagination.css') }}" rel="stylesheet">
     <title>Vino - @yield('title')</title>
+    
 </head>
 <body>
     @yield('content')
@@ -104,5 +105,14 @@
         © <span>vino</span> 2023. (version 1.1) - Tous droits réservés.
     </footer>
     @endauth
+</body>
+</html>
+
+
+
+
+
+
+
 </body>
 </html>

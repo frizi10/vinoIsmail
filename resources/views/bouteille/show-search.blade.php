@@ -30,14 +30,18 @@
                                 <label for="color">Couleur</label>
                                 <select name="color" id="color">
                                     <option value="">Choisir les options</option>
-                                    <option value="white">Blanc</option>
+                                    <option value="blanc">Blanc</option>
+                                    <option value="Rouge">Rouge</option>
+                                    <option value="Rosé">Rosé</option>
                                 </select>
                             </div>
                             <div class="form-input-container">
                                 <label for="format">Format</label>
                                 <select name="format" id="format">
                                     <option value="">Choisir les options</option>
+                                    <option value="250">250ml</option>
                                     <option value="750">750ml</option>
+                                    <option value="1L">1L</option>
                                 </select>
                             </div>
                             <div class="form-input-container">
@@ -88,6 +92,7 @@
                             </div>
                         </details>                        
                         <div class="tag-container"></div>
+                        <button type="submit">Filtrer</button>
                     </form>
                 </div>
                 <div class="form-container">
@@ -118,7 +123,10 @@
                 </picture>
                 <div class="card-bouteille-content">
                     <div class="card-bouteille-info">
+                        <h2><a href="{{ route('bouteille.show',['bouteille_id'=> $bouteille->id]) }}" class="bottle-link">{{ $bouteille->nom }}</a></h2>
+
                         <h2><a href="#">{{ $bouteille->nom }}</a></h2>
+
                         <span>{{$bouteille->type}} | {{ $bouteille->format }} | {{$bouteille->pays}}</span>
                         <p>{{$bouteille->prix}} $</p>
                     </div>
@@ -169,4 +177,3 @@
             <script src="../../js/modalAjouter.js"></script>
             <script src="../../js/filterTag.js"></script>
         </main>
-        
