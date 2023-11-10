@@ -10,14 +10,239 @@ use Illuminate\Support\Facades\Auth;
 class BouteilleController extends Controller
 {
     /**
+     * Affiche la liste des bouteilles en page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $bouteilles = Bouteille::paginate(7);
+        $celliers = Cellier::where('user_id', Auth::id())->get();
+        
+        // Récupérer les filtres distincts sans valeurs nulles et en ordre alphabétique
+        $couleurs = Bouteille::whereNotNull('couleur')->distinct()->orderBy('couleur', 'asc')->pluck('couleur');
+        $pays = Bouteille::whereNotNull('pays')->distinct()->orderBy('pays', 'asc')->pluck('pays');
+        $formats = Bouteille::whereNotNull('format')->distinct()->orderBy('format', 'asc')->pluck('format');
+        $designations = Bouteille::whereNotNull('designation')->distinct()->orderBy('designation', 'asc')->pluck('designation');
+        $producteurs = Bouteille::whereNotNull('producteur')->distinct()->orderBy('producteur', 'asc')->pluck('producteur');
+        $agentPromotions = Bouteille::whereNotNull('agentPromotion')->distinct()->orderBy('agentPromotion', 'asc')->pluck('agentPromotion');
+        $types = Bouteille::whereNotNull('type')->distinct()->orderBy('type', 'asc')->pluck('type');
+        $millesimes = Bouteille::whereNotNull('millesime')->distinct()->orderBy('millesime', 'asc')->pluck('millesime');
+        $cepages = Bouteille::whereNotNull('cepage')->distinct()->orderBy('cepage', 'asc')->pluck('cepage');
+        $regions = Bouteille::whereNotNull('region')->distinct()->orderBy('region', 'asc')->pluck('region');
+        
+        // Récupérer le prix le plus élevé
+        $prixMax = Bouteille::max('prix');
 
+        // Récupérer le prix le plus bas
+        $prixMin = Bouteille::min('prix');
+
+    
+        return view('bouteille.index', [
+            'bouteilles'=> $bouteilles, 
+            'celliers' => $celliers,
+            'couleurs' => $couleurs,
+            'pays' => $pays,
+            'formats' => $formats,
+            'designations' => $designations,
+            'producteurs' => $producteurs,
+            'agentPromotions' => $agentPromotions,
+            'types' => $types,
+            'millesimes' => $millesimes,
+            'cepages' => $cepages,
+            'regions' => $regions,
+            'prixMax' => $prixMax,
+            'prixMin' => $prixMin,
+        ]);
+    }    
+
+    public function search(Request $request)
+    {
+        $bouteilles = Bouteille::paginate(7);
+        $allHtml = view('partials.bouteilles', compact('bouteilles'))->render();
+
+        $bouteillesQuery = Bouteille::query();
+
+        $query = $request->input('search');
+        $sortOption = $request->input('sort');
+
+        // Recherche
+        if (!empty($query)) {
+            $bouteillesQuery->where('nom', 'LIKE', '%' . $query . '%');
+        }
+
+        // // Appliquer les filtres pour chaque sélecteur qui peut avoir plusieurs valeurs
+        // $selectors = ['couleur', 'pays', 'format', 'designation', 'producteur', 'agentPromotion', 'type', 'millesime', 'cepage', 'region'];
+        // foreach ($selectors as $selector) {
+        //     $values = $request->input($selector); // Cela peut être un tableau ou une valeur unique
+        //     if (!empty($values)) {
+        //         if (is_array($values)) {
+        //             $bouteillesQuery->whereIn($selector, $values);
+        //         } else {
+        //             $bouteillesQuery->where($selector, $values);
+        //         }
+        //     }
+        // }
+
+        // // Appliquer les filtres pour chaque sélecteur qui peut avoir plusieurs valeurs
+        // $selectors = ['couleur', 'pays', 'format', 'designation', 'producteur', 'agentPromotion', 'type', 'millesime', 'cepage', 'region'];
+        // foreach ($selectors as $selector) {
+        //     $values = $request->input($selector); // Cela peut être un tableau ou une valeur unique
+        //     if (!empty($values)) {
+        //         // Ajoute une condition de groupe pour chaque sélecteur
+        //         $bouteillesQuery->where(function ($query) use ($selector, $values) {
+        //             if (is_array($values)) {
+        //                 // Applique une condition OR pour chaque valeur dans le tableau
+        //                 foreach ($values as $value) {
+        //                     $query->orWhere($selector, $value);
+        //                 }
+        //             } else {
+        //                 // Si ce n'est pas un tableau, applique une condition simple
+        //                 $query->orWhere($selector, $values);
+        //             }
+        //         });
+        //     }
+        // }
+
+        // $selectors = ['couleur', 'pays', 'format', 'designation', 'producteur', 'agentPromotion', 'type', 'millesime', 'cepage', 'region'];
+        // foreach ($selectors as $selector) {
+        //     $values = $request->input($selector);
+        //     if (!empty($values)) {
+        //         // La fonction whereHas peut être utilisée si vous filtrez sur des relations
+        //         // Sinon, utilisez where et whereIn comme montré ci-dessous
+        //         $bouteillesQuery->where(function ($query) use ($selector, $values) {
+        //             if (is_array($values)) {
+        //                 // La méthode whereIn crée une condition "OU" pour les valeurs multiples
+        //                 $query->whereIn($selector, $values);
+        //             } else {
+        //                 $query->where($selector, '=', $values);
+        //             }
+        //         });
+        //     }
+        // }
+
+        // $selectors = ['couleur', 'pays', 'format', 'designation', 'producteur', 'agentPromotion', 'type', 'millesime', 'cepage', 'region'];
+        // foreach ($selectors as $selector) {
+        //     $values = $request->input($selector);
+        //     if (!empty($values)) {
+        //         // Commencez une nouvelle sous-requête pour ce sélecteur
+        //         $bouteillesQuery->where(function ($query) use ($selector, $values) {
+        //             // Initialisez le premier orWhere avec la première valeur si c'est un tableau
+        //             if (is_array($values) && count($values) > 0) {
+        //                 // Commencez par le premier élément du tableau pour éviter le problème de la première condition "OR"
+        //                 $query->where($selector, '=', array_shift($values));
+        //                 // Puis ajoutez les autres valeurs avec orWhere
+        //                 foreach ($values as $value) {
+        //                     $query->orWhere($selector, '=', $value);
+        //                 }
+        //             } else {
+        //                 // S'il n'y a qu'une seule valeur, ajoutez-la avec where
+        //                 $query->where($selector, '=', $values);
+        //             }
+        //         });
+        //     }
+        // }
+        $selectors = ['couleur', 'pays', 'format', 'designation', 'producteur', 'agentPromotion', 'type', 'millesime', 'cepage', 'region'];
+
+        $couleurs = $request->input('couleur');
+        if (!empty($couleurs)) {
+            $bouteillesQuery->where(function ($query) use ($couleurs) {
+                if (is_array($couleurs)) {
+                    foreach ($couleurs as $index => $couleur) {
+                        if ($index == 0) {
+                            $query->where('couleur', $couleur);
+                        } else {
+                            $query->orWhere('couleur', $couleur);
+                        }
+                    }
+                } else {
+                    $query->where('couleur', $couleurs);
+                }
+            });
+        }
+
+
+        
+
+        // Trier
+        if (!empty($sortOption)) {
+            switch ($sortOption) {
+                case 'price-asc':
+                    $bouteillesQuery->orderBy('prix', 'asc');
+                    break;
+                case 'price-desc':
+                    $bouteillesQuery->orderBy('prix', 'desc');
+                    break;
+                case 'name-asc':
+                    $bouteillesQuery->orderBy('nom', 'asc');
+                    break;
+                case 'name-desc':
+                    $bouteillesQuery->orderBy('nom', 'desc');
+                    break;
+            }
+        }
+        
+        // // Paginer
+        // $results = $bouteillesQuery->paginate(7);
+        // $resultsHtml = view('partials.bouteilles', compact('results'))->render();
+        // return response()->json(['resultsHtml' => $resultsHtml]);
+
+        $page = $request->input('page');
+        $results = $bouteillesQuery->paginate(7)->appends([
+            'search' => $query,
+            'sort' => $sortOption,
+            'page' => $page,
+        ]);
+    
+        $resultsHtml = view('partials.bouteilles', compact('results'))->render();
+        return response()->json(['resultsHtml' => $resultsHtml]);
+
+        // if (!empty($query)) {
+        //     $results = Bouteille::where('nom', 'LIKE', '%' . $query . '%')->paginate(10);
+        //     $resultsHtml = view('partials.bouteilles', compact('results'))->render();
+        //     return response()->json(['resultsHtml' => $resultsHtml]);
+        // }
+        // else if ($query === "") {
+        //     return response()->json(['resultsHtml' => $allHtml]);
+        // }
+
+        // return response()->json(['resultsHtml' => 'Aucun résultat trouvé']);
+    }
+
+
+
+    public function sorting (Request $request) {
+
+        $sort = $request->input('sort');
+        switch ($sort) {
+            case 'price-asc':
+                $bouteilles = Bouteille::orderBy('prix', 'asc')->paginate(3);
+                break;
+            case 'price-desc':
+                $bouteilles = Bouteille::orderBy('prix', 'desc')->paginate(3);
+                break;
+            case 'name-asc':
+                $bouteilles = Bouteille::orderBy('nom', 'asc')->paginate(3);
+                break;
+            case 'name-desc':
+                $bouteilles = Bouteille::orderBy('nom', 'desc')->paginate(3);
+                break;
+            default:
+                $bouteilles = Bouteille::all();
+                break;
+        }
+        return view('bouteille.show-sorting', compact('bouteilles'));
+        
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        return view('bouteille.create');
     }
 
     /**
@@ -40,7 +265,7 @@ class BouteilleController extends Controller
     public function show($id)
     {
         $bouteille = Bouteille::findOrFail($id);
-        return view('bouteille.show', ['bouteille' => $bouteille]);
+        return view('bouteille.show', ['bouteille'=> $bouteille]);
     }
 
     /**
@@ -76,97 +301,4 @@ class BouteilleController extends Controller
     {
         //
     }
-
-
-
-
-    public function index(Request $request)
-    {
-        $bouteillesQuery = Bouteille::query();
-        $celliers = Cellier::where('user_id', Auth::id())->get();
-
-        // Récupération des paramètres de recherche
-        $nom = $request->input('search');
-        $prix_min = $request->input('prix_min');
-        $prix_max = $request->input('prix_max');
-        $couleur = $request->input('couleur');
-        $format = $request->input('format');
-        $pays = $request->input('pays');
-        $region = $request->input('region');
-        $millesime = $request->input('millesime');
-        $cepage = $request->input('cepage');
-
-        // Application des filtres si les paramètres sont présents
-        if (!empty($nom)) {
-            $bouteillesQuery->where('nom', 'like', "%{$nom}%");
-        }
-
-        if (!empty($prix_min)) {
-            $bouteillesQuery->where('prix', '>=', $prix_min);
-        }
-
-        if (!empty($prix_max)) {
-            $bouteillesQuery->where('prix', '<=', $prix_max);
-        }
-
-        if (!empty($couleur)) {
-            $bouteillesQuery->where('couleur', $couleur);
-        }
-
-        if (!empty($format)) {
-            $bouteillesQuery->where('format', $format);
-        }
-
-        if (!empty($pays)) {
-            $bouteillesQuery->where('pays', $pays);
-        }
-
-        if (!empty($region)) {
-            $bouteillesQuery->where('region', $region);
-        }
-
-        if (!empty($millesime)) {
-            $bouteillesQuery->where('millesime', $millesime);
-        }
-
-        if (!empty($cepage)) {
-            $bouteillesQuery->where('cepage', $cepage);
-        }
-
-        // Ajout de la logique de tri
-        $sort = $request->input('sort');
-        if (!empty($sort)) {
-            switch ($sort) {
-                case 'name-asc':
-                    $bouteillesQuery->orderBy('nom', 'asc');
-                    break;
-                case 'name-desc':
-                    $bouteillesQuery->orderBy('nom', 'desc');
-                    break;
-                case 'price-asc':
-                    $bouteillesQuery->orderBy('prix', 'asc');
-                    break;
-                case 'price-desc':
-                    $bouteillesQuery->orderBy('prix', 'desc');
-                    break;
-                    // Ajoutez d'autres cas de tri au besoin
-            }
-        } else {
-            // Si aucun tri n'est spécifié, tri par défaut
-            $bouteillesQuery->orderBy('created_at', 'desc');
-        }
-
-        $bouteilles = $bouteillesQuery->paginate(10);
-
-        // Récupération de champs de la base de données
-        $couleurs = Bouteille::distinct()->pluck('couleur');
-        $formats = Bouteille::distinct()->pluck('format');
-        $lesPays = Bouteille::distinct()->pluck('pays');
-        $regions = Bouteille::distinct()->pluck('region');
-        $millesimes = Bouteille::distinct()->pluck('millesime');
-        $cepages = Bouteille::distinct()->pluck('cepage');
-
-        return view('bouteille.index', compact('bouteilles', 'couleurs', 'formats', 'lesPays', 'regions', 'millesimes', 'cepages', 'celliers'));
-    }
-
 }

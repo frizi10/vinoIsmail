@@ -175,60 +175,60 @@
 
 // ============================
 
-document.addEventListener('click', function(event) {
-    if (event.target.matches('#pagination a')) {
-        event.preventDefault(); // Empêcher le lien de charger la page
+// document.addEventListener('click', function(event) {
+//     if (event.target.matches('#pagination a')) {
+//         event.preventDefault(); // Empêcher le lien de charger la page
 
-        // Récupérez le numéro de la page à partir de l'URL du lien cliqué
-        var pageUrl = new URL(event.target.href);
-        var page = pageUrl.searchParams.get('page') || 1; // Si le paramètre 'page' n'existe pas, 1 sera par défaut.
+//         // Récupérez le numéro de la page à partir de l'URL du lien cliqué
+//         var pageUrl = new URL(event.target.href);
+//         var page = pageUrl.searchParams.get('page') || 1; // Si le paramètre 'page' n'existe pas, 1 sera par défaut.
 
-        var searchQuery = document.getElementById('search-input').value;
-        var sortOption = document.getElementById('sort').value;
+//         var searchQuery = document.getElementById('search-input').value;
+//         var sortOption = document.getElementById('sort').value;
 
-        loadProducts(searchQuery, sortOption, page);
-    }
-});
+//         loadProducts(searchQuery, sortOption, page);
+//     }
+// });
 
-function loadProducts(searchQuery, sortOption, page = 1) {
-    var query = searchQuery || '';
-    var sort = sortOption || '';
-    var url = `/search?search=${encodeURIComponent(query)}&sort=${encodeURIComponent(sort)}&page=${encodeURIComponent(page)}`;
+// function loadProducts(searchQuery, sortOption, page = 1) {
+//     var query = searchQuery || '';
+//     var sort = sortOption || '';
+//     var url = `/search?search=${encodeURIComponent(query)}&sort=${encodeURIComponent(sort)}&page=${encodeURIComponent(page)}`;
 
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('search-results').innerHTML = data.resultsHtml;
-            updateUrl(query, sort, page);
-        });
-}
+//     fetch(url)
+//         .then(response => response.json())
+//         .then(data => {
+//             document.getElementById('search-results').innerHTML = data.resultsHtml;
+//             updateUrl(query, sort, page);
+//         });
+// }
 
-document.getElementById('search-input').addEventListener('input', function(event) {
-    loadProducts(event.target.value, document.getElementById('sort').value);
-});
+// document.getElementById('search-input').addEventListener('input', function(event) {
+//     loadProducts(event.target.value, document.getElementById('sort').value);
+// });
 
-document.getElementById('sort').addEventListener('change', function(event) {
-    loadProducts(document.getElementById('search-input').value, event.target.value);
-});
+// document.getElementById('sort').addEventListener('change', function(event) {
+//     loadProducts(document.getElementById('search-input').value, event.target.value);
+// });
 
-// Pour que les paramètres vides ("") ne s'affiche pas dans l'url
-function updateUrl(searchQuery, sortOption, page) {
-    let params = new URLSearchParams();
+// // Pour que les paramètres vides ("") ne s'affiche pas dans l'url
+// function updateUrl(searchQuery, sortOption, page) {
+//     let params = new URLSearchParams();
 
-    // Ajouter le paramètre de recherche à l'URL seulement s'il n'est pas vide
-    if (searchQuery) {
-        params.append('search', searchQuery);
-    }
-    // Ajouter le paramètre de tri à l'URL seulement s'il n'est pas vide
-    if (sortOption) {
-        params.append('sort', sortOption);
-    }
-    // Toujours ajouter le paramètre de page car il a une valeur par défaut (1)
-    params.append('page', page);
+//     // Ajouter le paramètre de recherche à l'URL seulement s'il n'est pas vide
+//     if (searchQuery) {
+//         params.append('search', searchQuery);
+//     }
+//     // Ajouter le paramètre de tri à l'URL seulement s'il n'est pas vide
+//     if (sortOption) {
+//         params.append('sort', sortOption);
+//     }
+//     // Toujours ajouter le paramètre de page car il a une valeur par défaut (1)
+//     params.append('page', page);
 
-    let newUrl = `${window.location.pathname}?${params.toString()}`;
-    window.history.pushState({}, '', newUrl);
-}
+//     let newUrl = `${window.location.pathname}?${params.toString()}`;
+//     window.history.pushState({}, '', newUrl);
+// }
 
 
 // // Fonction pour récupérer les tags sélectionnés avec leurs noms et valeurs
@@ -263,7 +263,7 @@ function getSelectedTags() {
     return tags;
 }
 
-// Fonction pour charger les produits avec les critères de recherche, de tri, de pagination et de tags
+// Fonction pour charger les bouteilles avec les critères de recherche, de tri, de pagination et de tags
 function loadProducts(searchQuery, sortOption, selectedTags, page = 1) {
     var query = searchQuery || '';
     var sort = sortOption || '';
@@ -279,12 +279,12 @@ function loadProducts(searchQuery, sortOption, selectedTags, page = 1) {
         .then(response => response.json())
         .then(data => {
             document.getElementById('search-results').innerHTML = data.resultsHtml;
-            updateUrl(query, sort, page, tags);
+            updateUrl(query, sort, tags, page);
         });
 }
 
 // Fonction pour mettre à jour l'URL sans recharger la page
-function updateUrl(searchQuery, sortOption, page, tags) {
+function updateUrl(searchQuery, sortOption, tags, page ) {
     let params = new URLSearchParams();
 
     if (searchQuery) {
@@ -294,10 +294,13 @@ function updateUrl(searchQuery, sortOption, page, tags) {
         params.append('sort', sortOption);
     }
     for (const [name, values] of Object.entries(tags)) {
-        values.forEach(value => {
-            params.append(name, value);
-        });
+        if (values.length > 0) { // Vérifiez si le tableau de valeurs n'est pas vide
+            values.forEach(value => {
+                params.append(name, value);
+            });
+        }
     }
+    
 
     params.append('page', page);
 
@@ -305,21 +308,21 @@ function updateUrl(searchQuery, sortOption, page, tags) {
     window.history.pushState({}, '', newUrl);
 }
 
-// Ajout de listener pour la saisie dans le champ de recherche
+// Ajout de listener pour la saisie dans recherche
 document.getElementById('search-input').addEventListener('input', function(event) {
-    // Charge les produits avec la valeur actuelle de recherche, l'option de tri sélectionnée, les tags sélectionnés, et réinitialise la page à 1
+    // Charge les bouteilles avec la valeur actuelle de recherche, l'option de tri sélectionnée, les tags sélectionnés, et réinitialise la page à 1
     loadProducts(event.target.value, document.getElementById('sort').value, getSelectedTags(), 1);
 });
 
 // Ajout de listener pour le changement de l'option de tri
 document.getElementById('sort').addEventListener('change', function(event) {
-    // Charge les produits avec la valeur actuelle de recherche, la nouvelle option de tri, les tags sélectionnés, et réinitialise la page à 1
+    // Charge les bouteilles avec la valeur actuelle de recherche, la nouvelle option de tri, les tags sélectionnés, et réinitialise la page à 1
     loadProducts(document.getElementById('search-input').value, event.target.value, getSelectedTags(), 1);
 });
 
 // Ajout de listener pour tout changement dans le formulaire de filtrage
 document.getElementById('form-filter').addEventListener('change', function() {
-    // Charge les produits avec la valeur actuelle de recherche, l'option de tri sélectionnée, les tags sélectionnés, et réinitialise la page à 1
+    // Charge les bouteilles avec la valeur actuelle de recherche, l'option de tri sélectionnée, les tags sélectionnés, et réinitialise la page à 1
     loadProducts(document.getElementById('search-input').value, document.getElementById('sort').value, getSelectedTags(), 1);
 });
 // Ajout de listener pour le bouton "réinitialiser"
@@ -327,7 +330,7 @@ document.getElementById('reset-filters').addEventListener('click', function() {
     // Réinitialiser le formulaire de filtrage
     var form = document.getElementById('form-filter');
     form.reset();
-    // Charge les produits avec la valeur actuelle de recherche, l'option de tri sélectionnée, les tags par défaut (vide), et réinitialise la page à 1
+    // Charge les bouteilles avec la valeur actuelle de recherche, l'option de tri sélectionnée, les tags par défaut (vide), et réinitialise la page à 1
     loadProducts(document.getElementById('search-input').value, document.getElementById('sort').value, {}, 1);
 });
 
@@ -338,7 +341,7 @@ document.addEventListener('click', function(event) {
         event.preventDefault(); // Empêche le lien de charger la page
         var pageUrl = new URL(event.target.href);
         var page = pageUrl.searchParams.get('page') || 1;
-        // Charge les produits avec la valeur actuelle de recherche, l'option de tri sélectionnée, les tags sélectionnés, et la page sélectionnée
+        // Charge les bouteilles avec la valeur actuelle de recherche, l'option de tri sélectionnée, les tags sélectionnés, et la page sélectionnée
         loadProducts(document.getElementById('search-input').value, document.getElementById('sort').value, getSelectedTags(), page);
     }
 });

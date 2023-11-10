@@ -1,9 +1,8 @@
 @extends('layouts.app')
 @section('title','Recherche')
 @section('content')
-<body>
         <header>
-            Détail du bouteille
+            fiche bouteille
         </header>
         <main class="nav-margin">
             <section class="card-bouteille">
@@ -99,49 +98,3 @@
             <script src="../../js/modalAjouter.js"></script>
         </main>
         @endsection
-    {{-- <nav class="nav">
-        <ul class="nav-list">
-            <li class="nav-item">        
-                <a href="#">
-                    <figure class="nav-icon-container nav-active">
-                        <img src="../../../public/assets/icons/home_icon.svg" alt="Accueil">
-                        <figcaption>accueil</figcaption>
-                    </figure>
-                </a>
-            </li>
-            <li class="nav-item">        
-                <a href="#">
-                    <figure class="nav-icon-container">
-                        <img src="../../../public/assets/icons/add_icon.svg" alt="Recherche">
-                        <figcaption class="icons-label">ajouter</figcaption>
-                    </figure>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#">
-                    <figure class="nav-icon-container">
-                        <img src="../../../public/assets/icons/list_icon.svg" alt="Liste d'achats">
-                        <figcaption>liste</figcaption>
-                    </figure>
-                </a>
-            </li>
-            <li class="nav-item">        
-                <a href="#">
-                    <figure class="nav-icon-container">
-                        <img src="../../../public/assets/icons/cellars_icon.svg" alt="Celliers">
-                        <figcaption>celliers</figcaption>
-                    </figure>
-                </a>
-            </li>
-            <li class="nav-item">         
-                <a href="#">
-                    <figure class="nav-icon-container">
-                        <img src="../../../public/assets/icons/profile_icon.svg" alt="Profil">
-                        <figcaption>profil</figcaption>
-                    </figure>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</body>
-</html> --}}
