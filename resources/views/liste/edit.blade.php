@@ -1,6 +1,5 @@
-<!-- Modification du nom d'une liste d'achat et supression -->
-
 @extends('layouts.app')
+@section('title', 'Modification de liste')
 @section('content')
     <main class="form-border nav-margin">
         <h1 class="form-h1">

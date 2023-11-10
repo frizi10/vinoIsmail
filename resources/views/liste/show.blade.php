@@ -1,4 +1,3 @@
-<!-- Une liste et ses bouteilles -->
 @extends('layouts.app')
 @section('title', 'Liste')
 @section('content')

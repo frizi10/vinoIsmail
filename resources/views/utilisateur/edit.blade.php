@@ -1,6 +1,5 @@
 @extends('layouts.app')
-@section("title", "Modifier profil")
-
+@section("title", "Modification profil")
 @section('content')
 <header >
         <a href="{{ route('profil.show', $user->id) }}" class="btn-arrow-top">

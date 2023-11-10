@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section("title", "Profil")
-
 @section('content')
 <header>
     profil
@@ -45,7 +44,6 @@
         </div>
     </section>
 
-    <!-- <div class="modal-container"> -->
         <dialog id="modal-supprimer" class="modal">
             <h2>Suppression de compte</h2>
             <hr>
@@ -64,7 +62,6 @@
                 </div>
             </form>
         </dialog>
-    <!-- </div> -->
     <script src="{{ asset('js/modalSupprimer.js') }}"></script>
 </main>
 @endsection

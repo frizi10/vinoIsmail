@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Bienvenue')
+@section('title', 'Création de compte')
 @section('content')
 <header>
     vino
