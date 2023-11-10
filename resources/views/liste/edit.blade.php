@@ -1,6 +1,5 @@
-<!-- Modification du nom d'une liste d'achat et supression -->
-
 @extends('layouts.app')
+@section('title', 'Modification de liste')
 @section('content')
     <main class="form-border nav-margin">
         <h1 class="form-h1">
@@ -27,7 +26,7 @@
                 @method('delete')
                 @csrf
                 <div class="form-button">
-                    <button type="submit" form="supprimerCellier" class="btn-submit">Supprimer</button>
+                    <button type="submit" form="supprimerCellier" class="btn-action btn-round btn-red btn-supprimer">Supprimer</button>
                 </div>
             </form>
         </div>
