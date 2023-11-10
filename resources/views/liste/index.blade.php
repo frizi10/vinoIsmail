@@ -1,7 +1,10 @@
 <!-- Index des listes d'achat -->
-
 @extends('layouts.app')
+@section('title', 'Listes')
 @section('content')
+<header>
+    listes
+</header>
     <main class="nav-margin">
         <a href="{{ route('liste.create') }}" class="btn-round btn-action">+ ajouter une liste</a>
         <h1>Vos listes d'achats</h1>
