@@ -1,4 +1,3 @@
-<!-- Une liste et ses bouteilles -->
 @extends('layouts.app')
 @section('title', 'Liste')
 @section('content')
@@ -27,6 +26,7 @@
                 <path d="M1.83728 7C1.285 7 0.83728 7.44772 0.83728 8C0.83728 8.55228 1.285 9 1.83728 9L1.83728 7ZM18.5986 8.70711C18.9891 8.31658 18.9891 7.68342 18.5986 7.29289L12.2347 0.928933C11.8441 0.538409 11.211 0.538409 10.8205 0.928933C10.4299 1.31946 10.4299 1.95262 10.8205 2.34315L16.4773 8L10.8204 13.6569C10.4299 14.0474 10.4299 14.6805 10.8204 15.0711C11.211 15.4616 11.8441 15.4616 12.2347 15.0711L18.5986 8.70711ZM1.83728 9L17.8915 9L17.8915 7L1.83728 7L1.83728 9Z" fill="white"/>
             </svg>
         </a>
+        @if($liste->bouteillesListes->count() > 1)
         <div class="form-container">
             <form action="{{ route('liste.show', ['liste_id' => $liste->id]) }}" method="">
                 @csrf
@@ -41,6 +41,7 @@
                 </div>
             </form>
         </div>
+        @endif
         <div class="card-count">
             <p>                
                 @if($liste->bouteillesListes->count() > 0)

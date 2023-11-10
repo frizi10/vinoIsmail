@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Bienvenue')
+@section('title', 'Création de compte')
 @section('content')
 <header>
     vino
@@ -42,9 +42,10 @@
             <div class="form-button">
                 <button type="submit" class="btn-submit">créer</button>
             </div>
-            <a href="{{ route('login') }}" class="btn-submit">connexion</a>
+            <div class="link">
+                <a href="{{ route('login') }}">connexion</a>
+            </div>
         </form>
     </div>
 </main>
-
 @endsection

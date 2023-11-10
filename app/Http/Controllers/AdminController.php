@@ -144,10 +144,23 @@ class AdminController extends Controller
         [
             'password.required' => "Le mot de passe est requis pour supprimer un compte"
         ]);
-    
+
         if (Hash::check($request->password, Auth::user()->password)) {
+            
+            $celliers = $user->celliers;
+            foreach($celliers as $cellier){
+                $cellier->bouteillesCelliers()->delete(); 
+            }
+            $user->celliers()->delete();
+        
+            $listes = $user->listes;
+            foreach($listes as $liste){
+                $liste->bouteillesListes()->delete(); 
+            }
+            $user->listes()->delete();
+
             $user->delete();
-            return redirect()->route('admin.index')->withSuccess('Compte supprimé avec succès.');
+            return redirect()->route('welcome')->withSuccess('Compte supprimé avec succès.');
         } else {
             return back()->withErrors(['erreur' => 'Le mot de passe est incorrect.']);
         }

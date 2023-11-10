@@ -1,6 +1,5 @@
-<!-- Création d'une nouvelle liste -->
-
 @extends('layouts.app')
+@section('title', 'Création de liste')
 @section('content')
     <main class="form-border nav-margin">
         <h1 class="form-h1">
