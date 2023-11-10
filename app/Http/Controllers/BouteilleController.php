@@ -71,98 +71,28 @@ class BouteilleController extends Controller
             $bouteillesQuery->where('nom', 'LIKE', '%' . $query . '%');
         }
 
-        // // Appliquer les filtres pour chaque sélecteur qui peut avoir plusieurs valeurs
-        // $selectors = ['couleur', 'pays', 'format', 'designation', 'producteur', 'agentPromotion', 'type', 'millesime', 'cepage', 'region'];
-        // foreach ($selectors as $selector) {
-        //     $values = $request->input($selector); // Cela peut être un tableau ou une valeur unique
-        //     if (!empty($values)) {
-        //         if (is_array($values)) {
-        //             $bouteillesQuery->whereIn($selector, $values);
-        //         } else {
-        //             $bouteillesQuery->where($selector, $values);
-        //         }
-        //     }
-        // }
-
-        // // Appliquer les filtres pour chaque sélecteur qui peut avoir plusieurs valeurs
-        // $selectors = ['couleur', 'pays', 'format', 'designation', 'producteur', 'agentPromotion', 'type', 'millesime', 'cepage', 'region'];
-        // foreach ($selectors as $selector) {
-        //     $values = $request->input($selector); // Cela peut être un tableau ou une valeur unique
-        //     if (!empty($values)) {
-        //         // Ajoute une condition de groupe pour chaque sélecteur
-        //         $bouteillesQuery->where(function ($query) use ($selector, $values) {
-        //             if (is_array($values)) {
-        //                 // Applique une condition OR pour chaque valeur dans le tableau
-        //                 foreach ($values as $value) {
-        //                     $query->orWhere($selector, $value);
-        //                 }
-        //             } else {
-        //                 // Si ce n'est pas un tableau, applique une condition simple
-        //                 $query->orWhere($selector, $values);
-        //             }
-        //         });
-        //     }
-        // }
-
-        // $selectors = ['couleur', 'pays', 'format', 'designation', 'producteur', 'agentPromotion', 'type', 'millesime', 'cepage', 'region'];
-        // foreach ($selectors as $selector) {
-        //     $values = $request->input($selector);
-        //     if (!empty($values)) {
-        //         // La fonction whereHas peut être utilisée si vous filtrez sur des relations
-        //         // Sinon, utilisez where et whereIn comme montré ci-dessous
-        //         $bouteillesQuery->where(function ($query) use ($selector, $values) {
-        //             if (is_array($values)) {
-        //                 // La méthode whereIn crée une condition "OU" pour les valeurs multiples
-        //                 $query->whereIn($selector, $values);
-        //             } else {
-        //                 $query->where($selector, '=', $values);
-        //             }
-        //         });
-        //     }
-        // }
-
-        // $selectors = ['couleur', 'pays', 'format', 'designation', 'producteur', 'agentPromotion', 'type', 'millesime', 'cepage', 'region'];
-        // foreach ($selectors as $selector) {
-        //     $values = $request->input($selector);
-        //     if (!empty($values)) {
-        //         // Commencez une nouvelle sous-requête pour ce sélecteur
-        //         $bouteillesQuery->where(function ($query) use ($selector, $values) {
-        //             // Initialisez le premier orWhere avec la première valeur si c'est un tableau
-        //             if (is_array($values) && count($values) > 0) {
-        //                 // Commencez par le premier élément du tableau pour éviter le problème de la première condition "OR"
-        //                 $query->where($selector, '=', array_shift($values));
-        //                 // Puis ajoutez les autres valeurs avec orWhere
-        //                 foreach ($values as $value) {
-        //                     $query->orWhere($selector, '=', $value);
-        //                 }
-        //             } else {
-        //                 // S'il n'y a qu'une seule valeur, ajoutez-la avec where
-        //                 $query->where($selector, '=', $values);
-        //             }
-        //         });
-        //     }
-        // }
         $selectors = ['couleur', 'pays', 'format', 'designation', 'producteur', 'agentPromotion', 'type', 'millesime', 'cepage', 'region'];
-
-        $couleurs = $request->input('couleur');
-        if (!empty($couleurs)) {
-            $bouteillesQuery->where(function ($query) use ($couleurs) {
-                if (is_array($couleurs)) {
-                    foreach ($couleurs as $index => $couleur) {
-                        if ($index == 0) {
-                            $query->where('couleur', $couleur);
-                        } else {
-                            $query->orWhere('couleur', $couleur);
+        foreach ($selectors as $selector) {
+            $values = $request->input($selector);
+            if (!empty($values)) {
+                // Commencez une nouvelle sous-requête pour ce sélecteur
+                $bouteillesQuery->where(function ($query) use ($selector, $values) {
+                    // Initialisez le premier orWhere avec la première valeur si c'est un tableau
+                    if (is_array($values) && count($values) > 0) {
+                        // Commencez par le premier élément du tableau pour éviter le problème de la première condition "OR"
+                        $query->where($selector, '=', array_shift($values));
+                        // Puis ajoutez les autres valeurs avec orWhere
+                        foreach ($values as $value) {
+                            $query->orWhere($selector, '=', $value);
                         }
+                    } else {
+                        // S'il n'y a qu'une seule valeur, ajoutez-la avec where
+                        $query->where($selector, '=', $values);
                     }
-                } else {
-                    $query->where('couleur', $couleurs);
-                }
-            });
+                });
+            }
         }
 
-
-        
 
         // Trier
         if (!empty($sortOption)) {
@@ -196,17 +126,6 @@ class BouteilleController extends Controller
     
         $resultsHtml = view('partials.bouteilles', compact('results'))->render();
         return response()->json(['resultsHtml' => $resultsHtml]);
-
-        // if (!empty($query)) {
-        //     $results = Bouteille::where('nom', 'LIKE', '%' . $query . '%')->paginate(10);
-        //     $resultsHtml = view('partials.bouteilles', compact('results'))->render();
-        //     return response()->json(['resultsHtml' => $resultsHtml]);
-        // }
-        // else if ($query === "") {
-        //     return response()->json(['resultsHtml' => $allHtml]);
-        // }
-
-        // return response()->json(['resultsHtml' => 'Aucun résultat trouvé']);
     }
 
 

@@ -19,7 +19,7 @@
             <div class="card-container-total">
                 <h3>total</h3>
                 <div>
-                    <span>{{ $totalPrix }}</span>
+                    <span>{{ number_format($totalPrix, 2, '.', '') }} $</span>
                 </div>
             </div>
             <div class="card-container-qt">

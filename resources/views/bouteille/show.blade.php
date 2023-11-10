@@ -17,46 +17,46 @@
                         <span>{{$bouteille->type}} | {{ $bouteille->format }} | {{$bouteille->pays}}</span>
                         <p>{{$bouteille->prix}}  $</p>
                     </div>
-                    <a href="" class="btn-ajouter">+ Ajouter</a>
+                    <!-- <a href="" class="btn-ajouter">+ Ajouter</a> -->
                 </div>
             </section>
             <table>
                 <tbody>
                     <tr>
                         <th>Appellation</th>
-                        <td>{{ $bouteille->nom}}</td>
+                        <td>{{ $bouteille->nom ?? '-'}}</td>
                     </tr>
                         <tr>
                         <th>Millésime</th>
-                        <td>{{$bouteille->millesime}}</td>
+                        <td>{{$bouteille->millesime ?? '-'}}</td>
                     </tr>
                     <tr>
                         <th>Degré d'alcool</th>
-                        <td>{{$bouteille->degre}}</td>
+                        <td>{{$bouteille->degre ?? '-'}}</td>
                     </tr>
                     <tr>
                         <th>Couleur</th>
-                        <td>{{$bouteille->couleur}}</td>
+                        <td>{{$bouteille->couleur ?? '-'}}</td>
                     </tr>
                     <tr>
                         <th>Producteur</th>
-                        <td>{{$bouteille->producteur}}</td>
+                        <td>{{$bouteille->producteur ?? '-'}}</td>
                     </tr>
                     <tr>
                         <th>Type</th>
-                        <td>{{$bouteille->type}}</td>
+                        <td>{{$bouteille->type ?? '-'}}</td>
                     </tr>
                     <tr>
                         <th>Cépage</th>
-                        <td>{{$bouteille->cepage}}</td>
+                        <td>{{ $bouteille->cepage ?? '-' }}</td>
                     </tr>
                     <tr>
                         <th>Région</th>
-                        <td>{{$bouteille->region}}</td>
+                        <td>{{$bouteille->region ?? '-'}}</td>
                     </tr>
                     <tr>
                         <th>Pastille de goût</th>
-                        <td><{{$bouteille->pastilleGoutTitre}}/td>
+                        <td><{{$bouteille->pastilleGoutTitre ?? '-'}}/td>
                     </tr>
                 </tbody>
             </table>

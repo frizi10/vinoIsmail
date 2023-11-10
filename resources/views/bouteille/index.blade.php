@@ -31,7 +31,7 @@
                             </svg>
                             Réinitialiser les filtres
                         </button>
-                        <div class="form-input-container">
+                        <!-- <div class="form-input-container">
                             <label for="prix-range">Prix ($)</label>
                             <div class="form-range">
                                 <div class="form-range-slider">
@@ -52,8 +52,8 @@
                                     </div>    
                                 </div>
                             </div>  
-                        </div>
-                        <div class="form-input-container">
+                        </div> -->
+                        <!-- <div class="form-input-container">
                             <label for="alcohol-range">Degré d'alcool (%)</label>
                             <div class="form-range">
                                 <div class="form-range-slider">
@@ -74,8 +74,8 @@
                                     </div>    
                                 </div>
                             </div>  
-                        </div>
-                        <div class="form-input-container">
+                        </div> -->
+                        <!-- <div class="form-input-container">
                             <label for="sugar-range">Taux de sucre (g/L)</label>
                             <div class="form-range">
                                 <div class="form-range-slider">
@@ -96,7 +96,7 @@
                                     </div>    
                                 </div>
                             </div>  
-                        </div>
+                        </div> -->
                         <!-- Couleur -->
                         <div class="form-input-container">
                             <label for="select_couleur">Couleur</label>
@@ -229,7 +229,7 @@
             </div>
         </section>
         <div class="card-container">
-            <div id="search-results">
+            <div id="search-results" class="card-results-container">
                 <div class="card-count">
                     <p>{{$bouteilles->total()}} bouteilles :</p>
                 </div>
@@ -301,6 +301,7 @@
         <script src="{{ asset('js/queryBottles.js') }}"></script>
         <script src="{{ asset('js/bottleCounterModal.js') }}"></script>
         <script src="{{ asset('js/modalAjouter.js') }}"></script>
+        <script src="{{ asset('js/modalAjouterRes.js') }}"></script>
         <script src="{{ asset('js/filterTag.js') }}"></script>
         <script src="{{ asset('js/filterSlider.js') }}"></script>
 
