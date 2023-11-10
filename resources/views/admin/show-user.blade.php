@@ -1,8 +1,5 @@
-<!-- Informations détaillées sur un utilisateur particulier -->
 @extends('layouts.app')
 @section('title', 'Utilisateur')
-@section('content')
-
 @section('content')
 <header>
 <a href="{{ route('admin.index') }}" class="btn-arrow-top">
@@ -53,27 +50,24 @@
             </a>
         </div>
     </section>
-
-    <!-- <div class="modal-container"> -->
-        <dialog id="modal-supprimer" class="modal">
-            <h2>Suppression de compte</h2>
-            <hr>
-            <p><strong>ATTENTION!</strong> Cette action est irréversible et entraînera la perte de toutes les données associées à ce compte.</p>
-            <p>Veuillez entrer votre mot de passe administrateur pour confirmer la suppression du compte</p>
-            <form action="{{ route('admin.destroy-user', $user->id) }}" method="post" class="form-modal">
-                @csrf
-                @method('DELETE')
-                    <div class="form-input-container">
-                        <label for="password">Mot de passe</label>
-                        <input type="password" id="password" name="password">
-                    </div>
-                    <div class="btn-modal-container">
-                        <button class="btn-modal-action btn-red">supprimer</button>
-                        <button class="btn-modal-cancel btn-green">annuler</button>
-                    </div>
-            </form>
-        </dialog>
-    <!-- </div> -->
+    <dialog id="modal-supprimer" class="modal">
+        <h2>Suppression de compte</h2>
+        <hr>
+        <p><strong>ATTENTION!</strong> Cette action est irréversible et entraînera la perte de toutes les données associées à ce compte.</p>
+        <p>Veuillez entrer votre mot de passe administrateur pour confirmer la suppression du compte</p>
+        <form action="{{ route('admin.destroy-user', $user->id) }}" method="post" class="form-modal">
+            @csrf
+            @method('DELETE')
+                <div class="form-input-container">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="password">
+                </div>
+                <div class="btn-modal-container">
+                    <button class="btn-modal-action btn-red">supprimer</button>
+                    <button class="btn-modal-cancel btn-green">annuler</button>
+                </div>
+        </form>
+    </dialog>
     <script src="{{ asset('js/modalSupprimer.js') }}"></script>
 </main>
 @endsection

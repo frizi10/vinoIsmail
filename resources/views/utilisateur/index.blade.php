@@ -43,25 +43,24 @@
             </a>
         </div>
     </section>
-
-        <dialog id="modal-supprimer" class="modal">
-            <h2>Suppression de compte</h2>
-            <hr>
-            <p><strong>ATTENTION!</strong> Cette action est irréversible et entraînera la perte de toutes les données associées à ce compte.</p>
-            <p>Veuillez entrer le mot de passe pour confirmer la suppression du compte</p>
-            <form action="{{ route('profil.destroy', $user->id) }}" method="post" class="form-modal">
-                @csrf
-                @method('DELETE')
-                <div class="form-input-container">
-                    <label for="password">Mot de passe</label>
-                    <input type="password" id="password" name="password">
-                </div>
-                <div class="btn-modal-container">
-                    <button class="btn-modal-action btn-red">supprimer</button>
-                    <button class="btn-modal-cancel btn-green">annuler</button>
-                </div>
-            </form>
-        </dialog>
+    <dialog id="modal-supprimer" class="modal">
+        <h2>Suppression de compte</h2>
+        <hr>
+        <p><strong>ATTENTION!</strong> Cette action est irréversible et entraînera la perte de toutes les données associées à ce compte.</p>
+        <p>Veuillez entrer le mot de passe pour confirmer la suppression du compte</p>
+        <form action="{{ route('profil.destroy', $user->id) }}" method="post" class="form-modal">
+            @csrf
+            @method('DELETE')
+            <div class="form-input-container">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password">
+            </div>
+            <div class="btn-modal-container">
+                <button class="btn-modal-action btn-red">supprimer</button>
+                <button class="btn-modal-cancel btn-green">annuler</button>
+            </div>
+        </form>
+    </dialog>
     <script src="{{ asset('js/modalSupprimer.js') }}"></script>
 </main>
 @endsection
