@@ -56,6 +56,7 @@ class CustomAuthController extends Controller
             'nom.max'           => 'Votre nom ne doit pas dépasser 20 caractères',
             'nom.alpha'         => 'Votre nom ne doit contenir que des lettres',
             'email.required'    => 'Veuillez saisir votre adresse email',
+            'email.email'       => 'Veuillez entrer un courriel valide',
             'password.required' => 'Veuillez saisir votre mot de passe',
             'password.min'      => 'Votre mot de passe doit contenir au moins 6 caractères',
             'password.confirmed'=> 'Les mots de passe ne correspondent pas'
@@ -118,7 +119,7 @@ class CustomAuthController extends Controller
     public function logout(){
         Auth::logout();
         Session::flush();
-        return redirect(route('login'))->withSuccess('Vous êtes déconnectés');
+        return redirect(route('login'))->withSuccess('Vous êtes déconnecté');
     }
 
     /**
@@ -194,6 +195,19 @@ class CustomAuthController extends Controller
         ]);
     
         if (Hash::check($request->password, $user->password)) {
+            
+            $celliers = $user->celliers;
+            foreach($celliers as $cellier){
+                $cellier->bouteillesCelliers()->delete(); 
+            }
+            $user->celliers()->delete();
+        
+            $listes = $user->listes;
+            foreach($listes as $liste){
+                $liste->bouteillesListes()->delete(); 
+            }
+            $user->listes()->delete();
+
             $user->delete();
             return redirect()->route('welcome')->withSuccess('Compte supprimé avec succès.');
         } else {
