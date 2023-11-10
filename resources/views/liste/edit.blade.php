@@ -22,6 +22,15 @@
                 </div>
             </form>
         </div>
+        <div class="form-container">
+            <form action="{{route('liste.destroy', $liste->id)}}" method="post" id="supprimerCellier">
+                @method('delete')
+                @csrf
+                <div class="form-button">
+                    <button type="submit" form="supprimerCellier" class="btn-submit">Supprimer</button>
+                </div>
+            </form>
+        </div>
     </main>
 
 @endsection

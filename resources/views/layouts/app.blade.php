@@ -9,12 +9,13 @@
     <link rel="stylesheet" href="https://use.typekit.net/dox8qou.css">
     <link href="{{ asset('css/pagination.css') }}" rel="stylesheet">
     <title>Vino - @yield('title')</title>
+    
 </head>
 <body>
     @yield('content')
     <!-- Si authentifié et administrateur -->
     @auth
-    @if(Auth::user()->nom == "Admin")
+    @if(Auth::user()->hasRole("Admin"))
     <nav class="main-nav">
         <ul class="nav-admin-list">
             <li class="main-nav-item">        
@@ -42,7 +43,7 @@
                 </a>
             </li>
             <li class="main-nav-item">         
-                <a href="#">
+                <a href="{{ route('profil.show', Auth::user()->id) }}">
                     <figure class="container-icons-navbar">
                         <img src="{{ asset('assets/icons/profile_icon.svg') }}" alt="Profil">
                         <figcaption>profil</figcaption>
@@ -104,5 +105,14 @@
         © <span>vino</span> 2023. (version 1.1) - Tous droits réservés.
     </footer>
     @endauth
+</body>
+</html>
+
+
+
+
+
+
+
 </body>
 </html>

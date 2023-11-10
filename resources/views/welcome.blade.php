@@ -5,10 +5,10 @@
     vino
 </header>
 @auth
-@if(Auth::user()->nom == "Admin")
+@if(Auth::user()->hasRole("Admin"))
 <!-- En attendant -->
 <main class="nav-margin">
-    <h1>Bienvenue sur l'interface d'aministration {{ Auth::user()->nom}}!</h1>
+    <h1>Bienvenue sur l'interface d'administration {{ Auth::user()->nom}}!</h1>
 </main>
 @else
 <main class="nav-margin">
@@ -116,8 +116,13 @@
         <img src="{{ asset('assets/img/img_connexion.jpeg') }}" alt="Bouteille au marché" class="welcome-img">
     </picture>
     @if(session('success'))
-        <div class="alert alert-success">
+        <div>
             {{ session('success') }}
+        </div>
+    @endif
+    @if($errors->has('erreur'))
+        <div>
+            {{ $errors->first('erreur') }}
         </div>
     @endif
     <div class="form-container">
