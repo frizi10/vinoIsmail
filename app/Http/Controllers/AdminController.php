@@ -164,12 +164,5 @@ class AdminController extends Controller
         } else {
             return back()->withErrors(['erreur' => 'Le mot de passe est incorrect.']);
         }
-    
-        // if (Hash::check($request->password, Auth::user()->password)) {
-        //     $user->delete();
-        //     return redirect()->route('admin.index')->withSuccess('Compte supprimé avec succès.');
-        // } else {
-        //     return back()->withErrors(['erreur' => 'Le mot de passe est incorrect.']);
-        // }
     }
 }
