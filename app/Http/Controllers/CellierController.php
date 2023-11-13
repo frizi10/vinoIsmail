@@ -23,8 +23,10 @@ class CellierController extends Controller
 
         $celliers->each(function ($cellier) {
             $cellier->prixTotal = 0; 
+            $cellier->quantiteTotal = 0; 
             foreach($cellier->bouteillesCelliers as $bouteilleCellier) {
-                $cellier->prixTotal += $bouteilleCellier->bouteille->prix; 
+                    $cellier->prixTotal += $bouteilleCellier->bouteille->prix * $bouteilleCellier->quantite;
+                    $cellier->quantiteTotal += $bouteilleCellier->quantite;
             }
         }); 
         
@@ -169,4 +171,33 @@ class CellierController extends Controller
             return redirect(route('cellier.index'))->with('error', 'Le cellier n\'existe pas'); 
         }
     }
+
+    /**
+     * Count the total price from a specific cellar.
+     *
+     * @return $totalPrix Total price
+     * @return $totalBouteille Number of bottles
+     */
+    public static function calculerTotalCellier()
+    {
+        $celliers = Cellier::with('bouteillesCelliers.bouteille')
+        ->where('user_id', Auth::id())
+        ->get();
+
+        $totalPrix = 0;
+        $totalQuantite = 0;
+
+        foreach ($celliers as $cellier) {
+            foreach ($cellier->bouteillesCelliers as $bouteilleCellier) {
+                $totalPrix += $bouteilleCellier->bouteille->prix * $bouteilleCellier->quantite;
+                $totalQuantite += $bouteilleCellier->quantite;
+            }
+        }
+
+        return [
+            'totalPrix' => $totalPrix,
+            'totalQuantite' => $totalQuantite
+        ];
+    }
+
 }
