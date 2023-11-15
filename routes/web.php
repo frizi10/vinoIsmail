@@ -8,6 +8,7 @@ use App\Http\Controllers\BouteilleController;
 use App\Http\Controllers\Web2scraperController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ListeController;
+use App\Http\Controllers\StatistiqueController;
 use Spatie\Permission\Middlewares\RoleMiddleware;
 use App\Http\Middleware\CheckRole;
 
@@ -153,4 +154,12 @@ Route::post('/register', [CustomAuthController::class, 'store'])->name('register
 // importer les données de la saq
 
 Route::get('/scrape', [Web2scraperController::class, 'scrapeData']);
+
+
+Route::get('/statistics', [StatistiqueController::class, 'index']);
+Route::get('/statistics-details/{user}', [StatistiqueController::class, 'detail'])->name('statistics.details');
+
+
+
+
 
