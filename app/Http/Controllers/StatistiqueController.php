@@ -1,85 +1,61 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\Models\Statistique;
+use App\Models\Cellier;
+use App\Models\User;
+use App\Models\Liste;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StatistiqueController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        // Récupérer tous les utilisateurs avec le nombre de celliers et de listes
+        $query = User::withCount(['celliers', 'listes']);
+        $usersWithCellierAndListeCount = $query->get();
+    
+        // Préparez les données pour la variable JavaScript
+        $userData = $usersWithCellierAndListeCount->map(function ($user) {
+            return [
+                'id_key' => $user->id,
+                'email_key' => $user->email,
+                'celliers_count_key' => $user->celliers_count,
+                'listes_count_key' => $user->listes_count ?? 0,
+            ];
+        });
+    
+        return view('statistics.index', [
+            'userData' => $userData,
+        ]);
+    }
+    
+
+    public function detail($userId)
+{
+    // Récupérer l'utilisateur avec son nom
+    $user = User::find($userId);
+
+    // Vérifier si l'utilisateur existe
+    if (!$user) {
+        abort(404); // Ou gérer autrement la non-existence de l'utilisateur
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    // Récupérer les celliers de l'utilisateur avec la quantité de bouteilles pour chaque cellier
+    $celliers = Cellier::where('user_id', $userId)->get();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    // Récupérer les listes de l'utilisateur avec la quantité de bouteilles pour chaque liste
+    $listes = Liste::where('user_id', $userId)->get();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Statistique  $statistique
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Statistique $statistique)
-    {
-        //
-    }
+    return view('statistics.details', [
+        'user' => $user,
+        'celliers' => $celliers,
+        'listes' => $listes,
+    ]);
+}
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Statistique  $statistique
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Statistique $statistique)
-    {
-        //
-    }
+    
+    
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Statistique  $statistique
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Statistique $statistique)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Statistique  $statistique
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Statistique $statistique)
-    {
-        //
-    }
+  
 }
